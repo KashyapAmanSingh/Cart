@@ -1,19 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"
+"use client";
 import React from "react";
 import CheckoutButton from "@/Compo/checkoutform";
 import { removeItem, setQuantity } from "@/redux/Slice";
 
-  
- 
- import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
- 
-
-   console.log(cartItems  , "cartItems -=======-----cartItems-------");
 
   const dispatch = useDispatch();
 
@@ -25,9 +19,6 @@ const Cart = () => {
     const parsedQuantity = parseInt(quantity, 10);
     dispatch(setQuantity({ quantity: parsedQuantity, i }));
   };
- 
- 
-
 
   return (
     <>
@@ -56,7 +47,7 @@ const Cart = () => {
                       <select
                         className="form-control"
                         id="quantityInput"
-                          onChange={(e) => handleUnitChange(e.target.value, i)}
+                        onChange={(e) => handleUnitChange(e.target.value, i)}
                       >
                         <option value="1"> 1</option>
                         <option value="2"> 2</option>
@@ -64,14 +55,10 @@ const Cart = () => {
                         <option value="4"> 4</option>
                         <option value="5"> 5</option>
                       </select>
-
-
                     </div>
                   </div>
-           
-                <CheckoutButton  />
-           
 
+                  <CheckoutButton />
                 </div>
               ))}
           </div>
@@ -82,6 +69,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-// console.log(product_id, "======================product_id ======================  product_idd- -==========================")
-//   console.log( quantity , "quantity - ---- -quantityquantityquantity - quantity")

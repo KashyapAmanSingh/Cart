@@ -28,7 +28,7 @@ export async function POST(request) {
           name: item.title,
           images: [item.image]
         },
-        unit_amount: item.price * 100, // Price in paise
+        unit_amount: item.price * 100, 
       },
   
       quantity: item.quantity,
@@ -37,18 +37,21 @@ export async function POST(request) {
         minimum: 1,
         maximum: 5,
       },
-      tax_rates: ['txr_1NsTcuSGcFt4Msz1iK55nNo7'], // Add tax rates here
-
+      tax_rates: ['txr_1NsTcuSGcFt4Msz1iK55nNo7'], 
+     
     })),
     mode: "payment",
+    shipping_options:[{ 
+      shipping_rates: ['shr_1NsTXXSGcFt4Msz180uBQEIR'],
+  }],
      phone_number_collection: {
       enabled: true,
     },
     billing_address_collection: 'required', 
- 
+   
     success_url: `http://localhost:3000/StripeSuccess`,
     cancel_url: `http://localhost:3000/StripeFail`,
-    // shipping_rates: ['shr_1NsTXXSGcFt4Msz180uBQEIR']
+
   };
   
 
