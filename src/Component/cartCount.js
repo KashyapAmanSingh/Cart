@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import { BsCart4 } from 'react-icons/bs';
 import { useSelector } from 'react-redux';

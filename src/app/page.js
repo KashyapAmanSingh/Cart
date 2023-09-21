@@ -1,17 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
- 
-import MainPage from '../Component/MainPage'
- 
+import MainPage from "../Component/MainPage";
 
- export default function Home() {
-   
-   
+export default function Home() {
   return (
- 
-
-      
- <h1> <MainPage/></h1>
- 
-   
-  )
+    <h1>
+      {" "}
+      <MainPage />
+    </h1>
+  );
 }
