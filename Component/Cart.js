@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+ 
 import React from "react";
 import CheckoutButton from "@/Compo/checkoutform";
 import { removeItem, setQuantity } from "@/redux/Slice";
@@ -58,11 +58,12 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <CheckoutButton />
+        
                 </div>
               ))}
           </div>
         </div>
+        <CheckoutButton/>
       </div>
     </>
   );

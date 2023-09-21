@@ -37,13 +37,17 @@ export async function POST(request) {
         minimum: 1,
         maximum: 5,
       },
-      tax_rates: ['txr_1NsTcuSGcFt4Msz1iK55nNo7'], 
-     
+      // tax_rates: ['txr_1NsTcuSGcFt4Msz1iK55nNo7'], 
+      tax_rate: 'txr_1NsTcuSGcFt4Msz1iK55nNo7',
+
     })),
     mode: "payment",
-    shipping_options:[{ 
-      shipping_rates: ['shr_1NsTXXSGcFt4Msz180uBQEIR'],
-  }],
+    shipping_options: [
+      {
+        shipping_rate: 'shr_1NsTXXSGcFt4Msz180uBQEIR',  
+      }
+    ],
+    
      phone_number_collection: {
       enabled: true,
     },

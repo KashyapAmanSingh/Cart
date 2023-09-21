@@ -12,7 +12,7 @@ const SuccessPage = () => {
 
     const storedSessionData = JSON.parse(localStorage.getItem('sessionData'));
      if (storedSessionData) {
-      stripe.checkout.sessions.retrieve("cs_test_a1gvzyGuaIngFX8DTOf1lsRBVxDKRJu1GOLnMRISvnMqI9SJWlkN6rneeD", (err, retrievedSession) => {
+      stripe.checkout.sessions.retrieve(storedSessionData , (err, retrievedSession) => {
         if (err) {
           console.error('Error retrieving session:', err);
         } else {
@@ -30,12 +30,21 @@ const SuccessPage = () => {
       });
     }
   }
+       
+  
+  const redirectToHome =() => {
+console.log("Redirecting to Home Page");
+    window.location.href = "/";
+       }
+
+
 
   return (
     <div>
       <h1>Thank you for your payment!</h1>
       <p>Your SuccessPageID: {session}</p>
       <pre>{JSON.stringify(session, null, 2)}</pre>
+      <button className='btn btn-danger' id="continueShoppingButton" onClick={redirectToHome}>Continue Shopping</button>
     </div>
   );
 };

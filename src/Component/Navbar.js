@@ -1,94 +1,62 @@
 /* eslint-disable @next/next/no-img-element */
-//  "use client"
+  "use client"
 
-import { addItem } from "@/redux/Slice";
-import axios from "axios";
-import React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+ import React from 'react'
+  // import MainPage from './mainPage'
+import Link from 'next/link';
+ 
+ const Navbar = () => {
 
-const Navbar = () => {
-  const [data, setDatas] = useState([]);
-  const dispatch = useDispatch();
 
-  const handleAddToCart = (product) => {
-    dispatch(
-      addItem({
-        id: product._id,
-        title: product.title,
-        image: product.images[0],
-        price: product.price,
-      })
-    );
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/fetchProduct");
-        console.log(response, "response Datas response loaded");
-        if (response.status === 200) {
-          setDatas(response.data.products);
-        } else {
-          throw new Error("Network response was not ok");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
-    <div className="container">
-      <div className="row">
-        {data &&
-          data.map((product) => (
-            <div className="col-md-3 mt-5" key={product._id}>
-              <div className="card" style={{ width: "18rem" }}>
-                <img
-                  src={product.images[0]}
-                  className="card-img-top"
-                  alt={product.title}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{product.title.slice(0, 50)}</h5>
-                  <button
-                    className="btn btn-info mt-3"
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
+   <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+  <div className="container-fluid">
+    <Link className="navbar-brand text-white fw-bolder" href="/">Home</Link>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+          <Link className="nav-link active text-white fw-bolder" aria-current="page" href="/cart">Cart</Link>
+        </li>
+     
+       {/*  <li className="nav-item dropdown">
+          <Link className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </Link>
+          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+
+
+
+
+          <Link  className="dropdown-item" href="/supplements">Supplements</Link>
+<Link   className="dropdown-item" href="/footwears">FootWears</Link>
+<Link  className="dropdown-item" href="/nutrition">Nutrition</Link>
+<Link  className="dropdown-item" href="/equipments">Equipments</Link>
+
+
+
+   
+          </ul>
+        </li>
+          */}
+      </ul>
+      <form className="d-flex">
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button className="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
+  </div>
+</nav>
   );
-};
 
-export const Page = () => {
-  const cartItems = useSelector((state) => state.cart.items);
 
-  return (
-    <div>
-      <h1>cartItems ------------cartItems-------</h1>
-      {cartItems.map((item, i) => (
-        <ul key={i}>
-          <li>
-            <div className="cartCard">
-              <h5>{item.title}</h5>
 
-              <h5>{item.price}</h5>
-              <img src={item.image} alt={item.title} />
-            </div>
-          </li>
-        </ul>
-      ))}
-    </div>
-  );
-};
+   
+ }
+ 
+ export default Navbar
 
-export default Navbar;
+ 
