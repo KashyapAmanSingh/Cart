@@ -1,10 +1,13 @@
 
 "use client"
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Stripe from "stripe";
 const stripe = new Stripe("sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic");
 
 const SuccessPage = () => {
+  const router = useRouter();
+
   const session = useSelector((state) => state.cart.session);
   
   if (typeof window !== 'undefined') {
@@ -34,7 +37,9 @@ const SuccessPage = () => {
   
   const redirectToHome =() => {
 console.log("Redirecting to Home Page");
-    window.location.href = "/";
+    // window.location.href = "/";
+    router.push('/');
+
        }
 
 

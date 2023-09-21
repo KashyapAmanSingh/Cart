@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
  
-import MainPage from '@/Component/MainPage'
+import MainPage from '../Component/MainPage'
  
 
  export default function Home() {

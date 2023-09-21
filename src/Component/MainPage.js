@@ -2,9 +2,9 @@
 "use client"
 
 import React from 'react'
-import { addItem } from "@/redux/Slice";
 import axios from "axios";
- 
+import { addItem } from '@/redux/Slice';
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from 'next/image';
@@ -15,7 +15,7 @@ const  MainPage = () => {
 
   const handleAddToCart = (product) => {
     dispatch(
-      addItem({
+      addItem ({
         id: product._id,
         title: product.title,
         image: product.images[0],
@@ -73,30 +73,30 @@ const  MainPage = () => {
   );
 };
 
-export const Page = () => {
-  const cartItems = useSelector((state) => state.cart.items);
+// export const Page = () => {
+//   const cartItems = useSelector((state) => state.cart.items);
 
-  return (
-    <div>
-      <h1>cartItems ------------cartItems-------</h1>
-      {cartItems.map((item, i) => (
-        <ul key={i}>
-          <li>
-            <div className="cartCard">
-              <h5>{item.title}</h5>
+//   return (
+//     <div>
+//       <h1>cartItems ------------cartItems-------</h1>
+//       {cartItems.map((item, i) => (
+//         <ul key={i}>
+//           <li>
+//             <div className="cartCard">
+//               <h5>{item.title}</h5>
 
-              <h5>{item.price}</h5>
-              <Image  src={item.image} alt={item.title}  
-                width={200} // Set an appropriate width in pixels
-                height={200} // Set an appropriate height in pixels
+//               <h5>{item.price}</h5>
+//               <Image  src={item.image} alt={item.title}  
+//                 width={200} // Set an appropriate width in pixels
+//                 height={200} // Set an appropriate height in pixels
             
-  />
-            </div>
-          </li>
-        </ul>
-      ))}
-    </div>
-  );
-};
+//   />
+//             </div>
+//           </li>
+//         </ul>
+//       ))}
+//     </div>
+//   );
+// };
 
 export default  MainPage;

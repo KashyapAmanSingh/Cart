@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google'
   
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Providerr from '@/redux/Provider';
-  import Navbar from '@/Component/Navbar';
-// import Cart from '../../Component/Cart';
+  import Navbar from '../Component/Navbar';
+ // import Cart from '../../Component/Cart';
   // import SuccessPage from './StripeSuccess/page';
     
  
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
    
          <Providerr    >  
          <Navbar/>    
-     {/* <Cart/> */}
+      {/* <Cart/> */}
           {/* <SuccessPage />    */}
      
           {children}

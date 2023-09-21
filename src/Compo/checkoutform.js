@@ -59,7 +59,12 @@ const CheckoutButton = () => {
     }
   };
 
-  return <button onClick={handleCheckout}>Buy Now</button>;
+  return (
+    <div className="d-flex justify-content-center align-items-center mt-3 mb-3">
+      <button className="btn btn-dark di" onClick={handleCheckout}>Buy Now</button>
+    </div>
+  );
+  
 };
 
 export default CheckoutButton;
