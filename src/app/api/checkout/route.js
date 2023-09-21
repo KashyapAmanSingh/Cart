@@ -37,8 +37,8 @@ export async function POST(request) {
         minimum: 1,
         maximum: 5,
       },
-      // tax_rates: ['txr_1NsTcuSGcFt4Msz1iK55nNo7'], 
-      tax_rate: 'txr_1NsTcuSGcFt4Msz1iK55nNo7',
+   tax_rates: ['txr_1NsTcuSGcFt4Msz1iK55nNo7'], 
+ 
 
     })),
     mode: "payment",

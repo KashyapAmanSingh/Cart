@@ -22,8 +22,7 @@ const Cart = () => {
 
   return (
     <>
-    <CheckoutButton/>
-    
+     
           <div className="mt-0">
         <div className="container">
           <div className="row">
@@ -63,9 +62,9 @@ const Cart = () => {
                 </div>
               ))}
           </div>
-          <CheckoutButton/>
         </div>
-   
+             <CheckoutButton/>
+
       </div>
     </>
   );
