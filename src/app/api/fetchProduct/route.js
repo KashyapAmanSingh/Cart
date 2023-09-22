@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../db/Connection";
 
 export async function GET(req) {
-  console.log("GET", req)
+  // console.log("GET", req)
    let client, db;
   try {
     const {
@@ -21,22 +21,34 @@ export async function GET(req) {
 console.log("Sort by:", sortBy);
 
     
-    if (sortBy) {
-      console.log("Sort by: Sort by: Sort by:", sortBy);
-      console.log("typeof ----------  Sort by --------- typeof:", typeof(sortBy));
-      const sortCriteria = {};
+if (sortBy) {
+  const sortCriteria = {};
+
+  switch (sortBy) {
+    case 'asc_price':
+      sortCriteria.price = 1;
+      break;
+    case 'des_price':
+      sortCriteria.price = -1;
+      break;
+    case 'ratings':
+      sortCriteria.ratings = -1;
+      break;
+    case 'timestamp':
+      sortCriteria.timestamp = -1;
+      break;
+    case 'discount':
+      sortCriteria.discount = -1; // Sort by discount in descending order
+      break;
+    default:
+      // Handle other sorting options or errors
+      break;
+  }
  
-        sortBy === 'asc_price' ? sortCriteria.price =1 :sortCriteria.price = -1;
-        sortBy === 'des_price' ? sortCriteria.price =-1 :sortCriteria.price = 1;
-        sortBy === 'ratings' ?    sortCriteria.ratings = 1:   sortCriteria.ratings= -1;
-        sortBy === 'timestamp' ?    sortCriteria.timestamp = 1:   sortCriteria.timestamp= -1;
-        sortBy === 'discount' ?    sortCriteria.discount = 1:   sortCriteria.discount= -1;
-   
 
-    const products = await collection.find({}).sort(sortCriteria).toArray();
-    return NextResponse.json({ products }, { status: 200 });
-
-    } else if(searchBy) {
+  const products = await collection.find({}).sort(sortCriteria).toArray();
+  return NextResponse.json({ products }, { status: 200 });
+} else if(searchBy) {
       const searchText = searchBy;
       const caseInsensitiveRegex = new RegExp(searchText, "i");
       const products = await collection.find({
@@ -57,7 +69,7 @@ console.log("Sort by:", sortBy);
     }
     else{
 
-      console.log("No sorting specified");
+      
       
       const products = await collection.find({}).toArray();
       return NextResponse.json({ products }, { status: 200 });

@@ -33,6 +33,25 @@ const Navbar = () => {
                 <span className="ms-1">Cart</span>
               </Link>
             </li>
+
+            <li className="nav-item">
+              <Link
+                href="/Sorting"
+                className="nav-link active text-white fw-bolder d-flex align-items-center"
+                aria-current="page"
+              >
+                <span className="ms-1">Sorting</span>
+              </Link>
+            </li>
+
+
+
+
+       
+
+
+
+
           </ul>
           {/* <form className="d-flex px-4" role="search">
             <input
@@ -66,7 +85,7 @@ const Navbar = () => {
           </ul>
         
             <li className="nav-item">
-               <Filter/>
+               {/* <Filter/> */}
              </li>
         </div>
       </div>
