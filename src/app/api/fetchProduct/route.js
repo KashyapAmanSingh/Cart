@@ -22,8 +22,6 @@ console.log("Sort by:", sortBy);
 
     
     if (sortBy) {
- 
-     
       console.log("Sort by: Sort by: Sort by:", sortBy);
       console.log("typeof ----------  Sort by --------- typeof:", typeof(sortBy));
       const sortCriteria = {};
