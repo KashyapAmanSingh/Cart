@@ -57,7 +57,9 @@ const  MainPage = () => {
     alt={product.title}
   />
                 <div className="card-body">
-                  <h5 className="card-title">{product.title.slice(0, 50)}</h5>
+                  <h5 className="card-title">{product.title.slice(0, 70)}</h5>
+                  <br/>
+                  <h5 className="card-title">Price:-{product.price}</h5>
                   <button
                     className="btn btn-info mt-3"
                     onClick={() => handleAddToCart(product)}
@@ -76,27 +78,27 @@ const  MainPage = () => {
 // export const Page = () => {
 //   const cartItems = useSelector((state) => state.cart.items);
 
-//   return (
-//     <div>
-//       <h1>cartItems ------------cartItems-------</h1>
-//       {cartItems.map((item, i) => (
-//         <ul key={i}>
-//           <li>
-//             <div className="cartCard">
-//               <h5>{item.title}</h5>
+  // return (
+  //   <div>
+  //     <h1>cartItems ------------cartItems-------</h1>
+  //     {cartItems.map((item, i) => (
+  //       <ul key={i}>
+  //         <li>
+  //           <div className="cartCard">
+  //             <h5>{item.title}</h5>
 
-//               <h5>{item.price}</h5>
-//               <Image  src={item.image} alt={item.title}  
-//                 width={200} // Set an appropriate width in pixels
-//                 height={200} // Set an appropriate height in pixels
+  //             <h5>{item.price}</h5>
+  //             <Image  src={item.image} alt={item.title}  
+  //               width={200} // Set an appropriate width in pixels
+  //               height={200} // Set an appropriate height in pixels
             
-//   />
-//             </div>
-//           </li>
-//         </ul>
-//       ))}
-//     </div>
-//   );
+  // />
+  //           </div>
+  //         </li>
+  //       </ul>
+  //     ))}
+  //   </div>
+  // );
 // };
 
 export default  MainPage;

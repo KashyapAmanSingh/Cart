@@ -1,55 +1,76 @@
-/* eslint-disable import/no-anonymous-default-export */
-/* eslint-disable no-undef */
-const { MongoClient } = require("mongodb");
 import { NextResponse } from "next/server";
+import { connectToDatabase } from "../../../../db/Connection";
 
-const uri = "mongodb+srv://itsevolution7:NQ8mNlceIbWsSVIG@cluster0.qshtbzf.mongodb.net";
-const client = new MongoClient(uri);
-
-// export default async (req, res) => {
-  export async function GET() {
-
+export async function GET(req) {
+  console.log("GET", req)
+   let client, db;
   try {
-    await client.connect();
-    const database = client.db("Crud_dbs");
-    const collectionName = "topiccollections";
-    const collection = database.collection(collectionName);
+    const {
+      client: databaseClient,
+      db: database,
+      collection,
+    } = await connectToDatabase("topiccollections");
+    client = databaseClient;
+    db = database;
+
+    const url = new URL(req.url, 'http://localhost:3000');
+    const sortBy = url.searchParams.get('sortBy');
+    const searchBy = url.searchParams.get('searchBy');
+    // const search = url.search;
+
+console.log("Sort by:", sortBy);
+
+    
+    if (sortBy) {
  
-    const products = await collection.find({}).toArray();
-    //  console.log("Fetched products from admin_database:");
-    // console.log(products);
-    // res.status(201).json({ products }); // Use res.json() to send a JSON response
+     
+      console.log("Sort by: Sort by: Sort by:", sortBy);
+      console.log("typeof ----------  Sort by --------- typeof:", typeof(sortBy));
+      const sortCriteria = {};
  
+        sortBy === 'asc_price' ? sortCriteria.price =1 :sortCriteria.price = -1;
+        sortBy === 'des_price' ? sortCriteria.price =-1 :sortCriteria.price = 1;
+        sortBy === 'ratings' ?    sortCriteria.ratings = 1:   sortCriteria.ratings= -1;
+        sortBy === 'timestamp' ?    sortCriteria.timestamp = 1:   sortCriteria.timestamp= -1;
+        sortBy === 'discount' ?    sortCriteria.discount = 1:   sortCriteria.discount= -1;
+   
+
+    const products = await collection.find({}).sort(sortCriteria).toArray();
     return NextResponse.json({ products }, { status: 200 });
 
-  } finally {
-     await client.close();
-  }
-  
+    } else if(searchBy) {
+      const searchText = searchBy;
+      const caseInsensitiveRegex = new RegExp(searchText, "i");
+      const products = await collection.find({
+          $or: [
+            { title: { $regex: caseInsensitiveRegex } },
+            { description: { $regex: caseInsensitiveRegex } },
+            { category: { $regex: caseInsensitiveRegex } },
+            { subcategory: { $regex: caseInsensitiveRegex } },
+            { brand: { $regex: caseInsensitiveRegex } },
+            { seller: { $regex: caseInsensitiveRegex } },
+            { model: { $regex: caseInsensitiveRegex } },
+            { tags: { $regex: caseInsensitiveRegex } },
+        
+          ]
+        }).toArray();
+            return NextResponse.json({ products }, { status: 200 });
+
+    }
+    else{
+
+      console.log("No sorting specified");
+      
+      const products = await collection.find({}).toArray();
+      return NextResponse.json({ products }, { status: 200 });
+    }
  
+  } catch (error) {
+    console.error("Error in GET request:", error);
+    return NextResponse.error("Internal Server Error", { status: 500 });
+  } finally {
+    if (client) {
+      await client.close();
+    }
+  }
 }
-
-
- // module.exports = fetchAllDataFromCollection; // Export the function
-
-
-
-
-
-
-
-// const searchText = "Creatine";
-// const caseInsensitiveRegex = new RegExp(searchText, "i");
-// const products = await collection.find({
-//     $or: [
-//       { title: { $regex: caseInsensitiveRegex } },
-//       { description: { $regex: caseInsensitiveRegex } },
-//       { category: { $regex: caseInsensitiveRegex } },
-//       { subcategory: { $regex: caseInsensitiveRegex } },
-//       { brand: { $regex: caseInsensitiveRegex } },
-//       { seller: { $regex: caseInsensitiveRegex } },
-//       { model: { $regex: caseInsensitiveRegex } },
-//       { tags: { $regex: caseInsensitiveRegex } },
-  
-//     ]
-//   }).toArray();

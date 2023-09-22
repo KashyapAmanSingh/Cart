@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import CartCount from './cartCount';
+import Filter from './Filter/Sorting';
+import Searching from './Filter/Searching';
 
 const Navbar = () => {
   return (
@@ -32,7 +34,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <form className="d-flex px-4" role="search">
+          {/* <form className="d-flex px-4" role="search">
             <input
               className="form-control me-2"
               type="search"
@@ -45,7 +47,10 @@ const Navbar = () => {
             >
               Search
             </button>
-          </form>
+          </form> */}
+
+                   <Searching/>
+
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0 px-4">
             <li className="nav-item">
               <Link
@@ -56,8 +61,13 @@ const Navbar = () => {
                 <span className="ms-1">Cart</span>
                 <CartCount />
               </Link>
-            </li>
+              
+              </li>
           </ul>
+        
+            <li className="nav-item">
+               <Filter/>
+             </li>
         </div>
       </div>
     </nav>
