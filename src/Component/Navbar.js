@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import CartCount from './cartCount';
-import Filter from './Filter/Sorting';
-import Searching from './Filter/Searching';
-
+ import Searching from './Filter/Searching';
+import Sorting from './Filter/Sorting';
+ 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -44,10 +44,18 @@ const Navbar = () => {
               </Link>
             </li>
 
+            <li className="nav-item">
+              <Link
+                href="/Filter"
+                className="nav-link active text-white fw-bolder d-flex align-items-center"
+                aria-current="page"
+              >
+                <span className="ms-1">  Filter </span>
+              </Link>
+            </li>
 
 
-
-       
+           
 
 
 
@@ -69,11 +77,14 @@ const Navbar = () => {
           </form> */}
 
                    <Searching/>
+                   <Sorting/>
+             
+
 
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0 px-4">
             <li className="nav-item">
               <Link
-                href="/cart"
+                href="/cart"ter
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >

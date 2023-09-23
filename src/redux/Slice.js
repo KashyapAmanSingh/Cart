@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -20,7 +20,7 @@ const cartSlice = createSlice({
         const updatedItems = [...state.items, newItem];
 
         if (typeof window !== "undefined") {
-          localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+          localStorage.setItem("cartItems", JSON.stringify(updatedItems));
         }
 
         return {
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
         state.items.splice(indexToRemove, 1);
 
         if (typeof window !== "undefined") {
-          localStorage.setItem('cartItems', JSON.stringify(state.items));
+          localStorage.setItem("cartItems", JSON.stringify(state.items));
         }
       }
     },
@@ -57,19 +57,18 @@ const cartSlice = createSlice({
       state.session = action.payload;
 
       if (typeof window !== "undefined") {
-        const storedSessionAll = JSON.parse(localStorage.getItem('sessionAll'));
+        const storedSessionAll = JSON.parse(localStorage.getItem("sessionAll"));
         const updatedSessionAll = [...(storedSessionAll || []), action.payload];
 
         state.sessionAll = updatedSessionAll;
 
-        localStorage.setItem('sessionData', JSON.stringify(action.payload));
-        localStorage.setItem('sessionAll', JSON.stringify(updatedSessionAll));
+        localStorage.setItem("sessionData", JSON.stringify(action.payload));
+        localStorage.setItem("sessionAll", JSON.stringify(updatedSessionAll));
       }
     },
   },
 });
 
-export const { addItem, removeItem, setQuantity, setSession } = cartSlice.actions;
+export const { addItem, removeItem, setQuantity, setSession } =
+  cartSlice.actions;
 export default cartSlice;
-
- 

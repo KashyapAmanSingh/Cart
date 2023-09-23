@@ -1,30 +1,36 @@
-"use client"
-import axios from 'axios';
-import React, { useState } from 'react';
+"use client";
+import { searchedItem } from "@/redux/ProductSlice";
+import axios from "axios";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Searching = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [  searchData,   setSearchData] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchData, setSearchData] = useState("");
+  const dispatch = useDispatch();
 
-console.log(searchTerm,"========>>>>>>>>searchTerm<<<<<<<<<<<=========")
-console.log(searchData,"========>>>>>>>>-----------------searchData--------------------<<<<<<<<<<<=========")
+  console.log(searchData," >>>>>>>>searchData<<<<<<<<<<< HEAD<<<<<<<<")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.get(`/api/fetchProduct?searchBy=${searchTerm}` );
- 
+    const response = await axios.get(
+      `/api/fetchProduct?searchBy=${searchTerm}`
+    );
+
     if (response.status === 200) {
-        try {
-          const data = await response.data;
-          console.log('Search results:', data);
-          setSearchData(data);
-        } catch (error) {
-          console.error('Error parsing JSON:', error);
-        }
-      } else {
-        console.error('Request failed with status:', response.status);
+      try {
+        const data = await response.data.products;
+        console.log("Search results:", data);
+        setSearchData(data);
+        dispatch(searchedItem(data));
+        
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
       }
+    } else {
+      console.error("Request failed with status:", response.status);
+    }
   };
 
   return (
@@ -38,10 +44,7 @@ console.log(searchData,"========>>>>>>>>-----------------searchData-------------
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button
-          className="btn btn-outline-success"
-          type="submit"
-        >
+        <button className="btn btn-outline-success" type="submit">
           Search
         </button>
       </form>
@@ -49,15 +52,4 @@ console.log(searchData,"========>>>>>>>>-----------------searchData-------------
   );
 };
 
-export default  Searching;
-
-
-
-
-
-
-
-
-
-
-
+export default Searching;

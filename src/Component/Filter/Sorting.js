@@ -2,10 +2,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
-
+import { useDispatch } from "react-redux";
+import { sortedItem } from "@/redux/ProductSlice";
+ 
 const Sorting = () => {
+  const dispatch=useDispatch();
   const [sortingOption, setSortingOption] = useState();
   const [sortedData, setSortedData] = useState([]);
+
+ 
+  console.log("Response data from sorted component file js :", sortedData );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,11 +20,12 @@ if (sortingOption) {
   try {
     console.log("Fetching data with sortingOption:", sortingOption);
     const response = await axios.get(`/api/fetchProduct?sortBy=${sortingOption}`);
-    
+             // Dispatch the sorted data into Redux store
+             dispatch(sortedItem(response.data.products));
     // Add these debugging lines
-    console.log("Response data:", response.data.products);
-    console.log("Discount values before sorting:", response.data.products.map(item => item.discount));
-    //  console.log("Ratings values before sorting:", response.data.products.map(item => item.ratings));
+    // console.log("Response data:", response.data.products);
+    // console.log("Discount values before sorting:", response.data.products.map(item => item.discount));
+    // //  console.log("Ratings values before sorting:", response.data.products.map(item => item.ratings));
 
     setSortedData(response.data.products);
   } catch (error) {
@@ -29,8 +36,8 @@ if (sortingOption) {
     };
 
     fetchData();
-  }, [sortingOption]);
-  console.log("Discount values after sorting:", sortedData.map(item => item.discount));
+  }, [sortingOption, dispatch]);
+  // console.log("Discount values after sorting:", sortedData.map(item => item.discount));
     //  console.log("Ratings values after sorting:", sortedData.map(item => item.ratings));
 
   return (
@@ -48,7 +55,7 @@ if (sortingOption) {
         <option value="discount">Sort by discount</option>
       </select>
 
-      <ul className="container-fluid">
+      {/* <ul className="container-fluid">
   <div className="row">
     {sortedData.map((item, i) => (
       <div className="col-md-2 mb-5 mt-4" key={i}>
@@ -70,7 +77,7 @@ if (sortingOption) {
       </div>
     ))}
   </div>
-</ul>
+</ul> */}
 
     </div>
   );

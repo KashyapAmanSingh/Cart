@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../db/Connection";
 
 export async function GET(req) {
-  // console.log("GET", req)
-   let client, db;
+    let client, db;
   try {
     const {
       client: databaseClient,
@@ -40,9 +39,8 @@ if (sortBy) {
     case 'discount':
       sortCriteria.discount = -1; // Sort by discount in descending order
       break;
-    default:
-      // Handle other sorting options or errors
-      break;
+ 
+       break;
   }
  
 
