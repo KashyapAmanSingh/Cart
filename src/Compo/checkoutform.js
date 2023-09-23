@@ -64,7 +64,6 @@ const CheckoutButton = () => {
       <button className="btn btn-dark di" onClick={handleCheckout}>Buy Now</button>
     </div>
   );
-  
 };
 
 export default CheckoutButton;
