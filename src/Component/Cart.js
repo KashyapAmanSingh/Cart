@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
- 
+
 import React from "react";
-import CheckoutButton from "@/Compo/checkoutform";  
-import { removeItem, setQuantity  } from "@/redux/Slice";  
+import CheckoutButton from "@/Compo/checkoutform";
+import { removeItem, setQuantity } from "@/redux/Slice";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,8 +22,7 @@ const Cart = () => {
 
   return (
     <>
-     
-          <div className="mt-0">
+      <div className="mt-0">
         <div className="container">
           <div className="row">
             {cartItems &&
@@ -57,14 +56,11 @@ const Cart = () => {
                       </select>
                     </div>
                   </div>
-
-        
                 </div>
               ))}
           </div>
         </div>
-             <CheckoutButton/>
-
+        <CheckoutButton />
       </div>
     </>
   );

@@ -13,22 +13,27 @@ const productSlice = createSlice({
     },
     sortedItem: (state, action) => {
       state.items = action.payload;
+      // console.log(
+      //   "Response sortedItem  from productSlice  action.payload :",
+      //   action.payload
+      // );
+    },
+    filteredItem: (state,action) => {
       console.log(
-        "Response sortedItem  from productSlice  action.payload :",
+        "Response productSlice  filteredItem   filteredItem :",
         action.payload
       );
+      // state.items = action.payload;
+      
     },
     homeItem: (state, action) => {
       state.items = action.payload;
-      console.log(
-        "Response sortedItem   productSlice  homeItem homeItem homeItem :",
-        action.payload
-      );
+      
     },
   },
 });
 
-export const { searchedItem, sortedItem, homeItem } = productSlice.actions;
+export const { searchedItem, sortedItem, homeItem,filteredItem } = productSlice.actions;
 export default productSlice;
 
 // count: 0,

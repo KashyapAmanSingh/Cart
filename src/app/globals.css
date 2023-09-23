@@ -105,3 +105,16 @@ a {
     color-scheme: dark;
   }
 }
+
+
+.categ{
+  border: 3px solid red !important;
+  min-height: 100vh !important;
+  max-height: auto !important;
+
+}
+
+ .assured{
+  border: 2px solid  darkslategray !important;
+  
+ }

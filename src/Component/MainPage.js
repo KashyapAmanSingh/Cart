@@ -7,6 +7,7 @@ import { addItem } from '@/redux/Slice';
 import { useDispatch, useSelector } from "react-redux";
 import Image from 'next/image';
 import { homeItem } from '@/redux/ProductSlice';
+import Category from './Category';
 
 const MainPage = () => {
   const [data, setDatas] = useState([]);
@@ -53,39 +54,48 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        {data &&
-          data.map((product) => (
-            <div className="col-md-3 mt-5" key={product._id}>
-              <div className="card" style={{ width: "18rem" }}>
-                <Image
-                  width={200}
-                  height={200}
-                  src={product.images[0]}
-                  className="card-img-top"
-                  alt={product.title}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{product.title.slice(0, 70)}</h5>
-                  <br />
-                  <h5 className="card-title">Price:-{product.price}</h5>
-                  <h5 className="card-title">Rrankings:-{product.ratings}</h5>
-                  <h5 className="card-title">Ddiscount:-{product.discount}</h5>
-
-                  <button
-                    className="btn btn-info mt-3"
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Add to Cart
-                  </button>
+        <div className="col-sm-2 categ">
+          <Category />
+        </div>
+  
+        <div className="col-sm-10">
+          <div className="row">
+            {data &&
+              data.map((product) => (
+                <div className="col-md-3 mt-5" key={product._id}>
+                  <div className="card" style={{ width: "18rem" }}>
+                    <Image
+                      width={200}
+                      height={200}
+                      src={product.images[0]}
+                      className="card-img-top"
+                      alt={product.title}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{product.title.slice(0, 70)}</h5>
+                      <br />
+                      <h5 className="card-title">Price: {product.price}</h5>
+                      <h5 className="card-title">Rankings: {product.ratings}</h5>
+                      <h5 className="card-title">Discount: {product.discount}</h5>
+  
+                      <button
+                        className="btn btn-info mt-3"
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );
+  
 };
 
 export default MainPage;
