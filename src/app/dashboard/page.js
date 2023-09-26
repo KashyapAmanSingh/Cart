@@ -17,7 +17,7 @@ const Page = () => {
         </div>
       );
     } else {
-      return <p>Please sign in or register!Redirect to sign page bro </p>;
+      return <p>Please sign in or register!Redirect to sign page bro  </p>;
     }
   };
 
