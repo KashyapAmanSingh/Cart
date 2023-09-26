@@ -19,10 +19,10 @@ const productSlice = createSlice({
       // );
     },
     filteredItem: (state,action) => {
-      console.log(
-        "Response productSlice  filteredItem   filteredItem :",
-        action.payload
-      );
+      // console.log(
+      //   "Response productSlice  filteredItem   filteredItem :",
+      //   action.payload
+      // );
       // state.items = action.payload;
       
     },
@@ -36,6 +36,4 @@ const productSlice = createSlice({
 export const { searchedItem, sortedItem, homeItem,filteredItem } = productSlice.actions;
 export default productSlice;
 
-// count: 0,
-// session: null,
-// sessionAll: [],
+ 

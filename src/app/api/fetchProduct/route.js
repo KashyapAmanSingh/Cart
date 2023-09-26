@@ -2,23 +2,30 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../db/Connection";
 
 export async function GET(req) {
+
+   
   let client, db;
   try {
-    const {
-      client: databaseClient,
-      db: database,
-      collection,
-    } = await connectToDatabase("topiccollections");
+    const { client: databaseClient, db: database, collection } = await connectToDatabase("topiccollections");
     client = databaseClient;
     db = database;
 
     const url = new URL(req.url, "http://localhost:3000");
-    const sortBy = url.searchParams.get("sortBy");
+     const sortBy = url.searchParams.get("sortBy");
     const searchBy = url.searchParams.get("searchBy");
-    // const search = url.search;
-    // console.log(search, "search  <-----------------------");
-    // console.log("Sort by:", sortBy);
+     const filteredPriceQuery1= url.searchParams.get("filteredPriceQuery1");
 
+     const filteredPriceQuery2 = url.searchParams.get("filteredPriceQuery2");
+
+     const filterBy = url.searchParams.get("filterBy");
+
+
+     console.log("sortBy:", sortBy);
+     console.log("searchBy:", searchBy);
+     console.log("filteredPriceQuery1:", filteredPriceQuery1);
+     console.log("filteredPriceQuery2:", filteredPriceQuery2);
+     console.log("filterBy:", filterBy);
+ 
     if (sortBy) {
       const sortCriteria = {};
 
@@ -38,7 +45,8 @@ export async function GET(req) {
         case "discount":
           sortCriteria.discount = -1; // Sort by discount in descending order
           break;
-
+        default:
+          // Handle other cases if needed
           break;
       }
 
@@ -62,7 +70,9 @@ export async function GET(req) {
         })
         .toArray();
       return NextResponse.json({ products }, { status: 200 });
-    } else {
+    }
+     
+     else {
       const products = await collection.find({}).toArray();
       return NextResponse.json({ products }, { status: 200 });
     }
@@ -75,3 +85,10 @@ export async function GET(req) {
     }
   }
 }
+// else if (filterBy) {
+//   const products = await collection
+//     .find({ category: filterBy })
+//     .sort({ price: 1 }) // Sort by price in ascending order
+//     .toArray();
+//   return NextResponse.json({ products }, { status: 200 });
+// }

@@ -1,11 +1,21 @@
-import React from 'react'
-import Filter from '@/Component/Filter/Filter'
+// import React from 'react'
+// import Filter from '@/Component/Filter/Filter'
 
-const page  = () => {
+// const page  = () => {
+//   return (
+//     <div>
+//         <Filter />
+//     </div>
+//   )
+// }
+
+// export default page
+
+import React from 'react'
+
+const page = () => {
   return (
-    <div>
-        <Filter />
-    </div>
+    <div>page     Filter     Filter     Filter     Filter     Filter     Filter     Filter     Filter     Filter     Filter</div>
   )
 }
 

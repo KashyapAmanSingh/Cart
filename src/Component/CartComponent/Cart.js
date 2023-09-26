@@ -1,18 +1,46 @@
 /* eslint-disable @next/next/no-img-element */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CheckoutButton from "@/Compo/checkoutform";
 import { removeItem, setQuantity } from "@/redux/Slice";
 
 import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
-  const cartItems = useSelector((state) => state.cart.items);
-
+  const [cartItems, setCartItems] = useState([]);
+  const [cartId, setCartId] = useState([]);
+ 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      const parsedCartItems = JSON.parse(storedCartItems);
+      setCartItems(parsedCartItems);
+    }
+  }, []);
+
+  // const handleremove = (itemId) => {
+  //    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+
+  //    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+
+  //    setCartItems(updatedCartItems);
+  // };
+
+
+  
   const handleremove = (id) => {
     dispatch(removeItem(id));
+    removeItems();
+  };
+
+  const removeItems = () => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      const parsedCartItems = JSON.parse(storedCartItems);
+      setCartItems(parsedCartItems);
+    }
   };
 
   const handleUnitChange = (quantity, i) => {
@@ -36,7 +64,7 @@ const Cart = () => {
 
                       <button
                         className="btn btn-primary"
-                        onClick={() => handleremove(i)} // Pass the index
+                        onClick={() => handleremove(product.id)} // Pass the index
                       >
                         Remove
                       </button>

@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSession } from "@/redux/Slice";
 
 const CheckoutButton = () => {
+  // *Fetch Data by local storage then comapre
+
   const cartItems = useSelector((state) => state.cart.items);
-  console.log(cartItems, "CheckoutButton cart Items");
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   const session = useSelector((state) => state.cart.session);
-  console.log(session, "Payment session  id of stripe bro ");
-
+ 
   const handleCheckout = async (e) => {
     e.preventDefault();
     try {
@@ -24,8 +24,7 @@ const CheckoutButton = () => {
           image: item.image,
         })),
       };
-      console.log(dataToSend, "CheckoutButton dataToSend");
-      console.log("Before Axios request");
+       console.log("Before Axios request");
       const response = await axios.post("/api/checkout", dataToSend, {
         headers: {
           "Content-Type": "application/json",
@@ -60,11 +59,10 @@ const CheckoutButton = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center mt-3 mb-3">
-      <button className="btn btn-dark di" onClick={handleCheckout}>Buy Now</button>
-    </div>
-  );
-  
+       <button className="btn btn-dark" onClick={handleCheckout}>
+        Buy Now
+      </button>
+   );
 };
 
 export default CheckoutButton;

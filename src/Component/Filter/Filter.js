@@ -1,21 +1,25 @@
-import React from 'react'
-
+import React from "react";
+// import { useState } from "react";
+import axios from "axios";
+import FilterSortQuery from "./FilterSortQuery";
+ 
 const Filter = () => {
-  return (
-    <div>
-            <select
-        className="form-select"
-        aria-label="Default select example"
-        // onChange={(e) => setSortingOption(e.target.value)}
-      >
-        <option defaultValue>Filter</option>
-        <option value="des_price">CateGory </option>
-        <option value="asc_price">Stars</option>
-        <option value="ratings">Price b/w</option>
-    
-      </select>
-    </div>
-  )
-}
+  // const [response, setResponse] = useState(null);
+  const apiUrl = FilterSortQuery();
+
+  const handleButtonClick = async () => {
+    try {
+      console.log(apiUrl,"fROM fILTER sECTION ");
+       const response = await axios.get(apiUrl);
+       console.log('setResponse(response.data);',response);
+      // setResponse(response.data);  
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  return <button onClick={handleButtonClick}>Fetch Data</button>
+     
+};
 
 export default Filter;

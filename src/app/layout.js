@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
  import Navbar from '../Component/Navbar';
  import CartProvider from '@/redux/Provider';
-
+ 
+ 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {

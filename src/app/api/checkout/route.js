@@ -5,9 +5,13 @@ export async function POST(request) {
  try {
    const { cart: cartItems } = await request.json();
    const itemIds = cartItems.map((item) => item.id);
+
+
+
+   
    console.log("Item IDs:", itemIds);
    
-   console.log("POST checkout  data coming or not bro POST: ", cartItems );
+   console.log("POST checkout  data coming or not bro POST: ",cartItems);
 
    if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
      return NextResponse.json({ error: "Invalid cart items" }, { status: 400 });

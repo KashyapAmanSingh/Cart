@@ -1,9 +1,11 @@
-import React from 'react';
-import Link from 'next/link';
-import CartCount from './cartCount';
- import Searching from './Filter/Searching';
-import Sorting from './Filter/Sorting';
- 
+import React from "react";
+import Link from "next/link";
+
+import Searching from "./Filter/Searching";
+import Sorting from "./Filter/Sorting";
+import { FcBusinessman } from "react-icons/fc";
+import CartCount from "./CartComponent/cartCount";
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -26,78 +28,33 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
-                href="/cart"
+                href="/UsersProfiles"
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
-                <span className="ms-1">Cart</span>
+                <span className="ms-1">
+                  <FcBusinessman size={35} />
+                </span>
               </Link>
             </li>
-
-            <li className="nav-item">
-              <Link
-                href="/Sorting"
-                className="nav-link active text-white fw-bolder d-flex align-items-center"
-                aria-current="page"
-              >
-                <span className="ms-1">Sorting</span>
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link
-                href="/Filter"
-                className="nav-link active text-white fw-bolder d-flex align-items-center"
-                aria-current="page"
-              >
-                <span className="ms-1">  Filter </span>
-              </Link>
-            </li>
-
-
-           
-
-
-
-
           </ul>
-          {/* <form className="d-flex px-4" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-success"
-              type="submit"
-            >
-              Search
-            </button>
-          </form> */}
 
-                   <Searching/>
-                   <Sorting/>
-             
-
+          <Searching />
+          <Sorting />
 
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0 px-4">
             <li className="nav-item">
               <Link
-                href="/cart"ter
+                href="/cart"
+                ter
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
                 <span className="ms-1">Cart</span>
                 <CartCount />
               </Link>
-              
-              </li>
+            </li>
           </ul>
-        
-            <li className="nav-item">
-               {/* <Filter/> */}
-             </li>
         </div>
       </div>
     </nav>

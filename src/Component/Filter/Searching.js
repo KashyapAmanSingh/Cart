@@ -1,7 +1,8 @@
 "use client";
+import { filteredSearchedQuery } from "@/redux/FilterSortSlice";
 import { searchedItem } from "@/redux/ProductSlice";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Searching = () => {
@@ -9,7 +10,12 @@ const Searching = () => {
   const [searchData, setSearchData] = useState("");
   const dispatch = useDispatch();
 
-  console.log(searchData," >>>>>>>>searchData<<<<<<<<<<< HEAD<<<<<<<<")
+  // console.log(searchData," >>>>>>>>searchData<<<<<<<<<<< HEAD<<<<<<<<")
+
+  useEffect(() => {
+    dispatch(filteredSearchedQuery(searchTerm));
+    // setSearchTerm("");
+  }, [searchTerm]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +30,6 @@ const Searching = () => {
         console.log("Search results:", data);
         setSearchData(data);
         dispatch(searchedItem(data));
-        
       } catch (error) {
         console.error("Error parsing JSON:", error);
       }

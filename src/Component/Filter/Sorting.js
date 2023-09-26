@@ -3,19 +3,24 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { sortedItem } from "@/redux/ProductSlice";
+import { sortedQuery } from "@/redux/FilterSortSlice";
 
 const Sorting = () => {
   const dispatch = useDispatch();
   const [sortingOption, setSortingOption] = useState();
   const [sortedData, setSortedData] = useState([]);
 
-  console.log("Response data from sorted component file js :", sortedData);
+  //console.log("Response data from sorted component file js :", sortedData);
+  useEffect(() => {
+    // dispatch(filteredItem(filterData));
+    dispatch(sortedQuery(sortingOption));
+  }, [sortingOption]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (sortingOption) {
         try {
-          console.log("Fetching data with sortingOption:", sortingOption);
+          // console.log("Fetching data with sortingOption:", sortingOption);
           const response = await axios.get(
             `/api/fetchProduct?sortBy=${sortingOption}`
           );
