@@ -1,55 +1,67 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+let storedCartItems;
+if (typeof localStorage !== 'undefined') {
+
+  storedCartItems = localStorage.getItem("cartItems");}
 const initialState = {
-  items: [],
+  items: storedCartItems ? JSON.parse(storedCartItems) : [], // Check if data is not null
   count: 0,
   session: null,
   sessionAll: [],
 };
 
+ 
+
 const cartSlice = createSlice({
   name: "Cart",
   initialState,
   reducers: {
+   
     addItem: (state, action) => {
       const { id, title, image, price } = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
-
+    
       if (!existingItem) {
         const newItem = { id, title, image, price, quantity: 1 };
         const updatedItems = [...state.items, newItem];
-
-        if (typeof window !== "undefined") {
-          localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-        }
-
+    
+         localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+    
         return {
           ...state,
-          count: state.count + 1,
-          items: updatedItems,
+          count: state.count + 1,  
+          items: updatedItems,  
         };
       }
-
+    
       return state;
     },
-
+    
     removeItem: (state, action) => {
-      const indexToRemove = action.payload;
-      if (indexToRemove >= 0 && indexToRemove < state.items.length) {
-        state.count--;
-        console.log(state.count, "  state.count  state.count");
+      const itemIdToRemove = action.payload;
+      const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
+      const updatedCartItems = storedCartItems.filter(
+        (item) => item.id !== itemIdToRemove
+      );
 
-        state.items.splice(indexToRemove, 1);
-
-        if (typeof window !== "undefined") {
-          localStorage.setItem("cartItems", JSON.stringify(state.items));
-        }
+      if (typeof window !== "undefined") {
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
       }
+      const updatedCount = updatedCartItems.length;
+
+      localStorage.setItem("cartCount", JSON.stringify(updatedCount));
+
+      return {
+        ...state,
+        count: updatedCount,
+        items: updatedCartItems,
+      };
     },
 
     setQuantity: (state, action) => {
       const { quantity, i } = action.payload;
-
       state.items[i].quantity = quantity;
     },
 
