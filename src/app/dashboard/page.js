@@ -21,8 +21,7 @@ const Page = () => {
     }
   };
 
-  // Render the content returned by checkAuthentication function
-  return checkAuthentication();
+   return checkAuthentication();
 };
 
 export default Page;
