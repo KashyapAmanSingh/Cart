@@ -18,6 +18,10 @@ const MainPage = () => {
 
   const dispatch = useDispatch();
   const sortedData = useSelector((state) => state.Product.items);
+  const  AllDatas = useSelector((state) => state.Product.items);
+
+
+
 
   useEffect(() => {
     if (sortedData != null) {
@@ -75,9 +79,12 @@ const MainPage = () => {
 
         <div className="col-sm-10">
           <div className="row">
-            <div className="">{/* <FeaturedProduct /> */}</div>
+          <div className="someClass">
+              {  <FeaturedProduct />}   
+             </div>
             {data &&
               data.map((product) => (
+                
                 <div className="col-md-3 mt-5" key={product._id}>
                   <div className="card" style={{ width: "18rem" }}>
                     <Image
