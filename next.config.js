@@ -5,6 +5,7 @@ module.exports = {
   images: {
     domains: ['res.cloudinary.com'],
   },
+  
 };
 
   
@@ -22,3 +23,11 @@ module.exports = {
   //       }
   //     ]
   //   },
+
+  // module.exports = {
+  //   images: {
+  //     domains: ['res.cloudinary.com'],
+  //     loader: 'cloudinary', // This should be set to 'cloudinary' if you are using Cloudinary as the image loader.
+  //     path: 'https://res.cloudinary.com/dm2wuzfzc/image/upload', // Note the corrected path.
+  //   },
+  // };
