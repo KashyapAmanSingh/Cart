@@ -1,20 +1,25 @@
+"use client";
 
-"use client"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import UserForm from "./Users";
+import UserProfile from "./UserProfile";
+import { Loader1 } from "../Progress";
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import UserForm from './Users';
- 
 const UserDetailAfterSignIn = () => {
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+  console.log("UserDetailAfterSignIn", data);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("/api/user");
-          setHasData(true);
+        setHasData(true);
+        setData(response.data.user);
         setLoading(false);
+        console.log("UserDetailAfterSignIn  ", response.data);
       } catch (error) {
         console.error("Error:", error);
         setHasData(false);
@@ -28,12 +33,15 @@ const UserDetailAfterSignIn = () => {
   return (
     <>
       {loading ? (
-        <div>Loading...</div>
+        <div>
+          <Loader1 />
+        </div>
       ) : (
         <>
-          {hasData ? (
+          {hasData && data.length !== 0 ? (
             <div>
-              <p>Data is available</p>
+          
+              <UserProfile data={data[0]} />
             </div>
           ) : (
             <div>

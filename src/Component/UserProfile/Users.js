@@ -2,15 +2,21 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+ import ImageUpload from "../Cloudnary";
+
+  
 
 function UserForm() {
   const route = useRouter();
+  const [OptimisedImageUrl, setOptimisedImageUrl] = useState(""); 
+console.log(OptimisedImageUrl,"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Url of the optimized images%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+ 
 
-  const initialFormData = {
+const initialFormData = {
     name: "",
     mobileNumber: "",
     email: "",
-    profilePicture: "",
+    profilePicture: OptimisedImageUrl,   
     address: {
       street: "",
       city: "",
@@ -26,7 +32,6 @@ function UserForm() {
     "name",
     "mobileNumber",
     "email",
-    "profilePicture",
     "address.street",
     "address.city",
     "address.state",
@@ -34,29 +39,37 @@ function UserForm() {
     "address.country",
   ];
 
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      profilePicture:OptimisedImageUrl,
       [name]: value,
     });
   };
+
+
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post("/api/user", formData);
-
       console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
     }
-    // route.push('/')
+  route.push('/')
   };
 
   return (
     <>
+      <ImageUpload
+        setOptimisedImageUrl={setOptimisedImageUrl}
+        OptimisedImageUrl={OptimisedImageUrl}
+      /> 
       <form onSubmit={handleSubmit}>
         {fieldNames.map((fieldName) => (
           <div key={fieldName}>
@@ -79,3 +92,5 @@ function UserForm() {
 }
 
 export default UserForm;
+
+ 

@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.11.2",
     "@kinde-oss/kinde-auth-nextjs": "^1.8.19",
     "@reduxjs/toolkit": "^1.9.5",
     "@stripe/stripe-js": "^2.1.5",
     "axios": "^1.5.0",
     "bootstrap": "^5.3.2",
+    "cloudinary-core": "^2.13.0",
     "cls": "^0.1.5",
     "cors": "^2.8.5",
     "eslint": "8.49.0",
@@ -26,6 +29,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
+    "react-loader-spinner": "^5.4.5",
     "react-redux": "^8.1.2",
     "react-responsive-carousel": "^3.2.23"
   },
