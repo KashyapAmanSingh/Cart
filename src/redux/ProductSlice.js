@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
+  detailedProduct: null, 
+
 };
 
 const productSlice = createSlice({
@@ -13,16 +15,10 @@ const productSlice = createSlice({
     },
     sortedItem: (state, action) => {
       state.items = action.payload;
-      // console.log(
-      //   "Response sortedItem  from productSlice  action.payload :",
-      //   action.payload
-      // );
+ 
     },
     filteredItem: (state,action) => {
-      // console.log(
-      //   "Response productSlice  filteredItem   filteredItem :",
-      //   action.payload
-      // );
+ 
         state.items = action.payload;
       
     },
@@ -31,7 +27,8 @@ const productSlice = createSlice({
       
     },
     DetailedProduct:(state, action) => {
-      state.items = action.payload;
+      state.detailedProduct = action.payload;
+ 
     }
   },
 });
