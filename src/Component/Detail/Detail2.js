@@ -2,12 +2,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { Loader1 } from "../Progress";
 
 function DynamicTabs( ) {
   const router = useRouter();
-  const cartItems = useSelector((state) => state.Product.items); //If i refresh CartItems Empty 
-  console.log(cartItems,"==============>>DynamicTabs CartItems<<<================");
-  const Id = useSelector((state) => state.Reviews.ProductOrderId);
+   const cartItems = useSelector((state) => state.Product.items);  
+   const Id = useSelector((state) => state.Reviews.ProductOrderId);
      const filteredItems = cartItems.filter((item) => item._id === Id);
  console.log("This is the first id of detailed Dynamic Id ??",Id)
   const filteredSimilar = cartItems.filter(
@@ -16,11 +16,17 @@ function DynamicTabs( ) {
       item.title !== filteredItems[0].title
   );
 
-  const [item] = filteredItems;
-  if (!item) {
-    return <p>No product data available. Product not found.</p>;
-  }
+  const detailedProduct = useSelector((state) => state.Product.detailedProduct);
 
+
+  if (!detailedProduct) {
+    return   <div
+    className="d-flex align-items-center justify-content-center"
+    style={{ height: "100vh" }}
+  >
+    <Loader1 />;
+  </div>
+  }
   const {
     title,
     model,
@@ -28,10 +34,10 @@ function DynamicTabs( ) {
     description,
     legalDisclaimer,
     manufacturingInfo,
-  } = item;
+  } = detailedProduct;
+ 
   const goToCardDetailsPage = (id) => {
-    console.log("id of the similar Products<<======================>>",id);
-    router.push(`/CardDetails/${id}`);
+     router.push(`/CardDetails/${id}`);
   };
 
   return (
@@ -109,7 +115,7 @@ function DynamicTabs( ) {
 
                >
                 <div className="card mb-4">
-                  {/* Add your card content here */}
+                 
                   <img
                     src={item.images[0]}
                     className="card-img-top"

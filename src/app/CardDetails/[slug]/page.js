@@ -1,95 +1,61 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Detail1 from "@/Component/Detail/Detail1";
 import DynamicTabs from "@/Component/Detail/Detail2";
 import StarRating from "@/Component/ReviewsRatings/Ratings";
 import Comment from "@/Component/ReviewsRatings/Comment";
 import { addProductOrderId } from "@/redux/ReviewSlice";
-   import { useDispatch } from "react-redux";
- 
+import { useDispatch  } from "react-redux";
+import { DetailedProduct } from "@/redux/ProductSlice";
+import Loader from "@/Component/Progress";
+
 const Page = ({ params }) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-    dispatch(addProductOrderId(params.slug));
-  // }, [params ,dispatch ]);
- 
+  dispatch(addProductOrderId(params.slug));
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/fetchDetailProduct", {
+          params: {
+            id: params.slug,
+          },
+        });
+        dispatch(DetailedProduct(response.data.product));
+        console.log("Server Response:", response.data);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ height: "100vh" }}
+      >
+        <Loader />;
+      </div>
+    );
+  }
+
   return (
     <>
-      <Detail1   />
-      <DynamicTabs  />
-      <StarRating  />
- 
-        < Comment/>
-
-
-
+      <Detail1 />
+      <DynamicTabs />
+      <StarRating />
+      <Comment />
     </>
   );
 };
 
 export default Page;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import { useSelector } from 'react-redux';
-
-// const CardDetailsPage = ({ params }) => {
-//   const cartItems = useSelector((state) => state.Product.items);
-
-//    const filteredItems = cartItems.filter((item) => item._id == params.slug);
-
-//   return (
-//     <div>
-//       <h1>Card Details Page for ID: {params.slug}</h1>
-//       <h2>Filtered Items:</h2>
-//       <ul>
-//         {filteredItems.map((item) => (
-//           <li key={item._id}>
-//             <h5>
-//               {item.title} - Price: ${item.price}
-//             </h5>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default CardDetailsPage;
-
-{
-  /* <Detail id={params.slug}/> */
-}

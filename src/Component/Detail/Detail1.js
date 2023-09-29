@@ -5,24 +5,36 @@ import { addItem } from "@/redux/Slice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineLocalOffer } from "react-icons/md";
+  import Loader from "../Progress";
 
 const Detail1 = () => {
-  const cartItems = useSelector((state) => state.Product.items);
-console.log(cartItems);//                         *This is empty  on each refresh 
-  const Id = useSelector((state) => state.Reviews.ProductOrderId);
   const dispatch = useDispatch();
-  const filteredItems = cartItems.filter((item) => item._id === Id);
-  const [item] = filteredItems;
 
-  if (!item) {
-    return <p>No product data available. Product not found.</p>;
+  // const cartItems = useSelector((state) => state.Product.items);
+
+  const detailedProduct = useSelector((state) => state.Product.detailedProduct);
+
+ 
+
+  // const Id = useSelector((state) => state.Reviews.ProductOrderId);
+  // const filteredItems = cartItems.filter((item) => item._id === Id);
+  // const [item] = filteredItems;
+
+
+  if (!detailedProduct) {
+    return  <div
+    className="d-flex align-items-center justify-content-center"
+    style={{ height: "100vh" }}
+  >
+    <Loader />;
+  </div>
   }
 
   const {
     price,
     brand,
     category,
-    description,
+    // description,
     seller,
     size,
     title,
@@ -33,7 +45,7 @@ console.log(cartItems);//                         *This is empty  on each refres
     stock,
     discount,
     tags,
-  } = item;
+  } = detailedProduct || {};
 
   const handleAddToCart = (product) => {
     dispatch(
@@ -128,19 +140,7 @@ console.log(cartItems);//                         *This is empty  on each refres
           </div>
         </div>
 
-        {/* <div className="container mt-5">
-  <div className="row">
-    <div className="col-md-4">
-       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 1" className="img-fluid" />
-    </div>
-    <div className="col-md-4">
-       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 2" className="img-fluid" />
-    </div>
-    <div className="col-md-4">
-       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 3" className="img-fluid" />
-    </div>
-  </div>
-</div> */}
+ 
       </div>
     </div>
   );

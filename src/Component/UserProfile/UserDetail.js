@@ -37,8 +37,11 @@ const UserDetailAfterSignIn = () => {
   return (
     <>
       {loading ? (
-        <div>
-          <Loader1 />
+          <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ height: "100vh" }}
+        >
+          <Loader1 />;
         </div>
       ) : (
         <>

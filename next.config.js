@@ -8,23 +8,29 @@
 //   },
 //   // ... other Next.js configuration options
 // });
-
 const withPWA = require('next-pwa')({
   dest: 'public',
   disable: false,
   skipWaiting: true,
-  runtimeCaching: true,
-   register: true,
-   //scope: '/ ',
-  // sw: 'service-worker.js',
-  //...
-})
-
-
+  runtimeCaching: [
+    {
+      urlPattern: /^http:\/\/localhost/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'api-cache',
+        expiration: {
+          maxEntries: 100,
+          maxAgeSeconds: 60 * 60 * 24, // 1 day
+        },
+      },
+    },
+    // Add more caching strategies as needed
+  ],
+  register: true, // Correct placement of register property
+});
 
 module.exports = withPWA({
   images: {
     domains: ['res.cloudinary.com'],
-    } 
-   
-})
+  },
+});

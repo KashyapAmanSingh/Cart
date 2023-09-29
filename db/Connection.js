@@ -15,3 +15,6 @@ export async function connectToDatabase(collectionName) {
     throw error;
   }
 }
+
+
+
