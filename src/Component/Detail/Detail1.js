@@ -4,17 +4,14 @@ import CheckoutButton from "@/Compo/checkoutform";
 import { addItem } from "@/redux/Slice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineLocalOffer  } from 'react-icons/md';
- 
+import { MdOutlineLocalOffer } from "react-icons/md";
 
-
-
-
-
-const Detail1 = ({ id }) => {
+const Detail1 = () => {
   const cartItems = useSelector((state) => state.Product.items);
+console.log(cartItems);//                         *This is empty  on each refresh 
+  const Id = useSelector((state) => state.Reviews.ProductOrderId);
   const dispatch = useDispatch();
-  const filteredItems = cartItems.filter((item) => item._id === id.slug);
+  const filteredItems = cartItems.filter((item) => item._id === Id);
   const [item] = filteredItems;
 
   if (!item) {
@@ -54,35 +51,44 @@ const Detail1 = ({ id }) => {
       <div>
         {/* <!-- Main Product --> */}
         {/* container-fluid */}
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-2 mt-5 mb-5 ">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-2 mt-5 mb-5 ">
               <div className="vice_image1  border-3 border-warning border">
-                <img src={images[1]} alt={title} class="img-fluid" />
+                <img src={images[1]} alt={title} className="img-fluid" />
               </div>
 
               <div className="vice_image1 mt-2  border-3 border-warning border">
-                <img src={images[2]} alt={title} class="img-fluid" />
+                <img src={images[2]} alt={title} className="img-fluid" />
               </div>
             </div>
 
-            <div class="col-md-4 border-3 border-warning border mt-4 ">
-              <img src={images[0]} alt={title} class="img-fluid" />
+            <div className="col-md-4 border-3 border-warning border mt-4 ">
+              <img src={images[0]} alt={title} className="img-fluid" />
             </div>
-            <div class="col-md-6 mt-5">
+            <div className="col-md-6 mt-5">
               {/* <!-- Product Details --> */}
-              <h4 class="title mt-3 mb-3 text-left fw-bold">{title}</h4>
-              <div class="d-flex align-items-center">
-                <div class="rating">
+              <h4 className="title mt-3 mb-3 text-left fw-bold">{title}</h4>
+              <div className="d-flex align-items-center">
+                <div className="rating">
                   {/* <!-- Insert star rating here --> */}
                 </div>
-                <span class="text-muted mx-1 mb-2 btn btn-warning">154 orders</span>
-                <span class="text-dark mx-4 mb-2 btn btn-info">In stock:{stock}</span>
+                <span className="text-muted mx-1 mb-2 btn btn-warning">
+                  154 orders
+                </span>
+                <span className="text-dark mx-4 mb-2 btn btn-info">
+                  In stock:{stock}
+                </span>
               </div>
-              <div class="price mb-3 mt-3">
-                <span class="h4 mb-3 fw-medium"><MdOutlineLocalOffer />Price:&#8377;{price}</span>
-                <span class=" h4 text-muted  mx-4">Discount:{discount}%</span>
-                {/* <span class="text-muted">Assured:{tags}</span> */}
+              <div className="price mb-3 mt-3">
+                <span className="h4 mb-3 fw-medium">
+                  <MdOutlineLocalOffer />
+                  Price:&#8377;{price}
+                </span>
+                <span className=" h4 text-muted  mx-4">
+                  Discount:{discount}%
+                </span>
+                {/* <span className="text-muted">Assured:{tags}</span> */}
               </div>
               {/* <p>{description.slice(0, 190)}</p> */}
               {/* <!-- Specifications --> */}
@@ -107,32 +113,31 @@ const Detail1 = ({ id }) => {
                 </tbody>
               </table>
 
-              <div class="d-flex mb-4 my-4 ">
-                <div class="">
+              <div className="d-flex mb-4 my-4 ">
+                <div className="">
                   <CheckoutButton />
                 </div>
                 <button
-  className="btn btn-info btn-md mx-5 mb-4"
-  onClick={() => handleAddToCart(item)}
->
-  Add to Cart
-</button>
-
+                  className="btn btn-info btn-md mx-5 mb-4"
+                  onClick={() => handleAddToCart(item)}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* <div class="container mt-5">
-  <div class="row">
-    <div class="col-md-4">
-       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 1" class="img-fluid" />
+        {/* <div className="container mt-5">
+  <div className="row">
+    <div className="col-md-4">
+       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 1" className="img-fluid" />
     </div>
-    <div class="col-md-4">
-       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 2" class="img-fluid" />
+    <div className="col-md-4">
+       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 2" className="img-fluid" />
     </div>
-    <div class="col-md-4">
-       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 3" class="img-fluid" />
+    <div className="col-md-4">
+       <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp" alt="Product Image 3" className="img-fluid" />
     </div>
   </div>
 </div> */}

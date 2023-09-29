@@ -23,17 +23,20 @@ const productSlice = createSlice({
       //   "Response productSlice  filteredItem   filteredItem :",
       //   action.payload
       // );
-      // state.items = action.payload;
+        state.items = action.payload;
       
     },
     homeItem: (state, action) => {
       state.items = action.payload;
       
     },
+    DetailedProduct:(state, action) => {
+      state.items = action.payload;
+    }
   },
 });
 
-export const { searchedItem, sortedItem, homeItem,filteredItem } = productSlice.actions;
+export const { searchedItem, sortedItem, homeItem,filteredItem , DetailedProduct} = productSlice.actions;
 export default productSlice;
 
  

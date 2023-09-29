@@ -10,22 +10,27 @@ import {
 } from "react-icons/md";
 import { TbMapPinCode } from "react-icons/tb";
 import BuyedItem from "./BuyedItem";
+import { useSelector } from "react-redux";
 
-const UserProfile = ({ data }) => {
-  const { given_name, family_name, mobileNumber, email, profilePicture } = data;
+const UserProfile = () => {
+  const UserDataSlice = useSelector((state) => state.user.user);
 
-  //  FcDepartment
-  const initialFormIcon = [
-    FcAddressBook, //name
-    FcCellPhone,
-    AiOutlineMail,
-    FaStreetView,
-    BiSolidCity,
-    MdOutlineRealEstateAgent,
-    //  FcHome,
-    TbMapPinCode, // Assuming this is another icon you want to include, but it's not imported in your example
-    MdOutlineLocationCity,
-  ];
+  const { given_name, family_name, mobileNumber, email, profilePicture } =
+    UserDataSlice;
+
+  // console.log(UserDataSlice  ,"userDataSlice this is from sliced datas ")
+
+  // const initialFormIcon = [
+  //   FcAddressBook, //name
+  //   FcCellPhone,
+  //   AiOutlineMail,
+  //   FaStreetView,
+  //   BiSolidCity,
+  //   MdOutlineRealEstateAgent,
+  //   //  FcHome,
+  //   TbMapPinCode,  
+  //   MdOutlineLocationCity,
+  // ];
 
   const fieldNamesMapping = {
     Name: given_name,
@@ -61,7 +66,7 @@ const UserProfile = ({ data }) => {
               <div className="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                 {entries.map(([key, value], index) => (
                   <div key={index}>
-                    <div>{initialFormIcon[index]}</div>
+                    {/* <div>{initialFormIcon[index]}</div> */}
                     <p className="my-3 fw-bolder">{`${key}: ${value}`}</p>
                     <hr />
                   </div>
@@ -69,18 +74,15 @@ const UserProfile = ({ data }) => {
               </div>
             </div>
           </div>
-          
-          <div className="col-sm-4 text-center px-xl-10    ">   
-         
-          <div className="col-sm-12     ">
-          <div >
-            <h3 className="mt-4 mx-1">Product That You Buyed</h3>
 
+          <div className="col-sm-4 text-center px-xl-10    ">
+            <div className="col-sm-12     ">
+              <div>
+                <h3 className="mt-4 mx-1">Product That You Buyed</h3>
+              </div>
+              <BuyedItem />
             </div>
-          <BuyedItem/>       
-          </div> 
- 
-  </div>
+          </div>
         </div>
       </div>
     </div>

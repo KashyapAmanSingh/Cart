@@ -3,13 +3,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-function DynamicTabs({ id }) {
-  const cartItems = useSelector((state) => state.Product.items);
-  const filteredItems = cartItems.filter((item) => item._id === id.slug);
+function DynamicTabs( ) {
   const router = useRouter();
-
-
-
+  const cartItems = useSelector((state) => state.Product.items); //If i refresh CartItems Empty 
+  console.log(cartItems,"==============>>DynamicTabs CartItems<<<================");
+  const Id = useSelector((state) => state.Reviews.ProductOrderId);
+     const filteredItems = cartItems.filter((item) => item._id === Id);
+ console.log("This is the first id of detailed Dynamic Id ??",Id)
   const filteredSimilar = cartItems.filter(
     (item) =>
       item.category === filteredItems[0].category &&

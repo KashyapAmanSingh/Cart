@@ -37,6 +37,17 @@ const Navbar = () => {
                 </span>
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                href="/Rating"
+                ter
+                className="nav-link active text-white fw-bolder d-flex align-items-center"
+                aria-current="page"
+              >
+                <span className="ms-1">Rating</span>
+                <CartCount />
+              </Link>
+            </li>
           </ul>
 
           <Searching />

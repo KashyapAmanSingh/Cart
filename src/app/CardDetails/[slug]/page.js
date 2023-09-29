@@ -1,21 +1,37 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import Detail1 from "@/Component/Detail/Detail1";
 import DynamicTabs from "@/Component/Detail/Detail2";
+import StarRating from "@/Component/ReviewsRatings/Ratings";
+import Comment from "@/Component/ReviewsRatings/Comment";
+import { addProductOrderId } from "@/redux/ReviewSlice";
+   import { useDispatch } from "react-redux";
+ 
+const Page = ({ params }) => {
+  const dispatch = useDispatch();
 
-const page = ({ params }) => {
+  // useEffect(() => {
+    dispatch(addProductOrderId(params.slug));
+  // }, [params ,dispatch ]);
+ 
   return (
     <>
-      <Detail1 id={params} />
-      <DynamicTabs id={params} />
+      <Detail1   />
+      <DynamicTabs  />
+      <StarRating  />
+ 
+        < Comment/>
+
+
+
     </>
   );
 };
 
-export default page;
+export default Page;
 
 
 

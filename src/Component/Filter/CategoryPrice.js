@@ -1,26 +1,23 @@
 import { filteredPriceQuery } from '@/redux/FilterSortSlice';
 import { filteredItem } from '@/redux/ProductSlice';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 const CategoryPrice = () => {
-    const [selectedCategoryPrice, setSelectedCategoryPrice] = useState("All");
-    const Price = ["All", "100-500", "500-2000", "2000-5000", "Over 6000"];
-    const dispatch = useDispatch();
-  //  console.log("setSelectedCategoryPrice",selectedCategoryPrice, "========>>>>>>>>  So <<<<<<<<<<<=========");
-     const rangeValues = selectedCategoryPrice.split('-');
-          const PricesRange1= parseInt(rangeValues[0]);
-          const  PricesRange2= parseInt(rangeValues[1]);
-          const myPriceRangeArray = [];
+  const [selectedCategoryPrice, setSelectedCategoryPrice] = useState("All");
+  const Price = ["All", "100-500", "500-2000", "2000-5000", "Over 6000"];
+  const dispatch = useDispatch();
 
-           myPriceRangeArray.push(PricesRange1);
-           myPriceRangeArray.push(PricesRange2);
+  const myPriceRangeArray = useMemo(() => {
+    const rangeValues = selectedCategoryPrice.split('-');
+    const PricesRange1 = parseInt(rangeValues[0]);
+    const PricesRange2 = parseInt(rangeValues[1]);
+    return [PricesRange1, PricesRange2];
+  }, [selectedCategoryPrice]);
 
-   useEffect(() => {
-     
-        dispatch(  filteredPriceQuery( myPriceRangeArray));
-      }, [selectedCategoryPrice]);
- 
+  useEffect(() => {
+    dispatch(filteredPriceQuery(myPriceRangeArray));
+  }, [selectedCategoryPrice, myPriceRangeArray, dispatch]);
       
 
   //  console.log("=====>>>>>>>>RangeValues <<<<<<========", rangeValues[0]  ,rangeValues[1] ,rangeValues ,typeof(parseInt(rangeValues[0])),  "========>>>>>>>>RangeValues<<<<<<<<<<<=========")

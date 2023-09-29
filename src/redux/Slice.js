@@ -10,6 +10,7 @@ const initialState = {
   count: 0,
   session: null,
   sessionAll: [],
+ 
 };
 
  
@@ -78,9 +79,10 @@ const cartSlice = createSlice({
         localStorage.setItem("sessionAll", JSON.stringify(updatedSessionAll));
       }
     },
+   
   },
 });
 
-export const { addItem, removeItem, setQuantity, setSession } =
+export const { addItem, removeItem, setQuantity, setSession  } =
   cartSlice.actions;
 export default cartSlice;
