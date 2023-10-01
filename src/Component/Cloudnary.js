@@ -1,20 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios"; // Import axios
-  import cloudinary from 'cloudinary-core';
-  import { FcUpload } from "react-icons/fc";
+import cloudinary from "cloudinary-core";
+import { FcUpload } from "react-icons/fc";
 import Loader from "./Progress";
-// import PropTypes from "prop-types";
  
 const cloudinaryCore = new cloudinary.Cloudinary({ cloud_name: "dm2wuzfzc" });
 
 function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState("");
-console.log(selectedFiles,"-----------------------------------------------------This is Selected Files from The Profile Pictures%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+ 
   const handleFileSelect = (e) => {
     const files = e.target.files[0];
-    setSelectedFiles( files );
+    setSelectedFiles(files);
   };
 
   const handleImageUpload = async () => {
@@ -22,10 +21,7 @@ console.log(selectedFiles,"-----------------------------------------------------
     if (selectedFiles) {
       const formData = new FormData();
       formData.append("file", selectedFiles);
-
-      // selectedFiles.forEach((file) => {
-      //   formData.append("file", file);
-      // });
+ 
       formData.append("upload_preset", "bofedne7");
 
       try {
@@ -43,14 +39,16 @@ console.log(selectedFiles,"-----------------------------------------------------
             fetch_format: "auto",
           });
 
-          setOptimisedImageUrl(  optimizedImageUrl );
+          setOptimisedImageUrl(optimizedImageUrl);
           setIsLoading(false);
         } else {
-          console.error("Image upload failed");
+          console.error("Image upload failed", response.data.message );
           setIsLoading(false);
         }
       } catch (error) {
         console.error("Image upload error:", error);
+ 
+      }finally {
         setIsLoading(false);
       }
     } else {
@@ -91,24 +89,8 @@ console.log(selectedFiles,"-----------------------------------------------------
       >
         Upload Image
       </button>
-
-      {/* {OptimisedImageUrl.length > 0 && (
-        <div>
-          <p>Uploaded Images:</p>
-          {OptimisedImageUrl.map((url, index) => (
-            <div key={index}>
-              <img src={url} alt={`Uploaded ${index}`} />
-              <p>This is the final URL: {url}</p>
-            </div>
-          ))}
-        </div>
-      )} */}
     </div>
   );
 }
-// ImageUpload.propTypes = {
-//   setOptimisedImageUrl: PropTypes.func.isRequired,
-//   OptimisedImageUrl: PropTypes.array.isRequired,
-// };
 
 export default ImageUpload;

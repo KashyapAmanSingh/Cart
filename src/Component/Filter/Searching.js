@@ -1,41 +1,18 @@
 "use client";
 import { filteredSearchedQuery } from "@/redux/FilterSortSlice";
-import { searchedItem } from "@/redux/ProductSlice";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+ import React, {  useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Searching = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchData, setSearchData] = useState("");
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
-  // console.log(searchData," >>>>>>>>searchData<<<<<<<<<<< HEAD<<<<<<<<")
 
-  useEffect(() => {
-    dispatch(filteredSearchedQuery(searchTerm));
-    // setSearchTerm("");
-  }, [searchTerm]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await axios.get(
-      `/api/fetchProduct?searchBy=${searchTerm}`
-    );
-
-    if (response.status === 200) {
-      try {
-        const data = await response.data.products;
-        console.log("Search results:", data);
-        setSearchData(data);
-        dispatch(searchedItem(data));
-      } catch (error) {
-        console.error("Error parsing JSON:", error);
-      }
-    } else {
-      console.error("Request failed with status:", response.status);
-    }
+    dispatch(filteredSearchedQuery(searchTerm));
+      
   };
 
   return (
@@ -49,7 +26,7 @@ const Searching = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className="btn btn-outline-success" type="submit">
+        <button className="btn btn-outline-success" type="submit"  disabled={!searchTerm.trim()} >
           Search
         </button>
       </form>

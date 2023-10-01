@@ -1,8 +1,11 @@
 "use client";
-import axios from "axios";
+import { fetchData } from "@/utils/FetchCode";
+ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import ImageUpload from "../Cloudnary";
+import React, { Suspense, useState } from "react";
+const ImageUpload = dynamic(() => import("../Cloudnary"), {
+  suspense: true,
+});
 
 function UserForm() {
   const route = useRouter();
@@ -37,31 +40,50 @@ function UserForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      profilePicture: OptimisedImageUrl,
-      [name]: value,
-    });
+
+    // For nested fields (address), update the state accordingly
+    if (name.startsWith("address.")) {
+      const addressField = name.split(".")[1];
+      setFormData((prevData) => ({
+        ...prevData,
+        address: {
+          ...prevData.address,
+          [addressField]: value,
+        },
+        profilePicture: OptimisedImageUrl,
+      }));
+    } else {
+      // For non-nested fields, update the state normally
+      setFormData({
+        ...formData,
+        profilePicture: OptimisedImageUrl,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post("/api/user", formData);
-      console.log("API Response:", response.data);
+      const response = await fetchData("/api/user", "POST", formData);
+       
+      console.log("Review submitted successfully", response);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error submitting review", error);
     }
     route.push("/");
   };
-
+  
+ 
   return (
     <>
-      <ImageUpload
-        setOptimisedImageUrl={setOptimisedImageUrl}
-        OptimisedImageUrl={OptimisedImageUrl}
-      />
+      <Suspense fallback={<div>Loading ImageUpload ...</div>}>
+        <ImageUpload
+          setOptimisedImageUrl={setOptimisedImageUrl}
+          OptimisedImageUrl={OptimisedImageUrl}
+        />
+      </Suspense>
+
       <form onSubmit={handleSubmit}>
         {fieldNames.map((fieldName) => (
           <div key={fieldName}>

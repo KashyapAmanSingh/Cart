@@ -1,22 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { BsCart4 } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { BsCart4 } from 'react-icons/bs';
 
 const CartCount = () => {
   const [count, setCount] = useState(0);
   const cartItems = useSelector((state) => state.cart.count);
 
   useEffect(() => {
-    const cartCountLocalStorage = localStorage.getItem("cartItems");
+    const cartCountLocalStorage = localStorage.getItem('cartItems');
     const cartItemsArray = JSON.parse(cartCountLocalStorage);
-    let cartItemsLength;
+
     if (Array.isArray(cartItemsArray)) {
-      cartItemsLength = cartItemsArray.length;
-     } else {
-      console.log("cartItemsArray is not an array or is empty.");
+      setCount(cartItemsArray.length);
+    } else {
+      console.log('cartItemsArray is not an array or is empty.');
     }
-    setCount(cartItemsLength);
   }, [cartItems]);
 
   return (
@@ -28,5 +27,7 @@ const CartCount = () => {
 };
 
 export default CartCount;
+
+ 
 
  

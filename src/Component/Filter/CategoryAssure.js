@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const CategoryAssure = () => {
-  const [selectedAssured, setSelectedAssured] = useState("All");
+  const [selectedAssured, setSelectedAssured] = useState(" ");
 
   const handleRadioChange = (event) => {
     const selectedValue = event.target.value;
@@ -11,11 +11,11 @@ const CategoryAssure = () => {
   return (
     <div className="assured fw-bold d-flex align-items-center justify-content-center">
       <input
-        type="checkbox" // Changed to checkbox input
+        type="checkbox" 
         name="Assured"
         id="Assured"
         value="Assured"
-        checked={selectedAssured === "Assured"} // Check if selectedAssured is equal to "Assured"
+        checked={selectedAssured === "Assured"}  
         onChange={handleRadioChange}
         className="form-check-input mt-3 mb-3"
         style={{ width: "25px", height: "25px" }}

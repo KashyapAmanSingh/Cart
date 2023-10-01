@@ -8,7 +8,6 @@ const HomePage = () => {
   const [data, setDatas] = useState([]);
   const dispatch = useDispatch();
 
-  // Use a useEffect to set data based on sortedData
   const sortedData = useSelector((state) => state.Product.items);
   useEffect(() => {
     if (sortedData != null) {

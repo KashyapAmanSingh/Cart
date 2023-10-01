@@ -1,11 +1,11 @@
+ 
 import React from "react";
 import Link from "next/link";
-
-import Searching from "./Filter/Searching";
-import Sorting from "./Filter/Sorting";
+import dynamic from "next/dynamic";
 import { FcBusinessman } from "react-icons/fc";
-import CartCount from "./CartComponent/cartCount";
-
+   const Searching = dynamic(() => import("./Filter/Searching"));
+const Sorting = dynamic(() => import("./Filter/Sorting"));
+const CartCount = dynamic(() => import("./CartComponent/cartCount"));
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">

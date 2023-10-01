@@ -1,32 +1,44 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Loader1 } from "../Progress";
 
-function DynamicTabs( ) {
+function DynamicTabs() {
   const router = useRouter();
-   const cartItems = useSelector((state) => state.Product.items);  
-   const Id = useSelector((state) => state.Reviews.ProductOrderId);
-     const filteredItems = cartItems.filter((item) => item._id === Id);
- console.log("This is the first id of detailed Dynamic Id ??",Id)
-  const filteredSimilar = cartItems.filter(
-    (item) =>
-      item.category === filteredItems[0].category &&
-      item.title !== filteredItems[0].title
+  const cartItems = useSelector((state) => state.Product.items);
+  const Id = useSelector((state) => state.Reviews.ProductOrderId);
+
+  const filteredItems = useMemo(
+    () => cartItems.filter((item) => item._id === Id),
+    [cartItems, Id]
+  );
+
+  console.log("This is the first id of detailed Dynamic Id ??", Id);
+
+  const filteredSimilar = useMemo(
+    () =>
+      cartItems.filter(
+        (item) =>
+          item.category === filteredItems[0]?.category &&
+          item.title !== filteredItems[0]?.title
+      ),
+    [cartItems, filteredItems]
   );
 
   const detailedProduct = useSelector((state) => state.Product.detailedProduct);
 
-
   if (!detailedProduct) {
-    return   <div
-    className="d-flex align-items-center justify-content-center"
-    style={{ height: "100vh" }}
-  >
-    <Loader1 />;
-  </div>
+    return (
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ height: "100vh" }}
+      >
+        <Loader1 />;
+      </div>
+    );
   }
+
   const {
     title,
     model,
@@ -35,9 +47,9 @@ function DynamicTabs( ) {
     legalDisclaimer,
     manufacturingInfo,
   } = detailedProduct;
- 
+
   const goToCardDetailsPage = (id) => {
-     router.push(`/CardDetails/${id}`);
+    router.push(`/CardDetails/${id}`);
   };
 
   return (
@@ -110,12 +122,12 @@ function DynamicTabs( ) {
           <h1>Similar Others Products</h1>
           <div className="row">
             {filteredSimilar.slice(0, 2).map((item) => (
-              <div key={item._id} className="col-md-6" 
-              onClick={() => goToCardDetailsPage(item._id)}
-
-               >
+              <div
+                key={item._id}
+                className="col-md-6"
+                onClick={() => goToCardDetailsPage(item._id)}
+              >
                 <div className="card mb-4">
-                 
                   <img
                     src={item.images[0]}
                     className="card-img-top"

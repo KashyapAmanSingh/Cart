@@ -1,16 +1,25 @@
- import LogOut from "@/Component/UserProfile/LogOut";
-import MainPage from "../Component/MainPage";
-import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/server";
- 
+import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+const LogOut = dynamic(() => import("@/Component/UserProfile/LogOut"), {
+  Suspense: true,
+});
+const MainPage = dynamic(() => import("../Component/MainPage"), {
+  Suspense: true,
+});
+
 export default function Home() {
   return (
     <h1>
       {" "}
-      <MainPage />
+      <Suspense fallback={<div>Loading MainPage...</div>}>
+        <MainPage />
+      </Suspense>
       <LoginLink>Sign in</LoginLink>
-
-<RegisterLink>Sign up</RegisterLink>
-<LogOut/>
+      <RegisterLink>Sign up</RegisterLink>
+      <Suspense fallback={<div>Loading LogOut...</div>}>
+        <LogOut />
+      </Suspense>
     </h1>
   );
 }

@@ -1,59 +1,43 @@
 /* eslint-disable @next/next/no-img-element */
 
-import CheckoutButton from "@/Compo/checkoutform";
-import { addItem } from "@/redux/Slice";
-import React from "react";
+ import React, { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineLocalOffer } from "react-icons/md";
-  import Loader from "../Progress";
+import Loader from "../Progress";
+import dynamic from "next/dynamic";
+import { addItem } from "@/redux/Slice";
+
+
+const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
+ 
+
 
 const Detail1 = () => {
   const dispatch = useDispatch();
 
-  // const cartItems = useSelector((state) => state.Product.items);
-
   const detailedProduct = useSelector((state) => state.Product.detailedProduct);
 
- 
-
-  // const Id = useSelector((state) => state.Reviews.ProductOrderId);
-  // const filteredItems = cartItems.filter((item) => item._id === Id);
-  // const [item] = filteredItems;
-
-
   if (!detailedProduct) {
-    return  <div
-    className="d-flex align-items-center justify-content-center"
-    style={{ height: "100vh" }}
-  >
-    <Loader />;
-  </div>
+    return (
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ height: "100vh" }}
+      >
+        <Loader />;
+      </div>
+    );
   }
 
-  const {
-    price,
-    brand,
-    category,
-    // description,
-    seller,
-    size,
-    title,
-    images,
-    offers,
-    ratings,
-    is_featured,
-    stock,
-    discount,
-    tags,
-  } = detailedProduct || {};
+  const { title, images, stock, price, discount, brand, category, seller, size } =
+    detailedProduct || {};
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = () => {
     dispatch(
       addItem({
-        id: product._id,
-        title: product.title,
-        image: product.images[0],
-        price: product.price,
+        id: detailedProduct._id,
+        title: detailedProduct.title,
+        image: detailedProduct.images[0],
+        price: detailedProduct.price,
       })
     );
   };
@@ -61,8 +45,7 @@ const Detail1 = () => {
   return (
     <div>
       <div>
-        {/* <!-- Main Product --> */}
-        {/* container-fluid */}
+     
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-2 mt-5 mb-5 ">
@@ -127,11 +110,13 @@ const Detail1 = () => {
 
               <div className="d-flex mb-4 my-4 ">
                 <div className="">
-                  <CheckoutButton />
+                <Suspense fallback={<div>Loading...</div>}>
+        <CheckoutButton />
+      </Suspense>
                 </div>
                 <button
                   className="btn btn-info btn-md mx-5 mb-4"
-                  onClick={() => handleAddToCart(item)}
+                  onClick={handleAddToCart}
                 >
                   Add to Cart
                 </button>
@@ -139,8 +124,6 @@ const Detail1 = () => {
             </div>
           </div>
         </div>
-
- 
       </div>
     </div>
   );

@@ -1,44 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const FilterSortQuery = () => {
-  const sortQuery = useSelector((state) => state.FilterSortSlice.sortQuery);
-  const filteredPriceQuery = useSelector(
-    (state) => state.FilterSortSlice.filteredPriceQuery
-  );
-  const filteredCategoryQ = useSelector(
-    (state) => state.FilterSortSlice.filteredCategoryQuery
-  );
-  
-  const filteredSearchedQuery = useSelector(
-    (state) => state.FilterSortSlice.filteredSearchedQuery
-  );
+  const {
+    sortQuery,
+    filteredPriceQuery,
+    filteredCategoryQuery,
+    filteredSearchedQuery,
+  } = useSelector((state) => state.FilterSortSlice);
 
-console.log(filteredSearchedQuery ,"filteredSearchedQuery -----------------  filteredSearchedQuery ");
-  
-  let apiUrl = `/api/fetchProduct`;
+  // const sortQuery = useSelector((state) => state.FilterSortSlice.sortQuery);
+  // const filteredPriceQuery = useSelector((state) => state.FilterSortSlice.filteredPriceQuery);
+  // const filteredCategoryQuery = useSelector((state) => state.FilterSortSlice.filteredCategoryQuery);
+  // const filteredSearchedQuery = useSelector((state) => state.FilterSortSlice.filteredSearchedQuery);
 
-  if (filteredCategoryQ) {
-    apiUrl += `?filterBy=${filteredCategoryQ}`;
+
+  const queryParams = [];
+
+  if (filteredCategoryQuery) {
+    queryParams.push(`filterBy=${filteredCategoryQuery}`);
   }
 
-  if (filteredPriceQuery && filteredPriceQuery.length > 0) {
-    const filteredPriceQuery1 = filteredPriceQuery[0];
-    const filteredPriceQuery2 = filteredPriceQuery[1];
-    apiUrl += `&filteredPriceQuery1=${filteredPriceQuery1}&filteredPriceQuery2=${filteredPriceQuery2}`;
+  if (filteredPriceQuery && filteredPriceQuery.length === 2) {
+    const [filteredPriceQuery1, filteredPriceQuery2] = filteredPriceQuery;
+    queryParams.push(`filteredPriceQuery1=${filteredPriceQuery1}`);
+    queryParams.push(`filteredPriceQuery2=${filteredPriceQuery2}`);
   }
+
   if (sortQuery) {
-    apiUrl += `&sortBy=${sortQuery}`;
-  }
-  if(filteredSearchedQuery){
-    apiUrl += `&searchBy=${filteredSearchedQuery}`;
+    queryParams.push(`sortBy=${sortQuery}`);
+    console.log("Searched content from step 2   Query component",   sortQuery);
 
   }
 
-//   console.log(
-//     apiUrl,
-//     "^^^^^^^^^^^^^^^^^^This is full of The Url<<<<<<<<<<<<<<<<<<"
-//   );
+  if (filteredSearchedQuery) {
+    queryParams.push(`searchBy=${filteredSearchedQuery}`);
+
+  }
+
+  const apiUrl = `/api/fetchProduct${
+    queryParams.length > 0 ? `?${queryParams.join("&")}` : ""
+  }`;
 
   return apiUrl;
 };

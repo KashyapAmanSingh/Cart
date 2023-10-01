@@ -1,65 +1,26 @@
-import React, { useEffect, useState } from "react";
-import CategoryPrice from "./CategoryPrice";
-import CategoryAssure from "./CategoryAssure";
+import React, { useEffect, useState,    Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
- import { filteredCategoryQuery } from "@/redux/FilterSortSlice";
- import Filter from "./Filter";
+import { filteredCategoryQuery } from "@/redux/FilterSortSlice";
+import dynamic from "next/dynamic";
+
+// Dynamic import of components
+const CategoryPrice = dynamic(() => import("./CategoryPrice"));
+const CategoryAssure = dynamic(() => import("./CategoryAssure"));
+const Filter = dynamic(() => import("./Filter"));
+// const MyErrorBoundary = dynamic(() => import("../path/to/MyErrorBoundary"), {
+//   loading: () => <p>Loading Error Boundary...</p>,
+// });
+
+
 
 const Category = () => {
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // const [filterData, setfilterData] = useState([]);
-  // const ProductItems = useSelector((state) => state.Product.items);
-  
   useEffect(() => {
     // dispatch(filteredItem(filterData));
     dispatch(filteredCategoryQuery(selectedCategory));
-  }, [selectedCategory]);
-
- 
- 
- 
-  //  const filterBy =  filteredCategoryQ  ;
-  //  const filteredPrice=filteredPriceQuery ;
-
-  // useEffect(() => {
-  //   if (selectedCategory === "All") {
-  //     setfilterData(ProductItems);
-  //   } else {
-  //     const filteredItems = ProductItems.filter(
-  //       (item) => item.category === selectedCategory
-  //     );
-  //     setfilterData(filteredItems);
-  //   }
-  // }, [selectedCategory]);
-
-  // const sortQuery = useSelector((state) => state.FilterSortSlice.sortQuery);
-  // const filteredCategoryQ = useSelector((state) => state.FilterSortSlice.filteredCategoryQuery);
-  // const filteredPriceQuery = useSelector((state) => state.FilterSortSlice.filteredPriceQuery);
-
-  // const apiUrl = '/api/fetchProduct';
-
-  //  const queryParams = {};
-
-  // if (sortQuery) {
-  //   queryParams.sortBy = sortQuery;
-  // }
-
-  // if (filteredCategoryQ) {
-  //   queryParams.filterBy = filteredCategoryQ;
-  // }
-
-  // if (filteredPriceQuery && filteredPriceQuery.length > 0) {
-  //   queryParams.filteredPriceQuery1 = filteredPriceQuery[0];
-  //   queryParams.filteredPriceQuery2 = filteredPriceQuery[1];
-  // }
-
-  // // Use the URLSearchParams API to construct the query string
-  // const params = new URLSearchParams(queryParams).toString();
-
-  // // Combine the URL with the query string
-  // const fullApiUrl = apiUrl + (params ? `?${params}` : '');
+  }, [selectedCategory,dispatch]);
 
   const categories = [
     "All",
@@ -110,19 +71,35 @@ const Category = () => {
           </div>
         ))}
       </div>
+      {/* <MyErrorBoundary> */}
 
-      <div>
+      <Suspense fallback={<div>Loading CategoryPrice ...</div>}>
         <CategoryPrice />
-      </div>
+      </Suspense>
+      {/* <MyErrorBoundary/> */}
+
       <div
         className="  mt-2  d-flex align-items-center justify-content-center
  "
       >
-        <CategoryAssure />
+
+{/* <MyErrorBoundary> */}
+
+        <Suspense fallback={<div>Loading CategoryAssure...</div>}>
+          <CategoryAssure />
+        </Suspense>
+        {/* <MyErrorBoundary/> */}
+
       </div>
 
       <div>
-        <Filter  />
+      {/* <MyErrorBoundary> */}
+
+        <Suspense fallback={<div>Loading Filter ...</div>}>
+          <Filter />
+        </Suspense>
+        {/* <MyErrorBoundary/> */}
+
       </div>
     </>
   );

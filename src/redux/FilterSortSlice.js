@@ -34,6 +34,7 @@ const FilterSortSlice = createSlice({
       state.filteredCategoryQuery = action.payload;
     },
     filteredSearchedQuery: (state, action) => {
+      
       // console.log(
       //   "Response     filteredSearchedQuery :",
       //   action.payload
