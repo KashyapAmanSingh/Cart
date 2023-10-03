@@ -32,7 +32,7 @@ const UserDetailAfterSignIn = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

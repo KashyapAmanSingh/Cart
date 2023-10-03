@@ -35,7 +35,7 @@ const Page = ({ params }) => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch,params.slug]);
 
   if (loading) {
     return (
