@@ -1,4 +1,7 @@
- import Comment from '@/Component/ReviewsRatings/Comment'
+"use client"
+
+
+import Comment from '@/Component/ReviewsRatings/Comment'
 import StarRating from '@/Component/ReviewsRatings/Ratings'
  import React from 'react'
 

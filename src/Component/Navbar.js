@@ -40,7 +40,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 href="/Rating"
-                ter
+           
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
@@ -57,7 +57,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 href="/cart"
-                ter
+           
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
