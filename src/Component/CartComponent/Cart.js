@@ -1,18 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
- 
-import React from "react";
-import CheckoutButton from "@/Compo/checkoutform";  
-import { removeItem, setQuantity  } from "@/redux/Slice";  
 
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import CheckoutButton from "@/Compo/checkoutform";
+import { removeItem, setQuantity } from "@/redux/Slice";
+
+import { useDispatch  } from "react-redux";
 
 const Cart = () => {
-  const cartItems = useSelector((state) => state.cart.items);
+  const [cartItems, setCartItems] = useState([]);
+  const [cartId, setCartId] = useState([]);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      const parsedCartItems = JSON.parse(storedCartItems);
+      setCartItems(parsedCartItems);
+    }
+  }, []);
+
   const handleremove = (id) => {
     dispatch(removeItem(id));
+    removeItems();
+  };
+
+  const removeItems = () => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      const parsedCartItems = JSON.parse(storedCartItems);
+      setCartItems(parsedCartItems);
+    }
   };
 
   const handleUnitChange = (quantity, i) => {
@@ -22,8 +40,7 @@ const Cart = () => {
 
   return (
     <>
-     
-          <div className="mt-0">
+      <div className="mt-0">
         <div className="container">
           <div className="row">
             {cartItems &&
@@ -37,7 +54,7 @@ const Cart = () => {
 
                       <button
                         className="btn btn-primary"
-                        onClick={() => handleremove(i)} // Pass the index
+                        onClick={() => handleremove(product.id)} // Pass the index
                       >
                         Remove
                       </button>
@@ -57,14 +74,11 @@ const Cart = () => {
                       </select>
                     </div>
                   </div>
-
-        
                 </div>
               ))}
           </div>
         </div>
-             <CheckoutButton/>
-
+        <CheckoutButton />
       </div>
     </>
   );

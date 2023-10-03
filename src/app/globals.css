@@ -105,3 +105,26 @@ a {
     color-scheme: dark;
   }
 }
+
+
+.categ{
+  border: 3px solid red !important;
+  max-height: 100vh !important;
+  max-height: auto !important;
+
+}
+
+ .assured{
+  border: 2px solid  darkslategray !important;
+  
+ }
+
+ .icon-hover:hover {
+  border-color: #3b71ca !important;
+  background-color: white !important;
+  color: #3b71ca !important;
+}
+
+.icon-hover:hover i {
+  color: #3b71ca !important;
+}

@@ -1,7 +1,11 @@
-import React from 'react';
-import Link from 'next/link';
-import CartCount from './cartCount';
-
+ 
+import React from "react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { FcBusinessman } from "react-icons/fc";
+   const Searching = dynamic(() => import("./Filter/Searching"));
+const Sorting = dynamic(() => import("./Filter/Sorting"));
+const CartCount = dynamic(() => import("./CartComponent/cartCount"));
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -24,32 +28,36 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
-                href="/cart"
+                href="/UsersProfiles"
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
-                <span className="ms-1">Cart</span>
+                <span className="ms-1">
+                  <FcBusinessman size={35} />
+                </span>
               </Link>
             </li>
+            {/* <li className="nav-item">
+              <Link
+                href="/Rating"
+           
+                className="nav-link active text-white fw-bolder d-flex align-items-center"
+                aria-current="page"
+              >
+                <span className="ms-1">Rating</span>
+                <CartCount />
+              </Link>
+            </li> */}
           </ul>
-          <form className="d-flex px-4" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-success"
-              type="submit"
-            >
-              Search
-            </button>
-          </form>
+
+          <Searching />
+          <Sorting />
+
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0 px-4">
             <li className="nav-item">
               <Link
                 href="/cart"
+           
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
