@@ -1,10 +1,13 @@
-/* eslint-disable react/require-default-props */
+"use client "
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactStars from "react-rating-stars-component";
 import { AiTwotoneStar } from "react-icons/ai";
 import { BiSolidStarHalf } from "react-icons/bi";
 import { addRatings } from "@/redux/ReviewSlice";
+
+
+ 
 
 const StarRating = () => {
   // const [rating, setRating] = useState(0);
