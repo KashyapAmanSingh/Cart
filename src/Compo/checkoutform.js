@@ -35,7 +35,6 @@ const CheckoutButton = () => {
  
 
       console.log("After Axios request");
-
       if (response.status === 200) {
         const sessionId = response.data;
         console.log("Session ID:", sessionId);
