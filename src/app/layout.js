@@ -16,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <Fragment>
-      <Head>
+      {/* <Head>
         <meta name="application-name" content="PWA App" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
-      </Head>
+      </Head> */}
       <html lang="en">
         <body className={inter.className}>
           <CartProvider>
