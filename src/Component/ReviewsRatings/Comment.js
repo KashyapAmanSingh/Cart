@@ -1,5 +1,4 @@
-// "use client";
-// "use client";
+  
 import { useDispatch } from "react-redux";
 import { addComment } from "@/redux/ReviewSlice";
 import SubmitReview from "./SubmitReview";

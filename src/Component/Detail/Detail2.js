@@ -155,4 +155,4 @@ function DynamicTabs() {
   );
 }
 
-export default DynamicTabs;
+export default  React.memo(DynamicTabs);

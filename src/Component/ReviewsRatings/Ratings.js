@@ -1,4 +1,4 @@
-"use client "
+"use client";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactStars from "react-rating-stars-component";
@@ -40,5 +40,5 @@ const StarRating = () => {
   );
 };
 
-export default StarRating;
+export default React.memo(StarRating);
 
