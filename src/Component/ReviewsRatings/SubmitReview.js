@@ -1,4 +1,4 @@
-"use client "
+"use client";
 import React, {   useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchData } from "@/utils/FetchCode";

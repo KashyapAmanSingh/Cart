@@ -1,9 +1,9 @@
- 
 import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { FcBusinessman } from "react-icons/fc";
-   const Searching = dynamic(() => import("./Filter/Searching"));
+import LogOut from "./UserProfile/LogOut";
+const Searching = dynamic(() => import("./Filter/Searching"));
 const Sorting = dynamic(() => import("./Filter/Sorting"));
 const CartCount = dynamic(() => import("./CartComponent/cartCount"));
 const Navbar = () => {
@@ -57,7 +57,6 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 href="/cart"
-           
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
@@ -66,6 +65,9 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <div className="btn btn-link bg-light  ">
+            <LogOut />
+          </div>
         </div>
       </div>
     </nav>

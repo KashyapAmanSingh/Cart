@@ -13,7 +13,7 @@ const Page = () => {
       return (
         <div>
         <UserDetailAfterSignIn /> 
-        
+    
         </div>
       );
     } else {

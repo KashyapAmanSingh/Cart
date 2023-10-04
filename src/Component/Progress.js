@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { RotatingLines, ThreeCircles } from "react-loader-spinner";
 
