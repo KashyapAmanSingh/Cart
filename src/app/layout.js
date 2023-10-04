@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../Component/Navbar";
 import CartProvider from "@/redux/Provider";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

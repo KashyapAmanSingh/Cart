@@ -4,13 +4,13 @@ import axios from "axios"; // Import axios
 import cloudinary from "cloudinary-core";
 import { FcUpload } from "react-icons/fc";
 import Loader from "./Progress";
- 
+
 const cloudinaryCore = new cloudinary.Cloudinary({ cloud_name: "dm2wuzfzc" });
 
 function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState("");
- 
+
   const handleFileSelect = (e) => {
     const files = e.target.files[0];
     setSelectedFiles(files);
@@ -21,7 +21,7 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
     if (selectedFiles) {
       const formData = new FormData();
       formData.append("file", selectedFiles);
- 
+
       formData.append("upload_preset", "bofedne7");
 
       try {
@@ -42,13 +42,12 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
           setOptimisedImageUrl(optimizedImageUrl);
           setIsLoading(false);
         } else {
-          console.error("Image upload failed", response.data.message );
+          console.error("Image upload failed", response.data.message);
           setIsLoading(false);
         }
       } catch (error) {
         console.error("Image upload error:", error);
- 
-      }finally {
+      } finally {
         setIsLoading(false);
       }
     } else {
@@ -58,21 +57,23 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
 
   return (
     <div>
-      <label
-        htmlFor="image_input"
-        id="file-upload-btn"
-        className="d-flex justify-content-center align-items-center"
-      >
-        {isLoading ? (
-          <div className="text-center">
-            <Loader />
-          </div>
-        ) : (
-          <>
-            <FcUpload size={24} /> Upload Images
-          </>
-        )}
-      </label>
+      <div className="ImageUploadBox">
+        <label
+          htmlFor="image_input"
+          id="file-upload-btn"
+          className=" d-flex justify-content-center align-items-center "
+        >
+          {isLoading ? (
+            <div className="text-center">
+              <Loader />
+            </div>
+          ) : (
+            <>
+              <FcUpload size={24} /> Upload Images
+            </>
+          )}
+        </label>
+      </div>
       <input
         type="file"
         name="image"
@@ -84,7 +85,7 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
 
       <button
         type="button"
-        className="btn btn-info"
+        className="btn btn-info mx-3 mb-1"
         onClick={handleImageUpload}
       >
         Upload Image
@@ -93,4 +94,4 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
   );
 }
 
-export default ImageUpload;
+export default React.memo(ImageUpload);

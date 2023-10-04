@@ -25,8 +25,8 @@ const UserProfile = () => {
   const entries = Object.entries(fieldNamesMapping);
 
   return (
-    <div className="container">
-      <div className="row">
+    <div className="container ">
+      <div className="row mx-5">
         <div className="col-sm-3 mb-4">
           <div className="card card-style1 my-2 mt-5 border-0">
             <div className="card-body d-flex justify-content-center p-1-9 p-sm-2-3 p-md-6 p-lg-7">
