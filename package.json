@@ -34,7 +34,8 @@
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^8.1.2",
     "react-responsive-carousel": "^3.2.23",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "url-parse": "^1.5.10"
   },
   "devDependencies": {
     "stripe": "^13.6.0",

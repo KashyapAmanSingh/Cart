@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../db/Connection";
-import parse from "url-parse";
+ 
+import parse from 'url-parse';
+
+
 export async function GET(req) {
   const parsedUrl = parse(req.url, true);
   const {
