@@ -11,7 +11,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.11.2",
-    "@kinde-oss/kinde-auth-nextjs": "^1.8.19",
+    "@kinde-oss/kinde-auth-nextjs": "^1.8.21",
     "@reduxjs/toolkit": "^1.9.5",
     "@stripe/stripe-js": "^2.1.5",
     "axios": "^1.5.0",
@@ -34,7 +34,8 @@
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^8.1.2",
     "react-responsive-carousel": "^3.2.23",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "url-parse": "^1.5.10"
   },
   "devDependencies": {
     "stripe": "^13.6.0",

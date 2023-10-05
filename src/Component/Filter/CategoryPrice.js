@@ -1,7 +1,7 @@
 import { filteredPriceQuery } from "@/redux/FilterSortSlice";
 import { filteredItem } from "@/redux/ProductSlice";
-import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const CategoryPrice = () => {
   const [selectedCategoryPrice, setSelectedCategoryPrice] = useState("All");
@@ -9,8 +9,16 @@ const CategoryPrice = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const myPriceRangeArray = selectedCategoryPrice.split("-").map(Number);
-    dispatch(filteredPriceQuery(myPriceRangeArray));
+    if (selectedCategoryPrice === "Over 6000") {
+      // Handle the case for "Over 6000"
+      dispatch(filteredPriceQuery([6000, Number.MAX_SAFE_INTEGER]));
+    } else {
+       const myPriceRangeArray = selectedCategoryPrice
+        .split("-")
+        .map(Number);
+
+      dispatch(filteredPriceQuery(myPriceRangeArray));
+    }
   }, [selectedCategoryPrice, dispatch]);
 
   const handleRadioChange = (event) => {
