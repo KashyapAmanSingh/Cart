@@ -17,7 +17,8 @@ const Functions = () => {
   const fetchProducts = useCallback(async () => {
     try {
       const response = await fetchData(apiUrl);
-
+console.log(response,"<---------  !!!!!!!!! Response from the FetchProducts API!!!");
+console.log(apiUrl,"!!!!!!!!! Response from the FetchProducts API apiUrl name is last at apiUrl!!!");
       if (response) {
         const { products } = response.data;
         dispatch(homeItem(products));

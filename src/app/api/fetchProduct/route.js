@@ -1,84 +1,127 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../db/Connection";
-
+import parse from "url-parse";
 export async function GET(req) {
- 
- let client, db;
- try {
-  const {
-   client: databaseClient,
-   db: database,
-   collection,
-  } = await connectToDatabase("topiccollections");
-  client = databaseClient;
-  db = database;
+  const parsedUrl = parse(req.url, true);
+  const {
+    filterBy,
+    filteredPriceQuery1,
+    filteredPriceQuery2,
+    sortBy,
+    searchBy,
+  } = parsedUrl.query;
 
-//   const headers = NextResponse.headers;
-//   const url = new URL(headers.get("URL"), "http://localhost:3000");
-//   const sortBy = url.searchParams.get("sortBy");
-//   const searchBy = url.searchParams.get("searchBy");
-//   const filteredPriceQuery1 = url.searchParams.get("filteredPriceQuery1");
+  console.log(
+    parsedUrl,
+    "<<<<<<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>>>>>>>>"
+  );
 
-//   const filteredPriceQuery2 = url.searchParams.get("filteredPriceQuery2");
+  let client, db;
+  try {
+    const {
+      client: databaseClient,
+      db: database,
+      collection,
+    } = await connectToDatabase("topiccollections");
+    client = databaseClient;
+    db = database;
 
-//   const filterBy = url.searchParams.get("filterBy");
+    console.log("filterBy:", filterBy);
+    console.log(
+      "filteredPriceQuery1:",
+      filteredPriceQuery1,
+      typeof filteredPriceQuery1
+    );
+    console.log(
+      "filteredPriceQuery2:",
+      filteredPriceQuery2,
+      typeof filteredPriceQuery2
+    );
+    console.log("sortBy:", sortBy);
+    console.log("searchBy:", searchBy);
 
-//   console.log("sortBy:", sortBy);
-//   console.log("searchBy:", searchBy);
-//   console.log("filteredPriceQuery1:", filteredPriceQuery1);
-//   console.log("filteredPriceQuery2:", filteredPriceQuery2);
-//   console.log("filterBy:", filterBy);
+    const mongoQuery = {};
 
-//   if (sortBy) {
-//    const sortCriteria = {};
+    if (filterBy && filterBy !== "All") {
+      console.log("$$$$$$$$$$$$$$  filterBy : $$$$$$$$$$$$$$  ", filterBy);
 
-//    switch (sortBy) {
-//     case "asc_price":
-//      sortCriteria.price = 1;
-//      break;
-//     case "des_price":
-//      sortCriteria.price = -1;
-//      break;
-//     case "ratings":
-//      sortCriteria.ratings = -1;
-//      break;
-//     case "timestamp":
-//      sortCriteria.timestamp = -1;
-//      break;
-//     case "discount":
-//      sortCriteria.discount = -1; // Sort by discount in descending order
-//      break;
-//     default:
-//      // Handle other cases if needed
-//      break;
-//    }
+      mongoQuery.category = filterBy;
+    }
 
-//    const products = await collection.find({}).sort(sortCriteria).toArray();
-//    return NextResponse.json({ products }, { status: 200 });
-//   } else if (searchBy) {
-//    const searchText = searchBy;
-//    const caseInsensitiveRegex = new RegExp(searchText, "i");
-//    const products = await collection
+    if (filteredPriceQuery1 && filteredPriceQuery2) {
+      console.log(
+        "$$$$$$$$$$$$$$  filteredPriceQuery1: $$$$$$$$$$$$$$  ",
+        filteredPriceQuery1
+      );
+      console.log(
+        "$$$$$$$$$$$$$$$       filteredPriceQuery1: $$$$$$$$$$$$$$  ",
+        filteredPriceQuery2
+      );
+
+      mongoQuery.price = {
+        $gte: parseInt(filteredPriceQuery1, 10),
+        $lte: parseInt(filteredPriceQuery2, 10),
+      };
+    }
+ if (searchBy) {
+  console.log("$$$$$$$$$$$$$$  searchBy: $$$$$$$$$$$$$$  ", searchBy, typeof searchBy);
+  
+  mongoQuery.$or = [
+    { title: { $regex: new RegExp(searchBy, "i") } },
+    { description: { $regex: new RegExp(searchBy, "i") } },
+    { category: { $regex: new RegExp(searchBy, "i") } },
+    { subcategory: { $regex: new RegExp(searchBy, "i") } },
+    { brand: { $regex: new RegExp(searchBy, "i") } },
+    { seller: { $regex: new RegExp(searchBy, "i") } },
+    { model: { $regex: new RegExp(searchBy, "i") } },
+    { tags: { $regex: new RegExp(searchBy, "i") } }
+  ];
+}
+
+
+
+    console.log("MongoDB Query QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ:", mongoQuery);
+
+    const products = await collection.find(mongoQuery).toArray();
+    console.log(
+      "Number of Matching Documents: lllllllllllllllllllll",
+      products.length
+    );
+
+    console.log(
+      products,
+      "_______________________________This is product of response bro _________________________"
+    );
+    //    const products = await collection.find({}).toArray();
+    return NextResponse.json({ products }, { status: 200 });
+  } catch (error) {
+    console.error("Error in GET request:", error);
+    return NextResponse.error("Internal Server Error", { status: 500 });
+  }
+}
+
+
+
+// const products = await collection
 //     .find({
 //      $or: [
-//       { title: { $regex: caseInsensitiveRegex } },
-//       { description: { $regex: caseInsensitiveRegex } },
-//       { category: { $regex: caseInsensitiveRegex } },
-//       { subcategory: { $regex: caseInsensitiveRegex } },
-//       { brand: { $regex: caseInsensitiveRegex } },
-//       { seller: { $regex: caseInsensitiveRegex } },
-//       { model: { $regex: caseInsensitiveRegex } },
-//       { tags: { $regex: caseInsensitiveRegex } },
+//       { title: { $regex: new RegExp(searchBy, "i") } }
+//       { description: { $regex: new RegExp(searchBy, "i") } }
+//       { category: { $regex: new RegExp(searchBy, "i") } }
+//       { subcategory: { $regex: new RegExp(searchBy, "i") } }
+//       { brand: { $regex: new RegExp(searchBy, "i") } }
+//       { seller: { $regex: new RegExp(searchBy, "i") } }
+//       { model: { $regex: new RegExp(searchBy, "i") } }
+//       { tags: { $regex: new RegExp(searchBy, "i") } }
 //      ],
 //     })
 //     .toArray();
-//    return NextResponse.json({ products }, { status: 200 });
-//   } else {
-   const products = await collection.find({}).toArray();
-   return NextResponse.json({ products }, { status: 200 });
-//   }
- } catch (error) {
-  console.error("Error in GET request:", error);
-  return NextResponse.error("Internal Server Error", { status: 500 });
-}
-}
+
+
+
+
+
+
+
+
+

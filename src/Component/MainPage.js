@@ -23,7 +23,8 @@ const FeaturedProduct = dynamic(() =>
 const MainPage = () => {
   const sortedData = useSelector((state) => state.Product.items);
   const { fetchProducts, apiUrl, loading } = Functions();
-
+  //  console.log(response,"!!!!!!!!! Response from the FetchProducts API!!!");
+  console.log(apiUrl,"!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!Response from main page most important pages  API !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   useEffect(() => {
     // Call the fetchProducts function when the component mounts
     fetchProducts();
