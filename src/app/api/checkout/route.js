@@ -59,7 +59,10 @@ export async function POST(request) {
   };
   
 
-   const stripe = new Stripe("sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic");
+   const stripe = new Stripe("sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic", {
+    apiVersion: "2022-11-15",
+  });
+  
     checkoutSession = await stripe.checkout.sessions.create(params);
   
     

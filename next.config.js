@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
 // 
- 
-module.exports = {
+const nextConfig = {
   images: {
     domains: ['res.cloudinary.com'],
   },
+  api: {
+    bodyParser: false,
+  },
 };
 
-  
+module.exports = nextConfig
 // module.exports = {
   //   async headers() {
   //     return [
