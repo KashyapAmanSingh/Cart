@@ -14,12 +14,12 @@ export async function GET(req) {
     AssuredBy,
   } = parsedUrl.query;
 
-  console.log(
-    parsedUrl,
-    "<<<<<<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>>>>>>>>",
-    AssuredBy,
-    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  );
+  // console.log(
+  //   parsedUrl,
+  //   "<<<<<<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>>>>>>>>",
+  //   AssuredBy,
+  //   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  // );
 
   let client, db;
   try {
@@ -53,31 +53,16 @@ export async function GET(req) {
       mongoQuery.category = filterBy;
     }
     if (AssuredBy && AssuredBy !== "") {
-       mongoQuery.is_featured = true;
+      mongoQuery.is_featured = true;
     }
 
     if (filteredPriceQuery1 && filteredPriceQuery2) {
-      console.log(
-        "$$$$$$$$$$$$$$  filteredPriceQuery1: $$$$$$$$$$$$$$  ",
-        filteredPriceQuery1
-      );
-      console.log(
-        "$$$$$$$$$$$$$$$       filteredPriceQuery1: $$$$$$$$$$$$$$  ",
-        filteredPriceQuery2
-      );
-
       mongoQuery.price = {
         $gte: parseInt(filteredPriceQuery1, 10),
         $lte: parseInt(filteredPriceQuery2, 10),
       };
     }
     if (searchBy) {
-      console.log(
-        "$$$$$$$$$$$$$$  searchBy: $$$$$$$$$$$$$$  ",
-        searchBy,
-        typeof searchBy
-      );
-
       mongoQuery.$or = [
         { title: { $regex: new RegExp(searchBy, "i") } },
         { description: { $regex: new RegExp(searchBy, "i") } },
@@ -89,8 +74,6 @@ export async function GET(req) {
         { tags: { $regex: new RegExp(searchBy, "i") } },
       ];
     }
-
-    console.log("MongoDB Query QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ:", mongoQuery);
 
     let sortField, sortOrder;
 
