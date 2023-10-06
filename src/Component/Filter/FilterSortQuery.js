@@ -7,13 +7,12 @@ const FilterSortQuery = () => {
     filteredPriceQuery,
     filteredCategoryQuery,
     filteredSearchedQuery,
+    filteredAssured,
   } = useSelector((state) => state.FilterSortSlice);
-
   // const sortQuery = useSelector((state) => state.FilterSortSlice.sortQuery);
   // const filteredPriceQuery = useSelector((state) => state.FilterSortSlice.filteredPriceQuery);
   // const filteredCategoryQuery = useSelector((state) => state.FilterSortSlice.filteredCategoryQuery);
   // const filteredSearchedQuery = useSelector((state) => state.FilterSortSlice.filteredSearchedQuery);
-
 
   const queryParams = [];
 
@@ -29,19 +28,20 @@ const FilterSortQuery = () => {
 
   if (sortQuery) {
     queryParams.push(`sortBy=${sortQuery}`);
-    console.log("Searched content from step 2   Query component",   sortQuery);
-
+    console.log("Searched content from step 2   Query component", sortQuery);
   }
 
   if (filteredSearchedQuery) {
     queryParams.push(`searchBy=${filteredSearchedQuery}`);
+  }
 
+  if (filteredAssured) {
+    queryParams.push(`AssuredBy=${filteredAssured}`);
   }
 
   const apiUrl = `/api/fetchProduct${
     queryParams.length > 0 ? `?${queryParams.join("&")}` : ""
   }`;
-
   return apiUrl;
 };
 

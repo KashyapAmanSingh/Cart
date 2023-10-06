@@ -3,9 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   sortQuery: [],
   filteredPriceQuery: [],
-  filteredCategoryQuery:[],
-  filteredSearchedQuery:[],
-  userId:""
+  filteredCategoryQuery: [],
+  filteredSearchedQuery: [],
+  filteredAssured: [],
+  userId: "",
 };
 
 const FilterSortSlice = createSlice({
@@ -14,10 +15,7 @@ const FilterSortSlice = createSlice({
   reducers: {
     sortedQuery: (state, action) => {
       state.sortQuery = action.payload;
-      console.log(
-        "Response sortedQuery Item :",
-        action.payload
-      );
+      console.log("Response sortedQuery Item :", action.payload);
     },
     filteredPriceQuery: (state, action) => {
       // console.log(
@@ -34,12 +32,16 @@ const FilterSortSlice = createSlice({
       state.filteredCategoryQuery = action.payload;
     },
     filteredSearchedQuery: (state, action) => {
-      
       // console.log(
       //   "Response     filteredSearchedQuery :",
       //   action.payload
       // );
       state.filteredSearchedQuery = action.payload; // Update the correct field
+    },
+
+    filteredAssured: (state, action) => {
+      state.filteredAssured = action.payload;
+    
     },
     // userId:(state, action) => {
     //   // console.log(action.payload,"This is user Id from the Kindle");
@@ -48,5 +50,11 @@ const FilterSortSlice = createSlice({
   },
 });
 
-export const { sortedQuery, filteredPriceQuery, filteredCategoryQuery,filteredSearchedQuery }= FilterSortSlice.actions;  //,userId
+export const {
+  sortedQuery,
+  filteredPriceQuery,
+  filteredCategoryQuery,
+  filteredSearchedQuery,
+  filteredAssured,
+} = FilterSortSlice.actions; //,userId
 export default FilterSortSlice;

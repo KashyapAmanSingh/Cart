@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../db/Connection";
- 
-import parse from 'url-parse';
 
+import parse from "url-parse";
 
 export async function GET(req) {
   const parsedUrl = parse(req.url, true);
@@ -12,11 +11,14 @@ export async function GET(req) {
     filteredPriceQuery2,
     sortBy,
     searchBy,
+    AssuredBy,
   } = parsedUrl.query;
 
   console.log(
     parsedUrl,
-    "<<<<<<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>>>>>>>>"
+    "<<<<<<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>>>>>>>>",
+    AssuredBy,
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   );
 
   let client, db;
@@ -49,6 +51,9 @@ export async function GET(req) {
       console.log("$$$$$$$$$$$$$$  filterBy : $$$$$$$$$$$$$$  ", filterBy);
 
       mongoQuery.category = filterBy;
+    }
+    if (AssuredBy && AssuredBy !== "") {
+       mongoQuery.is_featured = true;
     }
 
     if (filteredPriceQuery1 && filteredPriceQuery2) {
