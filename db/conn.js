@@ -12,7 +12,7 @@ async function Conn() {
   }
 }
 
-export default ConnectionMongoosedbs;
+export default Conn;
 
 // import { MongoClient } from 'mongodb';
 

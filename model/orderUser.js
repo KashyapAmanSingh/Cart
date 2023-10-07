@@ -31,6 +31,10 @@ const customerOrderSchema = new mongoose.Schema({
     enum: ['pending', 'shipped', 'delivered', 'canceled'],
     default: 'pending',
   },
+  ProductTitle:{
+    type: String,
+    required: true
+  },
   paymentMethod: String,
   transactionId: String,
   shippingMethod: String,
