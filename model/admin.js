@@ -1,4 +1,3 @@
-// models/AdminOrder.js
 
 import mongoose from 'mongoose';
 

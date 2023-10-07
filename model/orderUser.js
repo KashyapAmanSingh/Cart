@@ -1,4 +1,3 @@
-// models/CustomerOrder.js
 
 import mongoose from 'mongoose';
 
