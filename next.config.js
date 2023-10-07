@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-<<<<<<< HEAD
 // const withPWA = require('next-pwa');
 
  
@@ -12,6 +11,7 @@
 //   },
 //   // ... other Next.js configuration options
 // });
+
 const withPWA = require('next-pwa')({
   dest: 'public',
   disable: false,
@@ -38,15 +38,14 @@ module.exports = withPWA({
     domains: ['res.cloudinary.com'],
   } 
 });
-=======
 // 
-const nextConfig = {
-  images: {
-    domains: ['res.cloudinary.com'],
-  } 
-};
+// const nextConfig = {
+//   images: {
+//     domains: ['res.cloudinary.com'],
+//   } 
+// };
 
-module.exports = nextConfig
+// module.exports = nextConfig
 // module.exports = {
   //   async headers() {
   //     return [
@@ -61,4 +60,3 @@ module.exports = nextConfig
   //       }
   //     ]
   //   },
->>>>>>> feature

@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Conn from "../../../../db/conn";
-import CustomerOrder from "../../../../model/orderUser";
-
+import CustomerOrder from "../../../../models/orderUser";
+ 
 const stripe = new Stripe(
   "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic"
 );

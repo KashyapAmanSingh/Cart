@@ -25,15 +25,10 @@
     "micro": "^10.0.1",
     "micro-cors": "^0.1.1",
     "mongodb": "^6.0.0",
-<<<<<<< HEAD
     "mongoose": "^7.5.2",
     "next": "^13.4.19",
     "next-pwa": "^5.6.0",
-=======
-    "mongoose": "^7.6.0",
-    "next": "^13.4.19",
     "raw-body": "^2.5.2",
->>>>>>> feature
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
