@@ -27,8 +27,7 @@ const adminOrderSchema = new mongoose.Schema({
     pincode: String,
     mobileNumber: String,
     email: String,
-    // Add other customer details as needed
-  },
+   },
   orderStatus: {
     type: String,
     enum: ['pending', 'shipped', 'delivered', 'canceled'],

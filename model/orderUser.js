@@ -42,7 +42,7 @@ const customerOrderSchema = new mongoose.Schema({
   },
   orderNotes: String,
   orderItems: [orderItemSchema],
-  // Add any other additional fields as needed for the customer view
+
 });
 
 const CustomerOrder = mongoose.models.CustomerOrder || mongoose.model('CustomerOrder', customerOrderSchema);
