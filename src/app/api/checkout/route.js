@@ -5,8 +5,8 @@ export async function POST(request) {
  try {
    const { cart: cartItems } = await request.json();
    const itemIds = cartItems.map((item) => item.id);
-   console.log("Item IDs:", itemIds);
-   
+   console.log("Item IDs:~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~```~~~~~~~~~~~~~~!!!!!!!!!!!!!!!", cartItems);
+ 
    console.log("POST checkout  data coming or not bro POST: ", cartItems );
 
    if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
@@ -53,7 +53,7 @@ export async function POST(request) {
     },
     billing_address_collection: 'required', 
    
-    success_url: `http://localhost:3000/StripeSuccess`,
+    success_url: `http://localhost:3000/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `http://localhost:3000/StripeFail`,
 
   };
