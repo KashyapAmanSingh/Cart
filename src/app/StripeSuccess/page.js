@@ -9,7 +9,7 @@ const SuccessPage = () => {
   const router = useRouter();
   const params = useSearchParams();
   const session_id = params.get("session_id");
- 
+ console.log(session_id,"<<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,9 +34,8 @@ const SuccessPage = () => {
    return (
     <div>
       <h1>Thank you for your payment!</h1>
-      <p>Your SuccessPageID: {session}</p>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
-      <button
+      <p>Your SuccessPageID: {session_id }</p>
+       <button
         className="btn btn-danger"
         id="continueShoppingButton"
         onClick={redirectToHome}

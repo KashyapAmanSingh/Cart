@@ -45,7 +45,7 @@ const customerOrderSchema = new mongoose.Schema({
     amount: Number,
   },
   orderNotes: String,
-  orderItems: [orderItemSchema],
+  // orderItems: [orderItemSchema],
 
 });
 

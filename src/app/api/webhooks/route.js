@@ -7,8 +7,11 @@ const stripe = new Stripe(
     apiVersion: "2020-08-27", //2023-08-16
   }
 );
-
+const stripes = new Stripe(
+  "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic"
+);
 export async function POST(req, res) {
+  // console.log(req,"")
   try {
     const sig = req.headers.get("stripe-signature"); // const sig = req.headers['stripe-signature'];
     const rawBody = await req.text();
@@ -21,6 +24,31 @@ export async function POST(req, res) {
       "PAYLOAD---------------------------*********************************************PAYLOAD",
       rawBody
     );
+
+    const invoice = await stripes.invoices.retrieve("in_1NypUKSGcFt4Msz1e6ndcO1j");
+    console.log(' "~~~~~~~~~~~~~ ~~!!!Invoice details !!   ~~~~~~~~~~~~~~~~~~~~ "  :', invoice);
+    
+    console.log(' __________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________' );
+
+    const hostedInvoiceUrl = invoice.hosted_invoice_url;
+    console.log('Hosted Invoice URL________________________:', hostedInvoiceUrl);
+  
+    // Get the PDF URL for the invoice
+    const invoicePdfUrl = invoice.invoice_pdf;
+    console.log('Invoice PDF URL________________________:', invoicePdfUrl);
+  
+    // Now, you can use the PDF URL to download or display the PDF
+    // For example, you might want to open it in a new tab:
+    window.open(invoicePdfUrl, '_blank');
+
+
+
+
+
+
+
+
+
 
     const event = stripe.webhooks.constructEvent(
       rawBody,
