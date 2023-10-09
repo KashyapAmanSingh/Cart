@@ -11,7 +11,7 @@ export async function POST(request) {
       comment,
       productId,
       userId,
-      //  specialId
+   
     } = await request.json();
 
     console.log("Received data:", rating, comment, productId, userId);

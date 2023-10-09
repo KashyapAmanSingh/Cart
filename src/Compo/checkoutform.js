@@ -21,7 +21,7 @@ const CheckoutButton = () => {
 
       const dataToSend = {
         cart: cartItems.map((item) => ({
-          id: item.id,
+          _id: item.id,
           quantity: item.quantity,
           price: item.price,
           title: item.title,
@@ -29,7 +29,7 @@ const CheckoutButton = () => {
         })),
       };
 
-      console.log("Before Axios request");
+      console.log("Before Axios request-----------------------------------------",dataToSend);
       const response = await fetchData("/api/checkout", "POST", dataToSend);
 
  

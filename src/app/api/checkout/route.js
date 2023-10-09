@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
  try {
    const { cart: cartItems } = await request.json();
-   const itemIds = cartItems.map((item) => item.id);
-   console.log("Item IDs:", cartItems);
+   const itemIds = cartItems.map((item) => item._id);
+ 
+  //  console.log("Item IDs:", cartItems.map((item) => item));
  
    console.log("POST checkout  data coming or not bro POST: ", cartItems );
 
@@ -25,9 +26,11 @@ export async function POST(request) {
       price_data: {
         currency: "inr",
         product_data: {
+      
           name: item.title,
           images: [item.image]
         },
+        
         unit_amount: item.price * 100, 
       },
   
@@ -41,12 +44,17 @@ export async function POST(request) {
  
 
     })),
+    metadata: {
+      product_ids: itemIds.join(),  
+    },
     mode: "payment",
+
     shipping_options: [
       {
         shipping_rate: 'shr_1NsTXXSGcFt4Msz180uBQEIR',  
       }
     ],
+  
     
      phone_number_collection: {
       enabled: true,

@@ -8,8 +8,7 @@ import { useDispatch  } from "react-redux";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  const [cartId, setCartId] = useState([]);
-
+ 
   const dispatch = useDispatch();
 
   useEffect(() => {

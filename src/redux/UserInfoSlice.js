@@ -1,5 +1,4 @@
-// userSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     user: null,
   };
@@ -9,6 +8,7 @@ const userSlice = createSlice({
   reducers: {
     addUser: (state, action) => { 
         state.user = action.payload;
+        
        },
       
   },

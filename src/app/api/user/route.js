@@ -44,14 +44,12 @@ export async function POST(request) {
 export async function GET() {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const user = await getUser();
-  console.log(user.id, "----==================================================given name from backend------------------------------------------------------========================================================");
-
+ 
   await ConnectionMongoosedbs();
 
   try {
      const foundUser = await User.find({ id: user.id });
-    console.log(foundUser, "User of the id from MongoDB");
-    return NextResponse.json({ user: foundUser ? foundUser : "" }, { status: 200 });
+     return NextResponse.json({ user: foundUser ? foundUser : "" }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.error("Error fetching user data", { status: 500 });
