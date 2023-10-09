@@ -5,7 +5,8 @@ export async function POST(request) {
  try {
    const { cart: cartItems } = await request.json();
    const itemIds = cartItems.map((item) => item._id);
- 
+   const itemquantity = cartItems.map((item) => item.quantity);
+
   //  console.log("Item IDs:", cartItems.map((item) => item));
  
    console.log("POST checkout  data coming or not bro POST: ", cartItems );
@@ -45,8 +46,10 @@ export async function POST(request) {
 
     })),
     metadata: {
-      product_ids: itemIds.join(),  
+      product_ids: itemIds.join(),
+      product_quantity:  itemquantity.join()
     },
+    
     mode: "payment",
 
     shipping_options: [
