@@ -1,13 +1,13 @@
 
 
 "use client"
-import Cart from '@/Component/CartComponent/Cart'
+ import CartAuth from '@/Component/CartComponent/cartAuth'
 import React from 'react'
    
 const page = () => {
   return (
     <div>
-      <Cart />
+      <CartAuth/>
      </div>
   )
 }

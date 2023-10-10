@@ -19,7 +19,7 @@ const SuccessPage = () => {
         const response = await axios.post(`/api/retrieveSession`, {
           session_Id : session_id,
         });
-        // console.log("Response from API:-------------------------------------------------->", response.data);
+        console.log("Response from API:-------------------------------------------------->", response.data);
         setStates(response.data);
       } catch (error) {
         console.error("Error retrieving data:-------------------------------------------------->", error);

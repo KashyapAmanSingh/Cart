@@ -13,47 +13,71 @@ const UserDetailAfterSignIn = () => {
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
 
+  const [userKindeId, setUserKindeId] = useState(null);
+
+  const [authStatus, setAuthStatus] = useState(null);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const getKindeSession = async () => {
       try {
-        const response = await axios.get("/api/user");
-        setHasData(true);
-        setData(response.data.user);
+        const res = await fetch("/api/kindeSession");
+        const data = await res.json();
+        setAuthStatus(data.authenticated);
+        setUserKindeId(data.user);
 
-        dispatch(addUser(response.data.user[0]));
+        if (data.user?.id) {
+          const userResponse = await axios.get(`/api/user?id=${data.user.id}`);
+          const userData = userResponse.data;
 
-        setLoading(false);
-        // console.log("UserDetailAfterSignIn  ", response.data);
+          setData(userData.user);
+
+          // console.log(
+          //   "---- --====== ========-------- -------~~~~~ ~~~~userData.user[0])~ ~~~~~ ~~~~~>>>>",
+          //   userData.user,
+          //   userData.user[0]
+          // );
+          setHasData(true)
+          dispatch(addUser(userData.user[0]));
+
+          console.log(
+            userData.user[0]._id,
+            "This is the best place to use user information"
+          );
+        }
       } catch (error) {
-        console.error("Error:", error);
-        setHasData(false);
+        console.error("Error fetching user information:", error);
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchData();
-  }, [dispatch]);
+    getKindeSession();
+  }, []);
 
+  // }, [dispatch]);
+
+  if(loading) return    <Loader1 />
   return (
     <>
-      {loading ? (
-          <div
-          className="d-flex align-items-center justify-content-center"
-          style={{ height: "100vh" }}
-        >
-          <Loader1 />;
-        </div>
-      ) : (
+      { (
         <>
-          {hasData && data.length !== 0 ? (
-            <div>
-              <UserProfile />
-            </div>
-          ) : (
-            <div>
-              <UserForm />
-            </div>
-          )}
+
+
+{!authStatus ? (
+      <div>
+        <p>Please log in to view your profile.</p>
+  
+      </div>
+    ) : (
+      hasData && data.length !== 0 ? (
+        <UserProfile />
+      ) : (
+        <div>
+           <UserForm />
+        </div>
+      )
+    )}
+ 
         </>
       )}
     </>

@@ -3,9 +3,10 @@ import { NextResponse } from "next/server";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import User from "../../../../models/User";
+import parse from "url-parse";
 
-export async function POST(request) {
-  console.log(request);
+export async function POST(req) {
+  
   const { getUser, isAuthenticated } = getKindeServerSession();
   const user = await getUser();
   const {
@@ -14,7 +15,7 @@ export async function POST(request) {
     email,
     profilePicture,
     address: { street, city, state, postalCode, country },
-  } = await request.json();
+  } = await req.json();
   await ConnectionMongoosedbs();
 
   try {
@@ -41,14 +42,19 @@ export async function POST(request) {
   }
 }
 
-export async function GET() {
-  const { getUser, isAuthenticated } = getKindeServerSession();
-  const user = await getUser();
+export async function GET(req ) {
+        
  
+const parsedUrl = parse(req.url, true);
+
+ console.log(parsedUrl.query.id,"User ID:0-432423424234242352352362363245235353----------------------------------------------------------- -----------" );
+
+  
   await ConnectionMongoosedbs();
 
   try {
-     const foundUser = await User.find({ id: user.id });
+     const foundUser = await User.find({ id: parsedUrl.query.id });
+ 
      return NextResponse.json({ user: foundUser ? foundUser : "" }, { status: 200 });
   } catch (error) {
     console.error(error);
@@ -58,8 +64,8 @@ export async function GET() {
 
  
 
-export async function DELETE(request) {
-  const id = request.nextUrl.searchParams.get("id");
+export async function DELETE(req) {
+  const id = req.nextUrl.searchParams.get("id");
   await ConnectionMongoosedbs();
   await User.findByIdAndDelete(id);
   return NextResponse.json({ message: "User deleted" }, { status: 200 });

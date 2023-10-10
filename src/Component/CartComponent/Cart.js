@@ -5,11 +5,47 @@ import CheckoutButton from "@/Compo/checkoutform";
 import { removeItem, setQuantity } from "@/redux/Slice";
 
 import { useDispatch  } from "react-redux";
+import Loader from "../Progress";
+import { addUser } from "@/redux/UserInfoSlice";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
+
+
+
+
+
+
  
-  const dispatch = useDispatch();
+  const [cartItems, setCartItems] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  //  const [user, setUser] = useState();
+  // const [authStatus, setAuthStatus] = useState(null);
+  const dispatch = useDispatch()
+
+
+  // useEffect(() => {
+  //   const getKindeSession = async () => {
+  //     try {
+  //       const res = await fetch("/api/kindeSession");
+  //       const data = await res.json();
+  //       setUser(data.user);
+  //       console.log(data.user.id,"this is best place here to use as we have all users info so it it and use them bro ");
+  //       dispatch(addUser(data.user.id))
+  //       setAuthStatus(data.authenticated);
+  //     } catch (error) {
+  //       console.error('Error fetching user information:', error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   getKindeSession();
+  // }, []);
+
+
+
+
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
@@ -77,7 +113,20 @@ const Cart = () => {
               ))}
           </div>
         </div>
-        <CheckoutButton />
+
+{/* 
+        {loading ? (
+  <Loader/> 
+) : authStatus ? ( */}
+  <CheckoutButton />
+{/* ) : ( 
+  <p>Please log in to view your cart. </p>
+)} */}
+
+ 
+
+
+    
       </div>
     </>
   );

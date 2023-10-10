@@ -14,18 +14,18 @@ const stripe = new Stripe(
 export async function POST(request) {
   const body = await request.json(); // 👈
   const {  session_Id } = body;
-   console.log( "----->>>>>->>>>>->>>>>------=====================---------------------->>>>>->>>>>->>>>>->>>>>--",   );
+  //  console.log( "----->>>>>->>>>>->>>>>------=====================---------------------->>>>>->>>>>->>>>>->>>>>--",   );
   const { getUser } = getKindeServerSession();
-  const user = getUser();
+  const user = await getUser();
  
-    console.log("----------============User->>>>>",   user )
+     console.log("----------============User->>>>>",   user  )
    
   try {
     // await ConnectionMongoosedbs();
 
     // const foundUser = await User.find({ id: user.id });
     // const userId = foundUser[0]._id;
-    // console.log("----------============--------->>>>>",   userId  )
+  //  console.log("----------============--------->>>>>",   userId  )
 
     // if (!foundUser) {
     //   return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -39,7 +39,7 @@ export async function POST(request) {
  
     return NextResponse.json({ data: { retrievedSession} });  //, newOrder 
   } catch (error) {
-    // console.error("Error processing request:", error);
+    console.error("Error processing request:", error);
 
     return NextResponse.internalServerError({ error: "Internal Server Error" });
   }

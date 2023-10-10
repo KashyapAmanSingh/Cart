@@ -3,13 +3,11 @@ import { NextResponse } from "next/server";
   
 export async function POST(request) {
  try {
-   const { cart: cartItems } = await request.json();
+   const { cart: cartItems,       userDbsId  } = await request.json();
    const itemIds = cartItems.map((item) => item._id);
    const itemquantity = cartItems.map((item) => item.quantity);
-
-  //  console.log("Item IDs:", cartItems.map((item) => item));
- 
-   console.log("POST checkout  data coming or not bro POST: ", cartItems );
+    console.log("  userDbsId   userDbsId   userDbsId   userDbsId         userDbsId        userDbsId        userDbsId        userDbsId    ",    userDbsId      )
+  
 
    if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
      return NextResponse.json({ error: "Invalid cart items" }, { status: 400 });
@@ -29,7 +27,8 @@ export async function POST(request) {
         product_data: {
       
           name: item.title,
-          images: [item.image]
+          images: [ item.image] ,
+  
         },
         
         unit_amount: item.price * 100, 
@@ -47,8 +46,8 @@ export async function POST(request) {
     })),
     metadata: {
       product_ids: itemIds.join(),
-      product_quantity:  itemquantity.join()
-    },
+      product_quantity: itemquantity.join(),
+     },
     
     mode: "payment",
 
@@ -58,7 +57,8 @@ export async function POST(request) {
       }
     ],
   
-    
+    client_reference_id: userDbsId , 
+
      phone_number_collection: {
       enabled: true,
     },

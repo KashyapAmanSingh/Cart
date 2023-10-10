@@ -1,4 +1,3 @@
-
 import React from "react";
 import axios from "axios";
 import { initializeStripe } from "@/utils/stripe";
@@ -9,10 +8,13 @@ import { fetchData } from "@/utils/FetchCode";
 const CheckoutButton = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-
-  const session = useSelector((state) => state.cart.session);
   const [loading, setLoading] = React.useState(false);
 
+  const userDbsId = useSelector((state) => state.user.user);
+  console.log(
+    userDbsId._id,
+    "I AM A USER DATA FETCH FROM USERINFO SLICE AND I AM FROM CHECKOUT FORM IN THE DOCS CODES "
+  );
   const handleCheckout = async (e) => {
     e.preventDefault();
 
@@ -27,12 +29,14 @@ const CheckoutButton = () => {
           title: item.title,
           image: item.image,
         })),
+        userDbsId: userDbsId._id,
       };
 
-      console.log("Before Axios request-----------------------------------------",dataToSend);
+      console.log(
+        "Before Axios request-----------------------------------------",
+        dataToSend
+      );
       const response = await fetchData("/api/checkout", "POST", dataToSend);
-
- 
 
       console.log("After Axios request");
       if (response.status === 200) {
@@ -64,40 +68,17 @@ const CheckoutButton = () => {
   };
 
   return (
-    <button className="btn btn-dark" onClick={handleCheckout} disabled={loading}>
+    <button
+      className="btn btn-dark"
+      onClick={handleCheckout}
+      disabled={loading}
+    >
       {loading ? "Processing..." : "Buy Now"}
     </button>
   );
 };
 
 export default CheckoutButton;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React from "react";
 // import axios from "axios";
@@ -112,7 +93,7 @@ export default CheckoutButton;
 //    const dispatch = useDispatch();
 
 //   const session = useSelector((state) => state.cart.session);
- 
+
 //   const handleCheckout = async (e) => {
 //     e.preventDefault();
 //     try {
