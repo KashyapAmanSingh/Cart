@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import User from "../../../../models/User";
 import mongoose from "mongoose";
 import Stripe from "stripe";
 import AdminOrder from "../../../../models/admin";
-import axios from "axios";
 
 const stripe = new Stripe(
   "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic"
@@ -12,9 +10,6 @@ const stripe = new Stripe(
 );
 
 export async function POST(request) {
-  //   const { getUser } = getKindeServerSession();
-  //   const user = getUser();
-  // console.log(user,"THIS IS THE USERS BRO ")
   const body = await request.json();
   let { data } = body;
 
@@ -34,10 +29,9 @@ export async function POST(request) {
     mode,
     total_details,
   } = incomingData.object;
-  console.log(
-    client_reference_id,
-    "User not authenticated. Please sign in or register.💀💀💀💀💀"
-  );
+
+  const items = await stripe.checkout.sessions.listLineItems(sessionId);
+  console.log(items, "  -----------------------------------   ");
 
   const invoiceIds = await stripe.invoices.retrieve(invoice);
 
@@ -47,33 +41,30 @@ export async function POST(request) {
 
   const { city, country, line1, line2, postal_code, state } = address;
   const street = line1 + " " + line2;
-  const { product_ids, product_quantity } = metadata;
-
+  const { product_ids, product_quantity, product_id, images } = metadata;
   const productIdsArray = product_ids.split(",");
   const productQuantityArray = product_quantity.split(",");
 
-  try {
-    console.log(
-      "-------------------------------------------------------------------------------------------BEFORE USER DECALARATION "
-    );
+  const parsedProductIds = JSON.parse(product_id).map(
+    (id) => new mongoose.Types.ObjectId(id)
+  );
 
+  const product_images_url = JSON.parse(images);
+
+  try {
     const foundUser = await User.findOne({ _id: client_reference_id });
 
-    if (foundUser.length === 0) {
+    if (!foundUser) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
-    } else {
-      console.log(
-        "The User has been found and ite Great😘 😘 😘 😘 💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀 ",
-        foundUser
-      );
     }
 
- 
     try {
       const newOrder = await AdminOrder.create({
         transactionId: transactionId,
         sessionId: sessionId,
         userId: new mongoose.Types.ObjectId(client_reference_id),
+        productIds: parsedProductIds,
+        images: product_images_url,
         products: productIdsArray.map((productId, index) => ({
           productId: new mongoose.Types.ObjectId(productId),
           quantity: parseInt(productQuantityArray[index], 10),
@@ -100,7 +91,10 @@ export async function POST(request) {
         amount_discount: amount_discount,
       });
 
-      console.log(newOrder);
+      // console.log(
+      //   " 🤖----🤖🤖----🤖",
+      //   newOrder
+      // );
 
       if (newOrder) {
         await User.findByIdAndUpdate(client_reference_id, {

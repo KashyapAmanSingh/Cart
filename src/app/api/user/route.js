@@ -6,7 +6,6 @@ import User from "../../../../models/User";
 import parse from "url-parse";
 
 export async function POST(req) {
-  
   const { getUser, isAuthenticated } = getKindeServerSession();
   const user = await getUser();
   const {
@@ -42,27 +41,28 @@ export async function POST(req) {
   }
 }
 
-export async function GET(req ) {
-        
- 
-const parsedUrl = parse(req.url, true);
+export async function GET(req) {
+  const parsedUrl = parse(req.url, true);
 
- console.log(parsedUrl.query.id,"User ID:0-432423424234242352352362363245235353----------------------------------------------------------- -----------" );
+  console.log(
+    parsedUrl.query.id,
+    "User ID:0-432423424234242352352362363245235353----------------------------------------------------------- -----------"
+  );
 
-  
   await ConnectionMongoosedbs();
 
   try {
-     const foundUser = await User.find({ id: parsedUrl.query.id });
- 
-     return NextResponse.json({ user: foundUser ? foundUser : "" }, { status: 200 });
+    const foundUser = await User.find({ id: parsedUrl.query.id });
+
+    return NextResponse.json(
+      { user: foundUser ? foundUser : "" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error(error);
     return NextResponse.error("Error fetching user data", { status: 500 });
   }
 }
-
- 
 
 export async function DELETE(req) {
   const id = req.nextUrl.searchParams.get("id");

@@ -17,7 +17,10 @@ const CheckoutButton = () => {
   );
   const handleCheckout = async (e) => {
     e.preventDefault();
-
+    if (cartItems.length === 0 || cartItems.length > 5) {
+      alert("Invalid cart items. The number of items in the cart should be between 1 and 5.");
+      return; // Stop execution if the condition is not met
+    }
     try {
       setLoading(true);
 
@@ -31,11 +34,7 @@ const CheckoutButton = () => {
         })),
         userDbsId: userDbsId._id,
       };
-
-      console.log(
-        "Before Axios request-----------------------------------------",
-        dataToSend
-      );
+ 
       const response = await fetchData("/api/checkout", "POST", dataToSend);
 
       console.log("After Axios request");

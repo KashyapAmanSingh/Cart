@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
 
 const adminOrderSchema = new mongoose.Schema({
-  
   sessionId: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  productIds: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+  ],
+  
+  images: [String],
 
   products: [
     {
