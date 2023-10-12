@@ -3,6 +3,9 @@ import User from "../../../../models/User";
 import mongoose from "mongoose";
 import Stripe from "stripe";
 import AdminOrder from "../../../../models/admin";
+import ProductTitleQuantity from "../../../../models/productTitleQuantity";
+import UserAddress from "../../../../models/UserAddress";
+import AdminOrderTest from "../../../../models/modifyAdmin";
  
 const stripe = new Stripe(
   "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic"
@@ -57,17 +60,17 @@ export async function POST(request) {
     amount_subtotal: item.amount_subtotal / 100,
     amount_tax: item.amount_tax / 100,
     amount_total: item.amount_total / 100,
-    amount_discount: item.amount_total,
-
+    amount_discount: item.amount_discount,  
     images: product_images_url[i],
-  }));
+}));
+
 
   console.log(
     "😾😾🤢🤢🤢 ======================>>> ProductTitleQuantityArray ================😾😾😾🤢🤢🤢 ",
     productTitleQuantityArray
   );
 
-  try {
+ 
     const foundUser = await User.findOne({ _id: client_reference_id });
 
     if (!foundUser) {
@@ -75,49 +78,117 @@ export async function POST(request) {
     }
 
     try {
-      const newOrder = await AdminOrder.create({
-        transactionId: transactionId,
-        sessionId: sessionId,
-        userId: new mongoose.Types.ObjectId(client_reference_id),
-         ProductTitleQuantity: productTitleQuantityArray,
-         orderDate: new Date(created * 1000),
-        userAddress: {
-          street: street,
-          city: city,
-          pincode: postal_code,
-          mobileNumber: phone,
-          email: email,
-          country: country,
-          state: state,
-        },
-         paymentMethod: mode,
-        Invoice_url: invoiceIds.hosted_invoice_url,
-        Invoice_pdf: invoiceIds.invoice_pdf,
-        paymentStatus: "paid",
-        FinalPaymentStatus: type,
-        shipping_cost: amount_shipping / 100,
-        amount_subtotal: amount_subtotal / 100,
-        amount_total: amount_total / 100,
-        amount_discount: amount_discount,
-      });
+      // const newOrder = await AdminOrder.create({
+      //   transactionId: transactionId,
+      //   sessionId: sessionId,
+      //   userId: new mongoose.Types.ObjectId(client_reference_id),
+      //    ProductTitleQuantity: productTitleQuantityArray,
+      //    orderDate: new Date(created * 1000),
+      //   userAddress: {
+      //     street: street,
+      //     city: city,
+      //     pincode: postal_code,
+      //     mobileNumber: phone,
+      //     email: email,
+      //     country: country,
+      //     state: state,
+      //   },
+      //    paymentMethod: mode,
+      //   Invoice_url: invoiceIds.hosted_invoice_url,
+      //   Invoice_pdf: invoiceIds.invoice_pdf,
+      //   paymentStatus: "paid",
+      //   FinalPaymentStatus: type,
+      //   shipping_cost: amount_shipping / 100,
+      //   amount_subtotal: amount_subtotal / 100,
+      //   amount_total: amount_total / 100,
+      //   amount_discount: amount_discount,
+      // });
 
-      console.log(
-        " 🤖----🤖🤖----🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖",
-        newOrder
+      // console.log(
+      //   " 🤖----🤖🤖----🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖",
+      //   newOrder
+      // );
+
+    //   if (newOrder) {
+    //     await User.findByIdAndUpdate(client_reference_id, {
+    //       $push: { orders: newOrder._id },
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.error(
+    //     error,
+    //     "This is the error from the user Create Order backend api/create order"
+    //   );
+    // }
+
+  // Assuming you have parsedProductIds, items, product_images_url, etc. defined before this code block
+
+
+  const userAddress = await UserAddress.create({
+    street: street,
+    city: city,
+    pincode: postal_code,
+    mobileNumber: phone,
+    email: email,
+    country: country,
+    state: state,
+  });
+  const createdProductTitleQuantity = await ProductTitleQuantity.create({
+    products: productTitleQuantityArray,
+});
+console.log(
+  " createdProductTitleQuantity createdProductTitleQuantity 🤑----🤑🤑-- 🤑🤑🤑🤑🤑  createdProductTitleQuantity ",
+  createdProductTitleQuantity 
+);
+// Now you can use the _id of the created document wherever needed
+const productTitleQuantityId = createdProductTitleQuantity._id;
+console.log(
+  " productTitleQuantityId productTitleQuantityId 🤐----🤐🤐🤐--- 🤐🤐🤐🤐productTitleQuantityId       productTitleQuantityId ",
+  productTitleQuantityId
+);
+
+  
+ 
+const newOrderTest = await AdminOrderTest.create({
+  transactionId,
+  sessionId,
+  userId: new mongoose.Types.ObjectId(client_reference_id),
+  orderDate: new Date(created * 1000),
+  ProductTitleQuantity:productTitleQuantityId,
+  userAddress: userAddress._id,
+  paymentMethod: mode,
+  Invoice_url: invoiceIds.hosted_invoice_url,
+  Invoice_pdf: invoiceIds.invoice_pdf,
+  paymentStatus: "paid",
+  FinalPaymentStatus: type,
+  shipping_cost: amount_shipping / 100,
+  amount_subtotal: amount_subtotal / 100,
+  amount_total: amount_total / 100,
+  amount_discount: amount_discount / 100,
+});
+
+
+
+
+console.log(
+        " 🤖----🤖🤖--- 🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖",
+        newOrderTest
       );
 
-      if (newOrder) {
+      if (newOrderTest) {
         await User.findByIdAndUpdate(client_reference_id, {
-          $push: { orders: newOrder._id },
+          $push: { orders: newOrderTest._id },
         });
       }
-    } catch (error) {
-      console.error(
-        error,
-        "This is the error from the user Create Order backend api/create order"
-      );
-    }
+    
 
+ 
+
+
+
+
+
+    
     const dummyData = {
       message: "This is dummy data for testing.",
       timestamp: new Date().toISOString(),
@@ -133,10 +204,7 @@ export async function POST(request) {
       { status: 200 }
     );
   } catch (error) {
-    // Handle errors here
-    return NextResponse.json(
-      { message: "Failed fully lag received", error },
-      { status: 400 }
-    );
+    // Handle errors
+    return NextResponse.json({ message: "Failed to process the request", error }, { status: 500 });
   }
-}
+} 
