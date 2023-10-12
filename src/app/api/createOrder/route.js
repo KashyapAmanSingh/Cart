@@ -3,7 +3,7 @@ import User from "../../../../models/User";
 import mongoose from "mongoose";
 import Stripe from "stripe";
 import AdminOrder from "../../../../models/admin";
-
+ 
 const stripe = new Stripe(
   "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic"
   // { apiVersion: "2023-08-16" }
@@ -31,7 +31,8 @@ export async function POST(request) {
   } = incomingData.object;
 
   const items = await stripe.checkout.sessions.listLineItems(sessionId);
-  console.log(items, "  -----------------------------------   ");
+
+  // ,  Object.entries(items.data[0])
 
   const invoiceIds = await stripe.invoices.retrieve(invoice);
 
@@ -42,14 +43,29 @@ export async function POST(request) {
   const { city, country, line1, line2, postal_code, state } = address;
   const street = line1 + " " + line2;
   const { product_ids, product_quantity, product_id, images } = metadata;
-  const productIdsArray = product_ids.split(",");
-  const productQuantityArray = product_quantity.split(",");
+ 
+  const product_images_url = JSON.parse(images);
 
   const parsedProductIds = JSON.parse(product_id).map(
     (id) => new mongoose.Types.ObjectId(id)
   );
 
-  const product_images_url = JSON.parse(images);
+  const productTitleQuantityArray = items.data.map((item, i) => ({
+    productIds: parsedProductIds[i],
+    title: item.description,
+    quantity: item.quantity,
+    amount_subtotal: item.amount_subtotal / 100,
+    amount_tax: item.amount_tax / 100,
+    amount_total: item.amount_total / 100,
+    amount_discount: item.amount_total,
+
+    images: product_images_url[i],
+  }));
+
+  console.log(
+    "😾😾🤢🤢🤢 ======================>>> ProductTitleQuantityArray ================😾😾😾🤢🤢🤢 ",
+    productTitleQuantityArray
+  );
 
   try {
     const foundUser = await User.findOne({ _id: client_reference_id });
@@ -63,13 +79,8 @@ export async function POST(request) {
         transactionId: transactionId,
         sessionId: sessionId,
         userId: new mongoose.Types.ObjectId(client_reference_id),
-        productIds: parsedProductIds,
-        images: product_images_url,
-        products: productIdsArray.map((productId, index) => ({
-          productId: new mongoose.Types.ObjectId(productId),
-          quantity: parseInt(productQuantityArray[index], 10),
-        })),
-        orderDate: new Date(created * 1000),
+         ProductTitleQuantity: productTitleQuantityArray,
+         orderDate: new Date(created * 1000),
         userAddress: {
           street: street,
           city: city,
@@ -79,8 +90,7 @@ export async function POST(request) {
           country: country,
           state: state,
         },
-        ProductTitle: "Example Product",
-        paymentMethod: mode,
+         paymentMethod: mode,
         Invoice_url: invoiceIds.hosted_invoice_url,
         Invoice_pdf: invoiceIds.invoice_pdf,
         paymentStatus: "paid",
@@ -91,10 +101,10 @@ export async function POST(request) {
         amount_discount: amount_discount,
       });
 
-      // console.log(
-      //   " 🤖----🤖🤖----🤖",
-      //   newOrder
-      // );
+      console.log(
+        " 🤖----🤖🤖----🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖",
+        newOrder
+      );
 
       if (newOrder) {
         await User.findByIdAndUpdate(client_reference_id, {

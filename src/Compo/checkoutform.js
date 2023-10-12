@@ -1,6 +1,5 @@
 import React from "react";
-import axios from "axios";
-import { initializeStripe } from "@/utils/stripe";
+ import { initializeStripe } from "@/utils/stripe";
 import { useDispatch, useSelector } from "react-redux";
 import { setSession } from "@/redux/Slice";
 import { fetchData } from "@/utils/FetchCode";
@@ -19,7 +18,7 @@ const CheckoutButton = () => {
     e.preventDefault();
     if (cartItems.length === 0 || cartItems.length > 5) {
       alert("Invalid cart items. The number of items in the cart should be between 1 and 5.");
-      return; // Stop execution if the condition is not met
+      return; 
     }
     try {
       setLoading(true);
