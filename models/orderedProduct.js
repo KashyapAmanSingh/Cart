@@ -1,8 +1,8 @@
-// productTitleQuantity.js
+// orderedProductDetail.js
 
 import mongoose from "mongoose";
 
-const productTitleQuantitySchema = new mongoose.Schema({
+const orderedProduct = new mongoose.Schema({
   products: [
     {
       productIds: {
@@ -21,8 +21,8 @@ const productTitleQuantitySchema = new mongoose.Schema({
   ],
 });
 
-const ProductTitleQuantity = mongoose.models.ProductTitleQuantity || mongoose.model("ProductTitleQuantity", productTitleQuantitySchema);
+const orderedProductDetail = mongoose.models.orderedProductDetail || mongoose.model("orderedProductDetail", orderedProduct);
 
-export default ProductTitleQuantity;
+export default orderedProductDetail;
   
  

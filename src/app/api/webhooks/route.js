@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Stripe } from "stripe";
-import AdminOrder from "../../../../models/admin";
+import AdminOrder from "../../../../models/AdminOrderInfo";
 import mongoose from "mongoose";
 import ConnectionMongoosedbs from "../../../../db/ConnectionMongoosedbs";
  import User from "../../../../models/User";

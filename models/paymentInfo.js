@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 
-const orderPaymentInfo = new mongoose.Schema({
+const orderPaymentInfoSchema = new mongoose.Schema({
+    transactionId: { type: String, required: true },
   sessionId: { type: String, required: true },
   paymentMethod: String,
-  transactionId: String,
-  Invoice_url: String,
-  Invoice_pdf: String,
+
+  Invoice_url: { type: String, required: true },
+  Invoice_pdf: { type: String, required: true },
   paymentStatus: {
     type: String,
     enum: ["pending", "paid", "failed"],
@@ -19,6 +20,7 @@ const orderPaymentInfo = new mongoose.Schema({
   orderDate: { type: Date, default: Date.now },
 });
 
-const orderPaymentInfoTest =mongoose.models.orderPaymentInfo||  mongoose.model("orderPaymentInfo", orderPaymentInfo);
+const orderPaymentInfo  =mongoose.models.orderPaymentInfo||  mongoose.model("orderPaymentInfo", orderPaymentInfoSchema);
  
-export default orderPaymentInfoTest;
+export default orderPaymentInfo ;
+ 
