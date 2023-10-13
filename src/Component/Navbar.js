@@ -3,6 +3,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { FcBusinessman } from "react-icons/fc";
 import LogOut from "./UserProfile/LogOut";
+import {  FcBookmark } from 'react-icons/fc';
 const Searching = dynamic(() => import("./Filter/Searching"));
 const Sorting = dynamic(() => import("./Filter/Sorting"));
 const CartCount = dynamic(() => import("./CartComponent/cartCount"));
@@ -37,17 +38,17 @@ const Navbar = () => {
                 </span>
               </Link>
             </li>
-            {/* <li className="nav-item">
+            <li className="nav-item">
               <Link
-                href="/Rating"
-           
+                href="/WishList"
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
-                <span className="ms-1">Rating</span>
-                <CartCount />
+                <span className="ms-1">
+                  <FcBookmark size={35} />
+                </span>
               </Link>
-            </li> */}
+            </li>
           </ul>
 
           <Searching />

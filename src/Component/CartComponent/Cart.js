@@ -9,12 +9,6 @@ import Loader from "../Progress";
 import { addUser } from "@/redux/UserInfoSlice";
 
 const Cart = () => {
-
-
-
-
-
-
  
   const [cartItems, setCartItems] = useState([]);
   // const [loading, setLoading] = useState(true);

@@ -49,13 +49,16 @@ export default Functions;
 
 const HandleAddToCartBtn = ({ product }) => {
   const dispatch = useDispatch();
+  const image = product.images && product.images.length > 0
+  ? product.images[0]
+  : product.firstImage  ;
 
   const handleAddToCart = () => {
     dispatch(
       addItem({
         id: product._id,
         title: product.title,
-        image: product.images[0],
+        image:image ,
         price: product.price,
       })
     );

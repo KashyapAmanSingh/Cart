@@ -10,7 +10,7 @@ const WishList = ({ wishProductDetail }) => {
     const existingItem = wishList.find(item => item._id === wishProductDetail._id);
     return Boolean(existingItem);
   });
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,11 +30,7 @@ const WishList = ({ wishProductDetail }) => {
 
     console.log('Added to wishlist:', wishProductDetail);
   };
-
-  if (typeof wish === 'undefined') {
-     return <div>Loading...</div>;
-  }
-
+ 
   return (
     <div className='container-fluid'>
       <div className='row'>

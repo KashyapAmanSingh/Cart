@@ -117,13 +117,29 @@ const cartSlice = createSlice({
         }
       }
     },
-    
-    
-    
+    removeWishListItem: (state, action) => {
+      const itemIdToRemove = action.payload;
+      console.log(`Removing ${itemIdToRemove}`, "---------------------------------------------------------------------------------");
+      const storedWishListItems = JSON.parse(localStorage.getItem("WishList"));
+
+      const updatedWishList = storedWishListItems.filter(
+        (item) => item._id !== itemIdToRemove
+      );
+      console.log(`updatedWishList ${Object.keys(updatedWishList)}`, "---------------------------------------------------------------------------------");
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("WishList", JSON.stringify(updatedWishList));
+      }
+
+      return {
+        ...state,
+        wishlist: updatedWishList,
+      };
+    },
  
   },
 });
 
-export const { addItem, removeItem, setQuantity, setSession,   addWishList  } =
+export const { addItem, removeItem, setQuantity, setSession,   addWishList,  removeWishListItem  } =
   cartSlice.actions;
 export default cartSlice;

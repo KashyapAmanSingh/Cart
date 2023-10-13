@@ -2,8 +2,7 @@
 import Cart from '@/Component/CartComponent/Cart';
 import React, { useEffect, useState } from 'react';
 import   Loader1  from '../Progress';
-import Link from 'next/link';
-import { useDispatch } from 'react-redux';
+ import { useDispatch } from 'react-redux';
 import { addUser } from '@/redux/UserInfoSlice';
 import axios from 'axios';
 
