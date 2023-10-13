@@ -1,19 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+ 
+// let storedCartItems;
+// let storedWishListItems; 
+
+// if (typeof localStorage !== 'undefined') {
+//   storedCartItems = localStorage.getItem("cartItems");
+//   storedWishListItems = localStorage.getItem("WishList");
+// }
+
+// const initialState = {
+//   items: storedCartItems ? JSON.parse(storedCartItems) : [],
+//   count: 0,
+//   session: null,
+//   sessionAll: [],
+//   wishlist: storedWishListItems ? JSON.parse(storedWishListItems):[],
+// };
 
 let storedCartItems;
+ 
 if (typeof localStorage !== 'undefined') {
+  storedCartItems = localStorage.getItem("cartItems");
+ }
 
-  storedCartItems = localStorage.getItem("cartItems");}
 const initialState = {
-  items: storedCartItems ? JSON.parse(storedCartItems) : [], // Check if data is not null
+  items: storedCartItems ? JSON.parse(storedCartItems) : [],
   count: 0,
   session: null,
   sessionAll: [],
- 
+  wishlist:  []
 };
 
- 
+
 
 const cartSlice = createSlice({
   name: "Cart",
@@ -79,10 +97,33 @@ const cartSlice = createSlice({
         localStorage.setItem("sessionAll", JSON.stringify(updatedSessionAll));
       }
     },
-   
+    addWishList: (state, action) => {
+      if (action.payload) {
+        const { _id, images, title, price, discount } = action.payload;
+        console.log("Added SetWishList SLICE:--------------------------- ###################", action.payload);
+    
+        // Check if the item already exists in the wishlist
+        const existingItem = state.wishlist.find((item) => item._id === _id);
+    
+        if (!existingItem) {
+          const wishlistItem = { _id, title, price, discount, firstImage: images[0] };
+          state.wishlist.push(wishlistItem);
+    
+          if (typeof window !== "undefined") {
+            const storedWishList = JSON.parse(localStorage.getItem("WishList")) || [];
+            const updatedWishList = [...storedWishList, wishlistItem];
+            localStorage.setItem("WishList", JSON.stringify(updatedWishList));
+          }
+        }
+      }
+    },
+    
+    
+    
+ 
   },
 });
 
-export const { addItem, removeItem, setQuantity, setSession  } =
+export const { addItem, removeItem, setQuantity, setSession,   addWishList  } =
   cartSlice.actions;
 export default cartSlice;

@@ -11,6 +11,7 @@ import Functions, {
   HandleAddToCartBtn,
   HandleCartImage,
 } from "@/utils/Functions";
+import WishList from "./WishList/WishList";
 
 const Category = dynamic(() => import("./Filter/Category"), {
   suspense: true,
@@ -65,6 +66,7 @@ const MainPage = () => {
                   data.map((product) => (
                     <div className="col-md-3 mt-5" key={product._id}>
                       <div className="card" style={{ width: "18rem" }}>
+                        <WishList      wishProductDetail={product}/>
                         <HandleCartImage
                           src={product.images[0]}
                           alt={product.title}

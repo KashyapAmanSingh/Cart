@@ -1,0 +1,51 @@
+import { addWishList } from '@/redux/Slice';
+import React, { useEffect, useState } from 'react';
+import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
+import { useDispatch } from 'react-redux';
+
+const WishList = ({ wishProductDetail }) => {
+  const [wish, setWish] = useState(() => {
+    const storedWishListString = localStorage.getItem("WishList");
+    const wishList = storedWishListString ? JSON.parse(storedWishListString) : [];
+    const existingItem = wishList.find(item => item._id === wishProductDetail._id);
+    return Boolean(existingItem);
+  });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedWishListString = localStorage.getItem("WishList");
+    if (storedWishListString) {
+      const parsedCartItems = JSON.parse(storedWishListString);
+      const existingItem = parsedCartItems.find(item => item._id === wishProductDetail._id);
+      setWish(Boolean(existingItem));
+    }
+  }, [wishProductDetail]);
+
+  const addWishClick = () => {
+    if (!wish) {
+      setWish(true);
+      dispatch(addWishList(wishProductDetail));
+    }
+
+    console.log('Added to wishlist:', wishProductDetail);
+  };
+
+  if (typeof wish === 'undefined') {
+     return <div>Loading...</div>;
+  }
+
+  return (
+    <div className='container-fluid'>
+      <div className='row'>
+        <div className='card-img-overlay m-0 p-0 col-sm-12 d-flex justify-content-end'>
+          <div onClick={addWishClick}>
+            {wish ? <FcLike /> : <FcLikePlaceholder />}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default WishList;
