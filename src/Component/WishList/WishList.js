@@ -34,7 +34,8 @@ const WishList = ({ wishProductDetail }) => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <div className='card-img-overlay m-0 p-0 col-sm-12 d-flex justify-content-end'>
+      {/* card-img-overlay */}
+        <div className=' m-0 p-0 col-sm-12 d-flex justify-content-end'>  
           <div onClick={addWishClick}>
             {wish ? <FcLike /> : <FcLikePlaceholder />}
           </div>

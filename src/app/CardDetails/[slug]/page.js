@@ -19,6 +19,7 @@ const fetcher = async (url) => {
 };
 
 const Page = ({ params }) => {
+  console.log("THIS IS THE PAGE OF PARAMS AND IDS OF THE  CARDS DETAILS AND THE STATUS OF THE CARDS",params.slug)
   const dispatch = useDispatch();
 
   const { data, error } = useSWR(
@@ -49,8 +50,8 @@ const Page = ({ params }) => {
     <>
       <Detail1 />
       <DynamicTabs />
-      <StarRating />
-      <Comment />
+      {/* <StarRating />
+      <Comment /> */}
     </>
   );
 };

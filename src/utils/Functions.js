@@ -82,7 +82,7 @@ const HandleCartImage = ({ src, alt,id }) => {
       console.error("Router is not available.");
     }
   };
-    
+    console.log("goToCardDetailsPage called with !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"   )
  
   return (
     <div>

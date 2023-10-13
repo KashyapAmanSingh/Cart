@@ -38,17 +38,7 @@ const Navbar = () => {
                 </span>
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                href="/WishList"
-                className="nav-link active text-white fw-bolder d-flex align-items-center"
-                aria-current="page"
-              >
-                <span className="ms-1">
-                  <FcBookmark size={35} />
-                </span>
-              </Link>
-            </li>
+         
           </ul>
 
           <Searching />
@@ -63,6 +53,17 @@ const Navbar = () => {
               >
                 <span className="ms-1">Cart</span>
                 <CartCount />
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                href="/WishList"
+                className="nav-link active text-white fw-bolder d-flex align-items-center"
+                aria-current="page"
+              >
+                <span className="ms-1">
+                  <FcBookmark size={35} />
+                </span>
               </Link>
             </li>
           </ul>

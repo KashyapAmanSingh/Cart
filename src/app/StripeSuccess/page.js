@@ -1,108 +1,132 @@
-// http://localhost:3000/StripeSuccess?session_id=cs_test_b1qSsxX34jhdYKblUp2UHpveepfMJ4KEekvPVAy10DHztrmQurJq0FBVoX
-
 "use client";
-import { fetchData } from "@/utils/FetchCode";
 import axios from "axios";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import shoppingboy from "../../../public/images/shoppingboy.jpg";
+import Loader, { Loader1 } from "@/Component/Progress";
 
 const SuccessPage = () => {
   const router = useRouter();
   const params = useSearchParams();
   const session_id = params.get("session_id");
   const [state, setStates] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchD = async () => {
+      setLoading(true);
       try {
         const response = await axios.post(`/api/retrieveSession`, {
-          session_Id : session_id,
+          session_Id: session_id,
         });
-        console.log("Response from API:-------------------------------------------------->", response.data);
+        console.log(
+          "Response from API: -------------------------------------------------->",
+          response.data
+        );
         setStates(response.data);
+        setLoading(false);
       } catch (error) {
-        console.error("Error retrieving data:-------------------------------------------------->", error);
+        console.error(
+          "Error retrieving data: -------------------------------------------------->",
+          error
+        );
       }
     };
-    
 
     fetchD();
-  }, []);
- 
-  if(state && state.data  ) { 
-    const {retrievedSession}=state.data;
+  }, [session_id]); // Added session_id as a dependency to useEffect
+
+   if (state && state.data) {
+    const { retrievedSession } = state.data;
+    const { successInvoice } = state.invoiceUrls;
 
     const {
-      session_id: id,
-      amount_subtotal,
       amount_total,
+      customer_details: { email, name },
+      line_items: { data },
+      metadata: { images },
       created,
-      currency,
-      custom_text,
-      customer_details: { email, name, phone },
-      invoice,
-      line_items: { object, has_more },
-      metadata: {product_ids },
-      mode,
-      payment_intent,
-      payment_method_types,
-      status,
-      total_details: { amount_discount, amount_shipping, amount_tax }
-  } = retrievedSession;
-  
-  console.log("id:-------------------------------------------------->", id,session_id);
-  console.log("amount_subtotal:-------------------------------------------------->", amount_subtotal);
-  console.log("amount_total:-------------------------------------------------->", amount_total);
-  console.log("created:-------------------------------------------------->", created);
-  console.log("currency:-------------------------------------------------->", currency);
-  console.log("custom_text:-------------------------------------------------->", custom_text);
-  console.log("email:-------------------------------------------------->", email);
-  console.log("name:-------------------------------------------------->", name);
-  console.log("phone:-------------------------------------------------->", phone);
-  console.log("invoice:-------------------------------------------------->", invoice);
-  console.log("object:-------------------------------------------------->", object);
-  console.log("has_more:-------------------------------------------------->", has_more);
-  console.log("metadata:-------------------------------------------------->", product_ids);
-  console.log("mode:-------------------------------------------------->", mode);
-  console.log("payment_intent:-------------------------------------------------->", payment_intent);
-  console.log("payment_method_types:-------------------------------------------------->", payment_method_types[0]);
-  console.log("status:-------------------------------------------------->", status);
-  console.log("amount_discount:-------------------------------------------------->", amount_discount);
-  console.log("amount_shipping:-------------------------------------------------->", amount_shipping);
-  console.log("amount_tax:-------------------------------------------------->", amount_tax);
-  
+    } = retrievedSession;
 
+    const date = new Date(created * 1000);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
 
-  console.log("THIS IS STATE OD THE PAGE SUCCESS",retrievedSession);
+    const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${
+      day < 10 ? "0" : ""
+    }${day} ${hours}:${minutes}:${seconds}`;
 
+    const imageUrls = JSON.parse(images);
 
+    return (
+      <div>
+         {loading ? (
+              <div className="d-flex justify-content-center align-items-center vh-100">
+                <Loader1 />
+              </div>
+            ) : (
+      <div >
+  <h4 className="text-center text-danger mt-4 fw-bold fw-semibold" > Hi, {name}!  thank you for your payment! Come back soon for more great deals!</h4>
+  </div>
+            )}
 
+<div className="d-flex justify-content-center align-items-center vh-70">   
 
+        <Image
+          priority
+          src={shoppingboy}
+          height={600}
+          width={600}
+          alt="Shopping Boy"
+        />
+</div>
+        <div className="container">
+          <div className="row">
+            {loading ? (
+              <div className="d-flex justify-content-center align-items-center ">
+                <Loader1 />
+              </div>
+            ) : (
+              data.map((item, i) => (
+                <div className="col-sm-3" key={i}>
+                  <div className="card_body"></div>
+                  <h7>{item.description.slice(0,60)}...</h7>
+                  <div className="imgcard ">
+                    <Image
+                      src={imageUrls[i]}
+                      alt="ordered Product image"
+                      height={100}
+                      width={100}
+                    />
+              
+                  </div>
+                  <div>
+                    <p>You created this order at {formattedDate}</p>
+                    <p>Your Total amount: {amount_total}</p>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
 
-
-
-
-
-
-
-  
-}
-  return (
-    <div>
-      <h1>Thank you for your payment!</h1>
-      <p>Your SuccessPageID: {session_id}</p>
-      <button
-        className="btn btn-danger"
-        id="continueShoppingButton"
-        // onClick={redirectToHome}
-      >
-        Continue Shopping
-      </button>
-    </div>
-  );
+        <button
+           className="btn btn-danger my-5 d-flex justify-content-center align-items-center mx-auto"
+          id="continueShoppingButton"
+          onClick={() => {
+             router.push("/");  
+          }}
+        >
+          Continue Shopping
+        </button>
+      </div>
+    );
+  }
 };
-// }
-export default SuccessPage;
 
-// source: "/api/.*",
+export default SuccessPage;

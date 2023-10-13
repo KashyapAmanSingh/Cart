@@ -9,11 +9,23 @@ const CheckoutButton = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = React.useState(false);
 
-  const userDbsId = useSelector((state) => state.user.user);
-  console.log(
-    userDbsId._id,
-    "I AM A USER DATA FETCH FROM USERINFO SLICE AND I AM FROM CHECKOUT FORM IN THE DOCS CODES "
-  );
+  const userDbsId = useSelector((state) => state?.user?.user);
+  const userId = userDbsId ? userDbsId?._id : null;
+  
+console.log(userId, "I AM A USER DATA FETCH FROM USERINFO SLICE AND I AM FROM CHECKOUT FORM IN THE DOCS CODES");
+
+// const handleCheckout = async (e) => {
+//   // Ensure userDbsId is not null before accessing its properties
+//   if (userDbsId && userDbsId._id) {
+//     // Your checkout logic here
+//   } else {
+//     console.error("User data is null or does not have _id property.");
+//     // Handle the case where userDbsId is null or does not have _id property
+//   }
+// };
+
+
+
   const handleCheckout = async (e) => {
     e.preventDefault();
     if (cartItems.length === 0 || cartItems.length > 5) {
@@ -31,7 +43,7 @@ const CheckoutButton = () => {
           title: item.title,
           image: item.image,
         })),
-        userDbsId: userDbsId._id,
+        userDbsId: userId,
       };
  
       const response = await fetchData("/api/checkout", "POST", dataToSend);

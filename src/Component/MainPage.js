@@ -24,10 +24,8 @@ const FeaturedProduct = dynamic(() =>
 const MainPage = () => {
   const sortedData = useSelector((state) => state.Product.items);
   const { fetchProducts, apiUrl, loading } = Functions();
-  //  console.log(response,"!!!!!!!!! Response from the FetchProducts API!!!");
-  console.log(apiUrl,"!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!Response from main page most important pages  API !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
   useEffect(() => {
-    // Call the fetchProducts function when the component mounts
     fetchProducts();
   }, [fetchProducts, apiUrl, loading]);
 
@@ -66,12 +64,15 @@ const MainPage = () => {
                   data.map((product) => (
                     <div className="col-md-3 mt-5" key={product._id}>
                       <div className="card" style={{ width: "18rem" }}>
-                        <WishList      wishProductDetail={product}/>
-                        <HandleCartImage
-                          src={product.images[0]}
-                          alt={product.title}
-                          id={product._id}
-                        />
+                        <WishList wishProductDetail={product} />
+
+                        <div className="cart_image">
+                          <HandleCartImage
+                            src={product.images[0]}
+                            alt={product.title}
+                            id={product._id}
+                          />
+                        </div>
                         <div className="card-body">
                           <h5 className="card-title">
                             {product.title.slice(0, 70)}

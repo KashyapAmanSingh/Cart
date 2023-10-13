@@ -124,8 +124,7 @@ export async function POST(request) {
     });
 
     console.log(
-      orderPaymentInfoInstance,
-      " 🤖----🤖🤖--- 🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖",
+       " 🤖----🤖🤖--- 🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖",
       newOrderTest
     );
 
@@ -141,7 +140,7 @@ export async function POST(request) {
       data: {
         key1: "value1",
         key2: "value2",
-        // Add more dummy data as needed
+        
       },
     };
 

@@ -15,15 +15,17 @@ export async function POST(request) {
 
   try {
     // await ConnectionMongoosedbs();
-    const items = await stripe.checkout.sessions.listLineItems( session_Id);
+ 
 
-    if (true) {
-      console.log( session_Id,
+ 
+    
+    // if (true) {
+    //   console.log( session_Id,
         
-        "The User has been found and it's Great 😘 😘 😘 💀💀💀💀💀💀 💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀"
-      );
-      console.log(items);
-    }  
+    //     "The User has been found and it's Great  "
+    //   );
+    //   console.log(items);
+    // }  
     
     const retrievedSession = await stripe.checkout.sessions.retrieve(
       session_Id,
@@ -32,7 +34,28 @@ export async function POST(request) {
       }
     );
 
-    return NextResponse.json({ data: { retrievedSession } }); //, newOrder
+    const {
+      
+      invoice,
+  } = retrievedSession;
+
+  
+//   const ProductDetails ={
+//     Invoice_url: invoiceIds.hosted_invoice_url,
+//     Invoice_pdf: invoiceIds.invoice_pdf,
+// }
+  
+
+ 
+ console.log("The User has been found and it's Great 😘 😘 😘 💀💀💀 💀💀💀" )
+    const invoiceIds = await stripe.invoices.retrieve( invoice);
+    const successInvoice ={
+      Invoice_url: invoiceIds.hosted_invoice_url,
+      Invoice_pdf: invoiceIds.invoice_pdf,
+  }
+
+    
+    return NextResponse.json({ data: { retrievedSession },invoiceUrls:{successInvoice} }); //, newOrder
   } catch (error) {
     console.error("Error processing request:", error);
 

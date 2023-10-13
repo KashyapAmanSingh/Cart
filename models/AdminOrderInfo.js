@@ -14,7 +14,12 @@ const adminOrderSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "orderPaymentInfo", required: true 
   },
- orderDate: { type: Date, default: () => new Date(created * 1000) }
+ orderDate: { type: Date, default: () => new Date(created * 1000) },
+ productStatus: {
+  type: String,
+  enum: ['Pending','Packed', 'Dispatched', 'Reached', , 'Delivered'],
+  default: 'Pending',
+},
 
 });
 
