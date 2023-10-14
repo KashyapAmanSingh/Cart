@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import Detail1 from "@/Component/Detail/Detail1";
 import DynamicTabs from "@/Component/Detail/Detail2";
@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { DetailedProduct } from "@/redux/ProductSlice";
 import Loader from "@/Component/Progress";
 import useSWR from "swr";
+import { fetchData } from "@/utils/FetchCode";
 
 const fetcher = async (url) => {
   const response = await fetch(url);
@@ -19,19 +20,23 @@ const fetcher = async (url) => {
 };
 
 const Page = ({ params }) => {
-  console.log("THIS IS THE PAGE OF PARAMS AND IDS OF THE  CARDS DETAILS AND THE STATUS OF THE CARDS",params.slug)
+  console.log(
+    "THIS IS THE PAGE OF PARAMS AND IDS OF THE CARDS DETAILS AND THE STATUS OF THE CARDS",
+    params.slug
+  );
   const dispatch = useDispatch();
-
   const { data, error } = useSWR(
     `/api/fetchDetailProduct?id=${params.slug}`,
     fetcher
   );
 
-  if (error) {
-    console.error("Error:", error);
+   const { data: authData, error: authError } = useSWR("/api/kindeSession", fetcher);
+
+  if (error || authError) {
+    console.error("Error:", error || authError);
   }
 
-  if (!data) {
+  if (!data || !authData) {
     return (
       <div
         className="d-flex align-items-center justify-content-center"
@@ -42,16 +47,24 @@ const Page = ({ params }) => {
     );
   }
 
-  dispatch(DetailedProduct(data.product));
+  const { authenticated } = authData ;
 
+  dispatch(DetailedProduct(data.product));
   dispatch(addProductOrderId(params.slug));
+
+  console.log("Fetching user by the fetchAuth Function:=====================================================================================================================", authenticated);
 
   return (
     <>
       <Detail1 />
       <DynamicTabs />
-      {/* <StarRating />
-      <Comment /> */}
+
+      {authenticated && (
+        <>
+          <StarRating />
+          <Comment />
+        </>
+      )}
     </>
   );
 };

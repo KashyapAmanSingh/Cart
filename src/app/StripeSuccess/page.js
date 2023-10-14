@@ -74,19 +74,20 @@ const SuccessPage = () => {
   <h4 className="text-center text-danger mt-4 fw-bold fw-semibold" > Hi, {name}!  thank you for your payment! Come back soon for more great deals!</h4>
   </div>
             )}
-
-<div className="d-flex justify-content-center align-items-center vh-70">   
+<div className="container">
+          <div className="row">
+<div className=" col-sm-4 d-flex justify-content-center align-items-center vh-70">   
 
         <Image
           priority
           src={shoppingboy}
-          height={600}
-          width={600}
+          height={670}
+          width={670}
           alt="Shopping Boy"
         />
 </div>
-        <div className="container">
-          <div className="row">
+<div className=" col-sm-8  ">   
+
             {loading ? (
               <div className="d-flex justify-content-center align-items-center ">
                 <Loader1 />
@@ -124,7 +125,8 @@ const SuccessPage = () => {
         >
           Continue Shopping
         </button>
-      </div>
+      </div>  
+        </div>
     );
   }
 };

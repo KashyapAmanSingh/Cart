@@ -14,17 +14,7 @@ const CheckoutButton = () => {
   
 console.log(userId, "I AM A USER DATA FETCH FROM USERINFO SLICE AND I AM FROM CHECKOUT FORM IN THE DOCS CODES");
 
-// const handleCheckout = async (e) => {
-//   // Ensure userDbsId is not null before accessing its properties
-//   if (userDbsId && userDbsId._id) {
-//     // Your checkout logic here
-//   } else {
-//     console.error("User data is null or does not have _id property.");
-//     // Handle the case where userDbsId is null or does not have _id property
-//   }
-// };
-
-
+ 
 
   const handleCheckout = async (e) => {
     e.preventDefault();
@@ -79,7 +69,8 @@ console.log(userId, "I AM A USER DATA FETCH FROM USERINFO SLICE AND I AM FROM CH
 
   return (
     <button
-      className="btn btn-dark"
+    className="btn btn-danger my-5 d-flex justify-content-center align-items-center mx-auto"
+     
       onClick={handleCheckout}
       disabled={loading}
     >

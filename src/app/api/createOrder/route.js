@@ -35,8 +35,7 @@ export async function POST(request) {
 
   const items = await stripe.checkout.sessions.listLineItems(sessionId);
 
-  // ,  Object.entries(items.data[0])
-
+ 
   const invoiceIds = await stripe.invoices.retrieve(invoice);
 
   const { amount_discount, amount_shipping } = total_details;
@@ -64,11 +63,7 @@ export async function POST(request) {
     images: product_images_url[i],
   }));
 
-  console.log(
-    "😾😾🤢🤢🤢 ======================>>> ProductTitleQuantityArray ================😾😾😾🤢🤢🤢 ",
-    productTitleQuantityArray
-  );
-
+ 
   const foundUser = await User.findOne({ _id: client_reference_id });
 
   if (!foundUser) {
@@ -90,16 +85,10 @@ export async function POST(request) {
     const createdProductTitleQuantity = await orderedProductDetail.create({
       products: productTitleQuantityArray,
     });
-    console.log(
-      " createdProductTitleQuantity createdProductTitleQuantity 🤑----🤑🤑-- 🤑🤑🤑🤑🤑  createdProductTitleQuantity ",
-      createdProductTitleQuantity
-    );
+ 
     // Now you can use the _id of the created document wherever needed
     const productTitleQuantityId = createdProductTitleQuantity._id;
-    console.log(
-      " productTitleQuantityId productTitleQuantityId 🤐----🤐🤐🤐--- 🤐🤐🤐🤐productTitleQuantityId       productTitleQuantityId ",
-      productTitleQuantityId
-    );
+ 
 
     const orderPaymentInfoInstance = await orderPaymentInfo.create({
       transactionId,
@@ -123,11 +112,7 @@ export async function POST(request) {
       orderPaymentInfo: orderPaymentInfoInstance._id,
     });
 
-    console.log(
-       " 🤖----🤖🤖--- 🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖",
-      newOrderTest
-    );
-
+ 
     if (newOrderTest) {
       await User.findByIdAndUpdate(client_reference_id, {
         $push: { orders: newOrderTest._id },
