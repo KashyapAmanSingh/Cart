@@ -52,8 +52,7 @@ const Page = ({ params }) => {
   dispatch(DetailedProduct(data.product));
   dispatch(addProductOrderId(params.slug));
 
-  console.log("Fetching user by the fetchAuth Function:=====================================================================================================================", authenticated);
-
+ 
   return (
     <>
       <Detail1 />
