@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   id: {
@@ -45,11 +45,10 @@ const userSchema = new mongoose.Schema({
       type: String,
     },
   },
+
+  orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "AdminOrder" }],
 });
 
- 
-
-
-const User =  mongoose.models.User || mongoose.model('User', userSchema); 
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 module.exports = User;
