@@ -6,11 +6,11 @@ export async function POST(request) {
 
    const successUrl = isDevelopment
       ? `http://localhost:3000/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`
-    : ` https://muscle-schema-mage.vercel.app/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`;
+      : `https://muscle-schema-mage.vercel.app/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`;
   
   const cancelUrl = isDevelopment
    ? `http://localhost:3000/StripeFail`
-  : `https://muscle-schema-mage.vercel.app/StripeFail`;
+   : `https://muscle-schema-mage.vercel.app/StripeFail`;
   
   
   
@@ -109,10 +109,9 @@ export async function POST(request) {
   } catch (error) {
     console.error(error);
     return NextResponse.error(
-      { message: `Failed to create the Order checkout: ${error.message}` },
+      { message: "Failed to create the topic" },
       { status: 500 }
     );
-    
   }
 }
  
