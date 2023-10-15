@@ -4,3 +4,5 @@ export async function GET(request, {params}) {
 	const endpoint = params.kindeAuth;
 	return handleAuth(request, endpoint);
 }
+
+
