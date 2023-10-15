@@ -109,9 +109,10 @@ export async function POST(request) {
   } catch (error) {
     console.error(error);
     return NextResponse.error(
-      { message: "Failed to create the topic" },
+      { message: `Failed to create the Order checkout: ${error.message}` },
       { status: 500 }
     );
+    
   }
 }
  
