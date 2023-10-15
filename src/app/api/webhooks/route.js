@@ -22,11 +22,8 @@ export async function POST(req, res) {
   // const eventType = parsedBody.type;
  
   // let event;
-  const isDevelopment = process.env.NODE_ENV === "development";
-
-  const Url = isDevelopment
-  ? 'http://localhost:3000'
-  : 'https://muscle-schema-mage.vercel.app';
+   const isDevelopment = process.env.NODE_ENV === "development";
+  const Url = isDevelopment ? 'http://localhost:3000' : 'https://muscle-schema-mage.vercel.app';
 
  
 console.log("~~~~~~~22222222222222222222222222222222222222222222222~~~~ ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -36,7 +33,8 @@ console.log("~~~~~~~22222222222222222222222222222222222222222222222~~~~ ~~~ ~~~~
     await ConnectionMongoosedbs();
   
 
-    const response = await axios.post(`${Url}/api/createOrder`,   rawBody, {
+    const response = await axios.post(`${Url}/api/createOrder`, rawBody, {
+
       headers: {
         'Content-Type': 'application/json',
       },
