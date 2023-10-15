@@ -28,8 +28,7 @@ export async function POST(req, res) {
   ? 'http://localhost:3000'
   : 'https://muscle-schema-mage.vercel.app';
 
-
-
+ 
 console.log("~~~~~~~22222222222222222222222222222222222222222222222~~~~ ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 
