@@ -2,6 +2,20 @@ import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
+  const isDevelopment = process.env.NODE_ENV === 'development';
+
+   const successUrl = isDevelopment
+      ? `http://localhost:3000/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`
+    : `https://cart-78jo79pgi-kashyapamansingh.vercel.app/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`;
+  
+  const cancelUrl = isDevelopment
+   ? `http://localhost:3000/StripeFail`
+  : `https://cart-78jo79pgi-kashyapamansingh.vercel.app/StripeFail`;
+  
+  
+  
+  
+  
   try {
     const { cart: cartItems, userDbsId } = await request.json();
     const itemIds = cartItems.map((item) => item._id);
@@ -75,8 +89,8 @@ export async function POST(request) {
       },
       billing_address_collection: "required",
 
-      success_url: `http://localhost:3000/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://localhost:3000/StripeFail`,
+      success_url:successUrl ,
+      cancel_url:  cancelUrl
     };
 
     const stripe = new Stripe(

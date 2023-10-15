@@ -6,8 +6,14 @@ import { useEffect, useState } from "react";
 import shoppingboy from "../../../public/images/shoppingboy.jpg";
 import Loader1 from "@/Component/Progress";
 import Link from "next/link";
-import { FaFileInvoiceDollar } from "react-icons/fa";
+import {
+ 
+  FaFileInvoiceDollar,
+ 
+} from "react-icons/fa";
+import { FcClock } from "react-icons/fc";
 
+ 
 const SuccessPage = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -57,7 +63,7 @@ const SuccessPage = () => {
 
     const formattedDate = `${year}-${month < 10 ? "0" : ""}${month}-${
       day < 10 ? "0" : ""
-    }${day} ${hours}:${minutes}:${seconds}`;
+    }${day} - ${hours}:${minutes}:${seconds}`;
 
     const imageUrls = JSON.parse(images);
     const { successInvoice } = state.invoiceUrls;
@@ -68,79 +74,76 @@ const SuccessPage = () => {
 
     return (
       <div>
-        {loading ? (
-          <div className="d-flex justify-content-center align-items-center vh-100">
-            <Loader1 />
-          </div>
-        ) : (
-          <div>
-            <h4 className="text-center text-danger mt-4 fw-bold fw-semibold">
-              {" "}
-              Hi, {name}! thank you for your payment! Come back soon for more
-              great deals!
-            </h4>
-            <div  className=" my-4   text-info fw-semibold">
-            <Link
-  href={successInvoice.Invoice_url ?? "/"}
-  className="my-auto d-flex  justify-content-center"
-  target="_blank"
->
-  <FaFileInvoiceDollar size={27}/>
-  <h5 className="text-center mx-1 fw-bolder text-dark">Click to Download invoice</h5>
-</Link>
-          </div>
-          </div>
-        )}
-        <div className="container">
+         
+        <div className="container-fluid">
           <div className="row">
-            <div className=" col-sm-4 d-flex justify-content-center align-items-center vh-70">
+          <div>
+            <h4 className=" text-center mt-4  fs-1 fw-bold">
+              Thank you,<span className="text-info fst-italic ">{name}! </span>  for your purchase! Your order has been
+              successfully processed. We hope you enjoy your new items!
+            </h4>
+           
+
+            <div className=" my-4 text-info fw-semibold">
+              <Link
+                href={successInvoice.Invoice_url ?? "/"}
+                className="my-auto d-flex  justify-content-center"
+                target="_blank"
+              >
+                <FaFileInvoiceDollar size={27} />
+                <h5 className="font-monospace text-decoration-underline text-reset text-center mx-1 fw-bolder text-dark">
+                  Click to Download invoice
+                </h5>
+              </Link>
+            </div>
+          </div>
+            <div className="col-sm-4 d-flex justify-content-center align-items-center border border-info m-0">
               <Image
                 priority
                 src={shoppingboy}
-                height={670}
-                width={670}
+                height={700}
+                width={680}
                 alt="Shopping Boy"
               />
             </div>
-            <div className=" col-sm-8  ">
+            <div className="col-sm-8">
               {loading ? (
-                <div className="d-flex justify-content-center align-items-center ">
+                <div className="d-flex justify-content-center align-items-center">
                   <Loader1 />
                 </div>
               ) : (
-                data.map((item, i) => (
-                  <div className="col-sm-3" key={i}>
-                    <div className="card_body"></div>
-                    <h7>{item.description.slice(0, 60)}...</h7>
-                    <div className="imgcard ">
-                      <Image
-                        src={imageUrls[i]}
-                        alt="ordered Product image"
-                        height={100}
-                        width={100}
-                      />
+                <div className="row">
+                  {data.map((item, i) => (
+                    <div className="col-sm-4 mb-4" key={i}>
+                      <div className="card">
+                        <div className="card-img-top d-flex justify-content-center align-items-center">
+                          <Image
+                            src={imageUrls[i]}
+                            alt="ordered Product image"
+                            height={200}
+                            width={200}
+                          />
+                        </div>
+                        <div className="card-body">
+                          <h7 className="card-title fw-medium">
+                            {item.description.slice(0, 80)}...
+                          </h7>
+                        </div>
+                        <div className="card-footer  ">
+                          <p className=" fw-semibold text-center my-auto">
+                            {" "}
+                            Created At : <FcClock size={25} />
+                            {formattedDate}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <p>You created this order at {formattedDate}</p>
-                      <p>Your Total amount: {amount_total}</p>
-                    </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               )}
             </div>
           </div>
-          {/* <div>
-            <Link
-              href={
-                successInvoice.Invoice_url
-                  ? successInvoice.Invoice_url
-                  : (target = "_blank")
-              }
-            >
-              <FaFileInvoiceDollar />
-              <p>Click to view invoice</p>
-            </Link>
-          </div> */}
+
           <button
             className="btn btn-danger my-5 d-flex justify-content-center align-items-center mx-auto"
             id="continueShoppingButton"
