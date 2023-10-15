@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-12  mb-0 mt-0 d-flex flex-column justify-content-center align-items-center vh-80">
-            <h1 className=" my-3 text-center fw-bold fs-2 text-info">Whoops! Looks like you've ventured into the mystical land of 404. No gym gear wizards here</h1>
+            <h1 className=" my-3 text-dark text-center fw-bold fs-2 text-info">Whoops! Looks like you have ventured into the mystical land of 404. No gym gear wizards here</h1>
             <Image
               priority
               src={notfoundimg}
