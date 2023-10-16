@@ -1,10 +1,11 @@
-// adminOrder.js
 
 import mongoose from "mongoose";
 import UserAddress from "./UserAddress";
 import User from "./User";
 import orderedProductDetail from "./orderedProduct";
 import orderPaymentInfo from "./paymentInfo";
+
+
 const adminOrderSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   orderedProductDetail: [
@@ -35,4 +36,4 @@ const adminOrderSchema = new mongoose.Schema({
 const AdminOrder =mongoose.models.AdminOrder || mongoose.model("AdminOrder", adminOrderSchema);
 
  
- 
+export default  AdminOrder;

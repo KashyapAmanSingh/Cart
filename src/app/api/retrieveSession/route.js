@@ -23,10 +23,6 @@ export async function POST(request) {
     const { invoice } = retrievedSession;
 
   
-
-    console.log(
-      "The User has been found and it's Great 😘 😘 😘 💀💀💀 💀💀💀"
-    );
     const invoiceIds = await stripe.invoices.retrieve(invoice);
     const successInvoice = {
       Invoice_url: invoiceIds.hosted_invoice_url,

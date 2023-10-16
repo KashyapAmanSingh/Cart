@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { Stripe } from "stripe";
-import AdminOrder from "../../../../models/AdminOrderInfo";
-import mongoose from "mongoose";
+ 
 import ConnectionMongoosedbs from "../../../../db/ConnectionMongoosedbs";
- import User from "../../../../models/User";
+ 
 import axios from "axios";
  
 // const endpointSecret =
@@ -12,8 +11,7 @@ const stripe = new Stripe(
   "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic"
   // { apiVersion: "2023-08-16" }
 );
-console.log("~11111111111111111111 ~~~~~~ ~~~~~~~~~~~~~ ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
+ 
 export async function POST(req, res) {
   const rawBody = await req.text();
   const sig = req.headers.get("stripe-signature");
@@ -26,8 +24,7 @@ export async function POST(req, res) {
   const Url = isDevelopment ? 'http://localhost:3000' : 'https://muscle-schema-mage.vercel.app';
 
  
-console.log("~~~~~~~22222222222222222222222222222222222222222222222~~~~ ~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
+ 
 
   try {
     await ConnectionMongoosedbs();
@@ -42,27 +39,7 @@ console.log("~~~~~~~22222222222222222222222222222222222222222222222~~~~ ~~~ ~~~~
       const data = response.data;
  
  
-    
-    // if (newOrder) {
-    //   await User.findByIdAndUpdate(userId, {
-    //     $push: { orders: newOrder._id },
-    //   });
-    // }
-    
- 
-    // event = await stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
-
-    // switch (eventType) {
-    //   case "checkout.session.async_payment_failed":
-    //     case "checkout.session.async_payment_succeeded":
-    //       case "checkout.session.completed":
-    //   case "checkout.session.expired":
-    //      break;
-
-    //   default:
-    //     break;
-    // }
-
+  
 
 
     return NextResponse.json(
@@ -80,4 +57,4 @@ console.log("~~~~~~~22222222222222222222222222222222222222222222222~~~~ ~~~ ~~~~
 }
 
 // export default { POST };
-console.log("~~~~~~~~~~~~~~~~~~~33333333333333333333333333333333333333~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+ 
