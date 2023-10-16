@@ -13,7 +13,7 @@ export default function NotFound() {
             </h1>
             <p className="text-center text-muted fs-5">
               Unfortunately, no gym gear wizards to be found here. Our fitness
-              enchanters are working to guide you back to the right path.Ok good Day 1st Time by  route error solved + not found both!
+              enchanters are working to guide you back to the right path.Ok good Day 1st Time by  route error solved + !
             </p>
             <Image
               priority
