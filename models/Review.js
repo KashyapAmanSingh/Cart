@@ -7,9 +7,9 @@ const reviewSchema = new mongoose.Schema({
  
  
  // // orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true },
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },  //, required: true
+ reviewedProductId: { type: mongoose.Schema.Types.ObjectId, ref: 'orderedProductDetail' },  //, required: true
 });
-
+ 
  
 const Review = mongoose.models.Review || mongoose.model('Review', reviewSchema);
 

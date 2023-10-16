@@ -20,7 +20,7 @@ const orderPaymentInfoSchema = new mongoose.Schema({
   orderDate: { type: Date, default: Date.now },
 });
 
-const orderPaymentInfo  =mongoose.models.orderPaymentInfo||  mongoose.model("orderPaymentInfo", orderPaymentInfoSchema);
+const orderPaymentInfo  =mongoose.models.orderPaymentInfo ||  mongoose.model("orderPaymentInfo", orderPaymentInfoSchema);
  
 export default orderPaymentInfo ;
  
