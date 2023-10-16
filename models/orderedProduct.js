@@ -7,7 +7,7 @@ const orderedProduct = new mongoose.Schema({
     {
       productIds: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",  
+        ref: "Product", // Assuming there is a "Product" model to reference
         required: true,
       },
       title: { type: String, required: true },

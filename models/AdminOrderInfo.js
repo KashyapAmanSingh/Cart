@@ -34,5 +34,5 @@ const adminOrderSchema = new mongoose.Schema({
 
 const AdminOrder =mongoose.models.AdminOrder || mongoose.model("AdminOrder", adminOrderSchema);
 
-export default AdminOrder;
+ 
  

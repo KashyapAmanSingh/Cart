@@ -63,6 +63,7 @@ export async function POST(request) {
     images: product_images_url[i],
   }));
   
+  
   const foundUser = await User.findOne({ _id: client_reference_id });
 
   if (!foundUser) {
@@ -85,7 +86,6 @@ export async function POST(request) {
       products: productTitleQuantityArray,
     });
  
-
     const productTitleQuantityId = createdProductTitleQuantity._id;
  
 
