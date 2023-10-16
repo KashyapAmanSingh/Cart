@@ -1,5 +1,4 @@
-// userAddress.js
-
+ 
 import mongoose from "mongoose";
 
 const userAddressSchema = new mongoose.Schema({
@@ -15,3 +14,4 @@ const userAddressSchema = new mongoose.Schema({
 const UserAddress = mongoose.models.UserAddress  ||   mongoose.model("UserAddress", userAddressSchema);
  
 export default UserAddress;
+ 

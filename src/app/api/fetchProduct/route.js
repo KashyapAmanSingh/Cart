@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../db/Connection";
-
+ 
 import parse from "url-parse";
+import ConnectionMongoosedbs from "../../../../db/ConnectionMongoosedbs";
+import mongoose from "mongoose";
 
 export async function GET(req) {
   const parsedUrl = parse(req.url, true);
@@ -14,23 +15,13 @@ export async function GET(req) {
     AssuredBy,
   } = parsedUrl.query;
 
-  // console.log(
-  //   parsedUrl,
-  //   "<<<<<<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>>>>>>>>",
-  //   AssuredBy,
-  //   "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  // );
-
-  let client, db;
+   
+ 
   try {
-    const {
-      client: databaseClient,
-      db: database,
-      collection,
-    } = await connectToDatabase("topiccollections");
-    client = databaseClient;
-    db = database;
+   
+    await ConnectionMongoosedbs();
 
+ 
     console.log("filterBy:", filterBy);
     console.log(
       "filteredPriceQuery1:",
@@ -111,14 +102,17 @@ export async function GET(req) {
     if (sortBy == "timestamp") {
       const queryWithSorting = sortField ? { [sortField]: sortOrder } : {};
       const products = (
-        await collection.find(mongoQuery).sort(queryWithSorting).toArray()
+        await mongoose.connection.collection("topiccollections")
+          .find(mongoQuery)
+          .sort(queryWithSorting)
+          .toArray()
       ).reverse();
 
       //    const products = await collection.find({}).toArray();
       return NextResponse.json({ products }, { status: 200 });
     } else {
       const queryWithSorting = sortField ? { [sortField]: sortOrder } : {};
-      const products = await collection
+      const products = await mongoose.connection.collection("topiccollections")
         .find(mongoQuery)
         .sort(queryWithSorting)
         .toArray();

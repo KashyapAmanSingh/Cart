@@ -62,8 +62,7 @@ export async function POST(request) {
     amount_discount: item.amount_discount,
     images: product_images_url[i],
   }));
-
- 
+  
   const foundUser = await User.findOne({ _id: client_reference_id });
 
   if (!foundUser) {
@@ -86,7 +85,7 @@ export async function POST(request) {
       products: productTitleQuantityArray,
     });
  
-    // Now you can use the _id of the created document wherever needed
+
     const productTitleQuantityId = createdProductTitleQuantity._id;
  
 
@@ -107,7 +106,7 @@ export async function POST(request) {
     const newOrderTest = await AdminOrder.create({
       userId: new mongoose.Types.ObjectId(client_reference_id),
       orderDate,
-      ProductTitleQuantity: productTitleQuantityId,
+      orderedProductDetail: productTitleQuantityId,
       userAddress: userAddress._id,
       orderPaymentInfo: orderPaymentInfoInstance._id,
     });

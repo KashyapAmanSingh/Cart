@@ -1,5 +1,4 @@
-// app/api/kindeSession/route.ts
-
+ 
  import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import {NextResponse} from "next/server";
 
