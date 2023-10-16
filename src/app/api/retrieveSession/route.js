@@ -32,7 +32,7 @@ export async function POST(request) {
     return NextResponse.json({
       data: { retrievedSession },
       invoiceUrls: { successInvoice },
-    }); //, newOrder
+    });  
   } catch (error) {
     console.error("Error processing request:", error);
 

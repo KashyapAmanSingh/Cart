@@ -25,4 +25,5 @@ const orderedProductDetail = mongoose.models.orderedProductDetail || mongoose.mo
 
 export default orderedProductDetail;
   
+  
  

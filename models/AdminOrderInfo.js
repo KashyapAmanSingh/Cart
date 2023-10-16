@@ -4,7 +4,7 @@ import UserAddress from "./UserAddress";
 import User from "./User";
 import orderedProductDetail from "./orderedProduct";
 import orderPaymentInfo from "./paymentInfo";
-
+ 
 
 const adminOrderSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
