@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import User from "../../../../models/User";
+ 
 import mongoose from "mongoose";
 import Stripe from "stripe";
  
@@ -8,6 +8,7 @@ import Stripe from "stripe";
  import UserAddress from "../../../models/UserAddress";
  import orderPaymentInfo from "../../../models/paymentInfo";
 import AdminOrder from "../../../models/AdminOrderInfo";
+import User from "../../../models/User"
 
 
 
