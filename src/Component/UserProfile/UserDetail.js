@@ -6,6 +6,7 @@ import UserProfile from "./UserProfile";
 import { Loader1 } from "../Progress";
 import { useDispatch } from "react-redux";
 import { addUser } from "@/redux/UserInfoSlice";
+import SecureProfile from "./secureProfile";
 
 const UserDetailAfterSignIn = () => {
   const [hasData, setHasData] = useState(false);
@@ -36,7 +37,7 @@ const UserDetailAfterSignIn = () => {
           //   userData.user,
           //   userData.user[0]
           // );
-          setHasData(true)
+          setHasData(true);
           dispatch(addUser(userData.user[0]));
 
           console.log(
@@ -56,30 +57,24 @@ const UserDetailAfterSignIn = () => {
 
   // }, [dispatch]);
 
-  if(loading) return    <Loader1 />
+  if (loading) return <Loader1 />;
   return (
     <>
-      { (
+      {
         <>
-
-
-{!authStatus ? (
-      <div>
-        <p>Please log in to view your profile.</p>
-  
-      </div>
-    ) : (
-      hasData && data.length !== 0 ? (
-        <UserProfile />
-      ) : (
-        <div>
-           <UserForm />
-        </div>
-      )
-    )}
- 
+          {!authStatus ? (
+            <div>
+              <SecureProfile />
+            </div>
+          ) : hasData && data.length !== 0 ? (
+            <UserProfile />
+          ) : (
+            <div>
+              <UserForm />
+            </div>
+          )}
         </>
-      )}
+      }
     </>
   );
 };
