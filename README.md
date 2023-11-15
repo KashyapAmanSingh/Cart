@@ -1,35 +1,107 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MyCarts - Gym E-commerce Application
+
+MyCarts is an e-commerce application designed for selling gym products. It includes various features such as product categories, price range filters, a secure payment gateway, detailed product pages, a review section, and user authentication with Kinder Auth.
+
+## Technologies Used
+
+- **Frontend:**
+  - React 18.2.0
+  - Next.js 13.4.19
+  - Bootstrap 5.3.2
+  - React Icons 4.11.0
+  - React Loader Spinner 5.4.5
+  - React Rating Stars Component 2.2.0
+  - React Redux 8.1.2
+  - React Responsive Carousel 3.2.23
+  - SWR 2.2.4
+
+- **Backend:**
+  - Node.js with Express 4.18.2
+  - MongoDB with Mongoose 7.5.2
+  - Kinder Auth for Next.js 1.8.21
+  - Axios 1.5.0 for making HTTP requests
+  - Cloudinary for image management with @cloudinary/react and @cloudinary/url-gen
+
+- **Payment Gateway:**
+  - Stripe JS 2.1.5 for handling payments
+
+  Live Deployed Link - https://muscle-populatee-mage.vercel.app/
 
 ## Getting Started
 
-First, run the development server:
+1. **Install Dependencies:**
 
-```bash
+   ```bash
+   npm install
+   ```
+   
+Run Development Server:
+   ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+   ```
+To Start Next.js development server.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Features
+Product Categories: Browse gym products in various categories.
+Price Range Filters: Filter products based on price ranges.
+Secure Payment Gateway: Process payments securely using Stripe JS.
+Detailed Product Pages: Explore detailed information about each product.
+Review Section: Leave and view reviews for products.
+User Authentication: Log in, log out, and manage profiles using Kinder Auth.
+Personal Profile : After Authentication Make Your Profile By Filling Details
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Backend Setup
+The application uses Node.js with Express for the backend and MongoDB for the database. Ensure that you have MongoDB installed and running. Update the MongoDB connection details in the backend code.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+APIs and External Services
+Stripe: Sign up for a Stripe account and obtain the API keys. Set the keys in your environment variables.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Cloudinary: Sign up for a Cloudinary account and obtain the API keys. Set the keys in your environment variables.
 
-## Deploy on Vercel
+Contributing
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# Cart
+
+
+## The Application Code Sructure
+
+
+
+
+
+## The Ui of this Application 
+
+
+### Home Page Ui:
+![Home_Page](https://github.com/KashyapAmanSingh/Cart/assets/119684617/774a6b94-7ca3-414c-85f7-8d0b07f6d86e)
+
+
+
+
+### Product Detail Page
+![Product_Detail_Page](https://github.com/KashyapAmanSingh/Cart/assets/119684617/67e0a511-02df-4a02-8214-9f73afd32658)
+
+
+
+
+## Product Section
+![Product_Section](https://github.com/KashyapAmanSingh/Cart/assets/119684617/d9e58686-eef7-449d-bd6d-5e4650aef7a2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
