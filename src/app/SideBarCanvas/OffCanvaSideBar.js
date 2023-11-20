@@ -14,7 +14,7 @@ const OffCanvaSideBar = () => {
   return (
     <>
       <button
-        class="btn btn-primary"
+        class="btn btn-dark p-0"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasWithBothOptions"

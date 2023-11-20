@@ -36,13 +36,13 @@ const MainPage = () => {
     <>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-2 d-none d-md-inline d-lg-inline d-xl-inline d-xxl-inline categ">
+          <div className="col-md-3 col-lg-2 mt-5 d-none d-md-inline d-lg-inline d-xl-inline d-xxl-inline categ">
             <Suspense fallback={<div>Loading Category...</div>}>
               <Category />
             </Suspense>
           </div>
         
-          <div className="col-sm-12 col-md-10  p-0 ">
+          <div className="col-sm-12 col-md-9 col-lg-10  p-0 ">
             <div className="row">
               <div className="someClass">
                 {loading ? (
@@ -55,7 +55,7 @@ const MainPage = () => {
                   </div>
                 ) : (
                   <div
-                  className="border border-3 border-info"
+                  className="mt-5  border border-3 border-info"
                   style={{ height: "100vh",width: "100%"}}
                 >
                    <FeaturedProduct />

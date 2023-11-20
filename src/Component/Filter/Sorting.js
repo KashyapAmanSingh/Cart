@@ -46,12 +46,12 @@ const Sorting = () => {
         aria-label="Default select example"
         onChange={(e) => setSortingOption(e.target.value)}
       >
-        <option defaultValue>Open this select menu</option>
-        <option value="des_price">Sort price high to low</option>
-        <option value="asc_price">Sort price low to high</option>
-        <option value="ratings">Sort By ratings</option>
-        <option value="timestamp">Sort By newest to oldest</option>
-        <option value="discount">Sort by discount</option>
+        <option defaultValue>Sort Product </option>
+        <option value="des_price">  By Price high to low</option>
+        <option value="asc_price">  By Price low to high</option>
+        <option value="ratings">  By ratings</option>
+        <option value="timestamp">  By newest to oldest</option>
+        <option value="discount">  By Product discount %</option>
       </select>
     </div>
   );

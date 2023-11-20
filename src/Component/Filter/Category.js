@@ -33,7 +33,7 @@ const Category = () => {
   return (
     <>
       <div>
-        <h4>Category:</h4>
+        <h4 className="mt-4">Category:</h4>
         {categories.map((category) => (
           <div
             key={category}
