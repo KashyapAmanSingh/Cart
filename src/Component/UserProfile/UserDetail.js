@@ -32,18 +32,10 @@ const UserDetailAfterSignIn = () => {
 
           setData(userData.user);
 
-          // console.log(
-          //   "---- --====== ========-------- -------~~~~~ ~~~~userData.user[0])~ ~~~~~ ~~~~~>>>>",
-          //   userData.user,
-          //   userData.user[0]
-          // );
           setHasData(true);
           dispatch(addUser(userData.user[0]));
 
-          console.log(
-            userData.user[0]._id,
-            "This is the best place to use user information"
-          );
+       
         }
       } catch (error) {
         console.error("Error fetching user information:", error);
@@ -55,8 +47,7 @@ const UserDetailAfterSignIn = () => {
     getKindeSession();
   }, []);
 
-  // }, [dispatch]);
-
+ 
   if (loading) return <Loader1 />;
   return (
     <>

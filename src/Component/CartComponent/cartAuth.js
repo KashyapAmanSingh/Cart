@@ -6,7 +6,7 @@ import   Loader1  from '../Progress';
 import { addUser } from '@/redux/UserInfoSlice';
 import axios from 'axios';
 import SecureCartLogin from './secureCartLogin';
-
+ 
  
 const CartAuth = () => {
   const [loading, setLoading] = useState(true);
@@ -52,7 +52,7 @@ const CartAuth = () => {
         <Cart />
       ) : ( 
        <SecureCartLogin/>             //<Link></Link>
-      )}
+       )}
     </div>
   );
 };
