@@ -30,13 +30,10 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={inter.className}>
           <CartProvider>
-            <div className="mb-3">
-            <Navbar/>
-
+            <div className="mt-5 mt-md-0 mt-lg-0">
+              <Navbar />
             </div>
-      
-            {children}
-         
+            <div className="  mt-sm-5 mt-md-5 mt-lg-0 ">{children}</div>
           </CartProvider>
         </body>
       </html>

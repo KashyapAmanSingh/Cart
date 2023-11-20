@@ -14,8 +14,7 @@ const FeaturedProduct = () => {
   }, [cartItems]);
 
   return (
-    <div className="mt-4 p-1">
-    <Carousel showThumbs={false}>
+     <Carousel showThumbs={false}>
       {is_featuredItems.map(({ title, images }, index) => (
         <div key={index} style={{ width: "100%", height: "70vh" }}>
           <Image
@@ -30,8 +29,7 @@ const FeaturedProduct = () => {
         </div>
       ))}
     </Carousel>
-    </div>
-  );
+   );
 };
 
 export default FeaturedProduct;
