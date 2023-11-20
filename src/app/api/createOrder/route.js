@@ -91,6 +91,7 @@ export async function POST(request) {
  
     const productTitleQuantityId = createdProductTitleQuantity._id;
  
+    console.log(productTitleQuantityId ,"!!!!!t newOrderTestt newOrderTest!!!!!!!!!!!!!!!!!! newOrderTestt newOrderTestt n ")
 
     const orderPaymentInfoInstance = await orderPaymentInfo.create({
       transactionId,
@@ -114,7 +115,7 @@ export async function POST(request) {
       orderPaymentInfo: orderPaymentInfoInstance._id,
     });
 
- 
+ console.log(newOrderTest,"!!!!!t newOrderTestt newOrderTest!!!!!!!!!!!!!!!!!! newOrderTestt newOrderTestt n ")
     if (newOrderTest) {
       await User.findByIdAndUpdate(client_reference_id, {
         $push: { orders: newOrderTest._id },

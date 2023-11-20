@@ -12,12 +12,8 @@ const Filter = () => {
     try {
       console.log(apiUrl, "fROM fILTER sECTION ");
       const response = fetchData(apiUrl);
-
-      //  await axios.get(apiUrl);
-
-      console.log("setResponse(response.data);", response);
-      // setResponse(response.data);
-    } catch (error) {
+ console.log("setResponse(response.data);", response);
+     } catch (error) {
       console.error("An error occurred:", error);
     }
   };

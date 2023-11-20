@@ -12,6 +12,7 @@ import Functions, {
   HandleCartImage,
 } from "@/utils/Functions";
 import WishList from "./WishList/WishList";
+import OffCanvaSideBar from "@/app/SideBarCanvas/OffCanvaSideBar";
 
 const Category = dynamic(() => import("./Filter/Category"), {
   suspense: true,
@@ -35,13 +36,13 @@ const MainPage = () => {
     <>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-2 categ">
+          <div className="col-md-2 d-none d-md-inline d-lg-inline d-xl-inline d-xxl-inline categ">
             <Suspense fallback={<div>Loading Category...</div>}>
               <Category />
             </Suspense>
           </div>
-
-          <div className="col-sm-10">
+        
+          <div className="col-sm-12 col-md-10  p-0 ">
             <div className="row">
               <div className="someClass">
                 {loading ? (
@@ -53,9 +54,12 @@ const MainPage = () => {
                     <Loader />
                   </div>
                 ) : (
-                  // If loading is false, show the FeaturedProduct component with suspense fallback
-
-                  <FeaturedProduct />
+                  <div
+                  className="border border-3 border-info"
+                  style={{ height: "100vh",width: "100%"}}
+                >
+                   <FeaturedProduct />
+                   </div>
                 )}
               </div>
 

@@ -16,10 +16,10 @@ export async function GET(req) {
         client: databaseClient,
         db: database,
         collection,
-      } = await connectToDatabase("topiccollections");
+      } = await connectToDatabase("productcollections");
       client = databaseClient;
       db = database;
-
+      
       const product = isValidObjectId
         ? await collection.findOne({ _id: new ObjectId(searchID) }) 
         : null;

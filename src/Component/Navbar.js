@@ -3,7 +3,8 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { FcBusinessman } from "react-icons/fc";
 import LogOut from "./UserProfile/LogOut";
-import {  FcBookmark } from 'react-icons/fc';
+import { FcBookmark } from "react-icons/fc";
+import OffCanvaSideBar from "@/app/SideBarCanvas/OffCanvaSideBar";
 const Searching = dynamic(() => import("./Filter/Searching"));
 const Sorting = dynamic(() => import("./Filter/Sorting"));
 const CartCount = dynamic(() => import("./CartComponent/cartCount"));
@@ -14,6 +15,9 @@ const Navbar = () => {
         <Link href="/" className="navbar-brand text-white fw-bolder">
           Home
         </Link>
+        <div className="  d-sm-inline d-md-none d-lg-none d-xl-none d-xxl-none  ">
+          <OffCanvaSideBar />
+        </div>
         <button
           className="navbar-toggler"
           type="button"
@@ -38,7 +42,6 @@ const Navbar = () => {
                 </span>
               </Link>
             </li>
-         
           </ul>
 
           <Searching />

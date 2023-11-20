@@ -11,8 +11,7 @@ const HomePage = () => {
   const sortedData = useSelector((state) => state.Product.items);
   useEffect(() => {
     if (sortedData != null) {
-      console.log(sortedData, "========>>>>>>>>  So <<<<<<<<<<<=========");
-      setDatas(sortedData);
+       setDatas(sortedData);
     }
   }, [sortedData]);
 

@@ -13,9 +13,7 @@ const CategoryPrice = () => {
       // Handle the case for "Over 6000"
       dispatch(filteredPriceQuery([6000, Number.MAX_SAFE_INTEGER]));
     } else {
-       const myPriceRangeArray = selectedCategoryPrice
-        .split("-")
-        .map(Number);
+      const myPriceRangeArray = selectedCategoryPrice.split("-").map(Number);
 
       dispatch(filteredPriceQuery(myPriceRangeArray));
     }
@@ -42,10 +40,10 @@ const CategoryPrice = () => {
             value={category}
             checked={selectedCategoryPrice === category}
             onChange={handleRadioChange}
-            className="form-check-input"
+            className="form-check-input border border-1 border-dark"
             style={{
-              width: "25px",
-              height: "25px",
+              width: "20px",
+              height: "20px",
               marginTop: "0",
               marginBottom: "0",
             }}
@@ -53,7 +51,7 @@ const CategoryPrice = () => {
 
           <label
             htmlFor={`price-${category}`}
-            className="form-check-label "
+            className="form-check-label mx-3"
             style={{
               fontSize: "16px",
               verticalAlign: "middle",

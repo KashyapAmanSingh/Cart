@@ -10,13 +10,9 @@ const CategoryAssure = () => {
     setSelectedAssured(event.target.value);
     dispatch(filteredAssured(event.target.value));
   };
-  // console.log(
-  //   selectedAssured,
-  //   typeof selectedAssured,
-  //   "<<<~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~This CategoryAssure ----is Fully Selecred price yet"
-  // );
+
   return (
-    <div className="assured fw-bold d-flex align-items-center justify-content-center">
+    <div className="assured fw-bold d-flex align-items-center justify-content-center j">
       <input
         type="checkbox"
         name="Assured"
@@ -24,19 +20,20 @@ const CategoryAssure = () => {
         value={selectedAssured === "Assured" ? "" : "Assured"}
         checked={selectedAssured === "Assured"}
         onChange={handleRadioChange}
-        className="form-check-input mt-3 mb-3"
-        style={{ width: "25px", height: "25px" }}
+        className="form-check-input mt-3 mb-3 border border-1 border-dark"
+        style={{ width: "20px", height: "20px" }}
       />
-
+  
       <label
         htmlFor="Assured"
-        className="form-check-label mx-4 "
-        style={{ fontSize: "19px" }}
+        className="form-check-label mx-3"
+        style={{ fontSize: "15px" }}
       >
         Assured
       </label>
     </div>
   );
+  
 };
 
 export default CategoryAssure;

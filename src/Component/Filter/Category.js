@@ -1,18 +1,12 @@
-import React, { useEffect, useState,    Suspense } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState, Suspense } from "react";
+import { useDispatch  } from "react-redux";
 import { filteredCategoryQuery } from "@/redux/FilterSortSlice";
 import dynamic from "next/dynamic";
 
-// Dynamic import of components
-const CategoryPrice = dynamic(() => import("./CategoryPrice"));
+ const CategoryPrice = dynamic(() => import("./CategoryPrice"));
 const CategoryAssure = dynamic(() => import("./CategoryAssure"));
 const Filter = dynamic(() => import("./Filter"));
-// const MyErrorBoundary = dynamic(() => import("../path/to/MyErrorBoundary"), {
-//   loading: () => <p>Loading Error Boundary...</p>,
-// });
-
-
-
+ 
 const Category = () => {
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -20,7 +14,7 @@ const Category = () => {
   useEffect(() => {
     // dispatch(filteredItem(filterData));
     dispatch(filteredCategoryQuery(selectedCategory));
-  }, [selectedCategory,dispatch]);
+  }, [selectedCategory, dispatch]);
 
   const categories = [
     "All",
@@ -52,10 +46,10 @@ const Category = () => {
               value={category}
               checked={selectedCategory === category}
               onChange={handleRadioChange}
-              className="form-check-input"
+              className="form-check-input border border-1 border-dark"
               style={{
-                width: "25px",
-                height: "25px",
+                width: "20px",
+                height: "20px",
                 marginTop: "0",
                 marginBottom: "0",
               }}
@@ -63,7 +57,7 @@ const Category = () => {
 
             <label
               htmlFor={category}
-              className="form-check-label"
+              className="form-check-label mx-3"
               style={{ fontSize: "16px" }}
             >
               {category}
@@ -78,28 +72,22 @@ const Category = () => {
       </Suspense>
       {/* <MyErrorBoundary/> */}
 
-      <div
-        className="  mt-2  d-flex align-items-center justify-content-center
- "
-      >
-
-{/* <MyErrorBoundary> */}
+      <div className="  my-2 d-flex justify-content-start">
+        {/* <MyErrorBoundary> */}
 
         <Suspense fallback={<div>Loading CategoryAssure...</div>}>
           <CategoryAssure />
         </Suspense>
         {/* <MyErrorBoundary/> */}
-
       </div>
 
       <div>
-      {/* <MyErrorBoundary> */}
+        {/* <MyErrorBoundary> */}
 
         <Suspense fallback={<div>Loading Filter ...</div>}>
           <Filter />
         </Suspense>
         {/* <MyErrorBoundary/> */}
-
       </div>
     </>
   );
