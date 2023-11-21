@@ -12,7 +12,7 @@ const CategoryAssure = () => {
   };
 
   return (
-    <div className="assured fw-bold d-flex align-items-center justify-content-center j">
+    <div className="assured fw-bold d-flex align-items-center justify-content-center ms-4">
       <input
         type="checkbox"
         name="Assured"

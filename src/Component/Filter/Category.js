@@ -33,11 +33,11 @@ const Category = () => {
   return (
     <>
       <div>
-        <h4 className="mt-4">Category:</h4>
+        <h4 className="mt-4 ms-3">Category:</h4>
         {categories.map((category) => (
           <div
             key={category}
-            className="form-check form-check form-check-label d-flex align-items-center  mt-3 mb-2"
+            className="form-check form-check form-check-label d-flex align-items-center ms-4 mt-3 mb-2"
           >
             <input
               type="radio"
@@ -46,7 +46,7 @@ const Category = () => {
               value={category}
               checked={selectedCategory === category}
               onChange={handleRadioChange}
-              className="form-check-input border border-1 border-dark"
+              className="form-check-input border border-1 border-dark "
               style={{
                 width: "20px",
                 height: "20px",
@@ -57,7 +57,7 @@ const Category = () => {
 
             <label
               htmlFor={category}
-              className="form-check-label mx-3"
+              className="form-check-label mx-2"
               style={{ fontSize: "16px" }}
             >
               {category}

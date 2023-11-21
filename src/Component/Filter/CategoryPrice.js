@@ -26,12 +26,12 @@ const CategoryPrice = () => {
 
   return (
     <div>
-      <h5>Price:</h5>
+      <h5 className="ms-3">Price:</h5>
 
       {Price.map((category) => (
         <div
           key={category}
-          className="form-check form-check-label d-flex align-items-center     mt-2 mb-2"
+          className="form-check form-check-label d-flex align-items-center  ms-4   mt-2 mb-2"
         >
           <input
             type="radio"
