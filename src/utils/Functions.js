@@ -75,7 +75,7 @@ const HandleAddToCartBtn = ({ product }) => {
   );
 };
 
-const HandleCartImage = ({ src, alt, id, product }) => {
+const HandleCartImage = ({ src, alt, id  }) => {
   const router = useRouter();
   const goToCardDetailsPage = (id) => {
     if (router) {
@@ -84,22 +84,12 @@ const HandleCartImage = ({ src, alt, id, product }) => {
       console.error("Router is not available.");
     }
   };
- 
 
   return (
     <div
       className="mx-auto mb-0   "
       style={{ width: "10rem", height: "7rem", position: "relative" }}
     >
-      <div
-         style={{
-          width: "12.5rem",
-          height: "9rem",
-          zIndex: "100",
-        }}
-      >
-        <WishList wishProductDetail={product} />
-      </div>
       <Image
         src={src}
         layout="fill"
@@ -111,10 +101,6 @@ const HandleCartImage = ({ src, alt, id, product }) => {
   );
 };
 
- 
- 
-
 export { HandleCartImage };
 
 export { HandleAddToCartBtn };
- 

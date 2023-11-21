@@ -69,13 +69,13 @@ const MainPage = () => {
                       <div className="card mx-auto border border-1 border-dark " style={{ width: "16rem",height:"22rem" }}>
                        
                         <div className="cart_image ">
-                     
+                        <WishList wishProductDetail={product} />
+
                           <HandleCartImage
                             src={product.images[0]}
                             alt={product.title}
                             id={product._id}
-                            product={product}
-                          />
+                           />
                           
                         </div>
                         
