@@ -62,34 +62,38 @@ const MainPage = () => {
                 )}
               </div>
 
-              <div className="row">
+              <div className="row mx-0">
                 {data &&
                   data.map((product) => (
-                    <div className="col-md-3 mt-5" key={product._id}>
-                      <div className="card" style={{ width: "18rem" }}>
-                        <WishList wishProductDetail={product} />
-
-                        <div className="cart_image">
+                    <div className="col-lg-4 col-xl-3 mx-auto col-sm-6  col-12 mt-5" key={product._id}>
+                      <div className="card mx-auto border border-1 border-dark " style={{ width: "16rem",height:"22rem" }}>
+                       
+                        <div className="cart_image ">
+                     
                           <HandleCartImage
                             src={product.images[0]}
                             alt={product.title}
                             id={product._id}
+                            product={product}
                           />
+                          
                         </div>
-                        <div className="card-body">
-                          <h5 className="card-title">
-                            {product.title.slice(0, 70)}
-                          </h5>
-                          <br />
-                          <h5 className="card-title">Price: {product.price}</h5>
-                          <h5 className="card-title">
+                        
+                        <div className="card-body  ">
+                          <h6 className="card-title ">
+                            {product.title.slice(0, 90)}
+                          </h6>
+           
+                          <h6 className="card-title text-start m-0">Price: ₹{product.price}</h6>
+                          <h6 className="card-title  m-0">
                             Rankings: {product.ratings}
+                          </h6>
+                          <h5 className="card-title mb-0">
+                            Discount: -{product.discount}<span className="  mb-0 text-danger fw-bold">%</span>
                           </h5>
-                          <h5 className="card-title">
-                            Discount: {product.discount}
-                          </h5>
-
+                             <div className="addCartBtn  ">
                           <HandleAddToCartBtn product={product} />
+                          </div>
                         </div>
                       </div>
                     </div>

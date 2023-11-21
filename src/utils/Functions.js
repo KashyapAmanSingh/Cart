@@ -6,8 +6,7 @@ import { addItem } from "@/redux/Slice";
 import FilterSortQuery from "@/Component/Filter/FilterSortQuery";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
- 
-
+import WishList from "@/Component/WishList/WishList";
 
 const Functions = () => {
   const dispatch = useDispatch();
@@ -17,8 +16,14 @@ const Functions = () => {
   const fetchProducts = useCallback(async () => {
     try {
       const response = await fetchData(apiUrl);
-console.log(response,"<---------  !!!!!!!!! Response from the FetchProducts API!!!");
-console.log(apiUrl,"!!!!!!!!! Response from the FetchProducts API apiUrl name is last at apiUrl!!!");
+      console.log(
+        response,
+        "<---------  !!!!!!!!! Response from the FetchProducts API!!!"
+      );
+      console.log(
+        apiUrl,
+        "!!!!!!!!! Response from the FetchProducts API apiUrl name is last at apiUrl!!!"
+      );
       if (response) {
         const { products } = response.data;
         dispatch(homeItem(products));
@@ -37,28 +42,25 @@ console.log(apiUrl,"!!!!!!!!! Response from the FetchProducts API apiUrl name is
   return {
     fetchProducts,
     apiUrl,
-    loading
+    loading,
   };
 };
 
 export default Functions;
 
- 
- 
-
-
 const HandleAddToCartBtn = ({ product }) => {
   const dispatch = useDispatch();
-  const image = product.images && product.images.length > 0
-  ? product.images[0]
-  : product.firstImage  ;
+  const image =
+    product.images && product.images.length > 0
+      ? product.images[0]
+      : product.firstImage;
 
   const handleAddToCart = () => {
     dispatch(
       addItem({
         id: product._id,
         title: product.title,
-        image:image ,
+        image: image,
         price: product.price,
       })
     );
@@ -66,15 +68,15 @@ const HandleAddToCartBtn = ({ product }) => {
 
   return (
     <div>
-      <button className="btn btn-info mt-3" onClick={handleAddToCart}>
+      <button className="btn btn-info mt-1  " onClick={handleAddToCart}>
         Add to Cart
       </button>
     </div>
   );
 };
 
-const HandleCartImage = ({ src, alt,id }) => {
-  const router=useRouter();
+const HandleCartImage = ({ src, alt, id, product }) => {
+  const router = useRouter();
   const goToCardDetailsPage = (id) => {
     if (router) {
       router.push(`/CardDetails/${id}`);
@@ -82,14 +84,25 @@ const HandleCartImage = ({ src, alt,id }) => {
       console.error("Router is not available.");
     }
   };
-    console.log("goToCardDetailsPage called with !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"   )
  
+
   return (
-    <div>
+    <div
+      className="mx-auto mb-0   "
+      style={{ width: "10rem", height: "7rem", position: "relative" }}
+    >
+      <div
+         style={{
+          width: "12.5rem",
+          height: "9rem",
+          zIndex: "100",
+        }}
+      >
+        <WishList wishProductDetail={product} />
+      </div>
       <Image
-        width={200}
-        height={200}
         src={src}
+        layout="fill"
         className="card-img-top"
         alt={`Image of ${alt}`}
         onClick={() => goToCardDetailsPage(id)}
@@ -98,33 +111,10 @@ const HandleCartImage = ({ src, alt,id }) => {
   );
 };
 
-// const FetchProducts = ( ) => {
-//   const dispatch = useDispatch();
-
-// useEffect(() => {
-//   const fetchDataMain = async () => {
-//     try {
-//       const response = await fetchData(apiUrl); //|| "/api/fetchProduct"
-
-//       if (response) {
-//         const { products } = response.data;
-//         dispatch(homeItem(products));
-//         setLoading(false);
-//       } else {
-//         throw new Error("Network response was not ok");
-//       }
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//       setLoading(false);
-//     }
-//   };
-
-//   fetchDataMain();
-// }, [apiUrl, dispatch]);
-
-// }
+ 
+ 
 
 export { HandleCartImage };
 
 export { HandleAddToCartBtn };
-//  export default Functions;
+ 
