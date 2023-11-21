@@ -12,8 +12,7 @@ import Functions, {
   HandleCartImage,
 } from "@/utils/Functions";
 import WishList from "./WishList/WishList";
-import OffCanvaSideBar from "@/app/SideBarCanvas/OffCanvaSideBar";
-
+ 
 const Category = dynamic(() => import("./Filter/Category"), {
   suspense: true,
 });
