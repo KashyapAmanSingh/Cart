@@ -3,9 +3,7 @@
 "use client";
 import React, { useEffect, Suspense } from "react";
 import { useSelector } from "react-redux";
-
 import dynamic from "next/dynamic";
-
 import Loader, { Loader1 } from "./Progress";
 import Functions, {
   HandleAddToCartBtn,

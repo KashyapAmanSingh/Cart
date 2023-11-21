@@ -1,16 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
-
- import React, { Suspense } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import Loader from "../Progress";
 import dynamic from "next/dynamic";
 import { addItem } from "@/redux/Slice";
-
+import Image from "next/image";
 
 const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
- 
-
 
 const Detail1 = () => {
   const dispatch = useDispatch();
@@ -28,8 +24,17 @@ const Detail1 = () => {
     );
   }
 
-  const { title, images, stock, price, discount, brand, category, seller, size } =
-    detailedProduct || {};
+  const {
+    title,
+    images,
+    stock,
+    price,
+    discount,
+    brand,
+    category,
+    seller,
+    size,
+  } = detailedProduct || {};
 
   const handleAddToCart = () => {
     dispatch(
@@ -45,42 +50,54 @@ const Detail1 = () => {
   return (
     <div>
       <div>
-     
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-2 mt-5 mb-5 ">
-              <div className="vice_image1  border-3 border-warning border">
-                <img src={images[1]} alt={title} className="img-fluid" />
+        <div className="container  mt-5">
+          <div className="row  ">
+            <div className="col-sm-1 mt-5  col-lg-2 col-md-2 p-0    mb-5 border border-1 border-info">
+              <div className="vice_image1 mt-5 border-1 border-secondary border">
+                <Image height={100} width={100} src={images[1]} alt={title} />
               </div>
-
-              <div className="vice_image1 mt-2  border-3 border-warning border">
-                <img src={images[2]} alt={title} className="img-fluid" />
+              <div className="vice_image1 mt-2 border-1 border-secondary border">
+                <Image height={100} width={100} src={images[2]} alt={title} />
               </div>
             </div>
 
-            <div className="col-md-4 border-3 border-warning border mt-4 ">
-              <img src={images[0]} alt={title} className="img-fluid" />
+            <div className="col-sm-5  col-lg-5 col-md-5 mt-5  p-0 border border-1 border-danger mt-4">
+              <div
+                className="responsive-image-container w-100 h-100"
+                style={{   position: "relative" }}
+              >
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  src={images[0]}
+                  alt={title}
+                />
+              </div>
             </div>
-            <div className="col-md-6 mt-5">
+
+            <div className="col-sm-6  col-lg-5 col-md-5 border border-1 border-danger mt-5 mx-auto">
               {/* <!-- Product Details --> */}
-              <h4 className="title mt-3 mb-3 text-left fw-bold">{title}</h4>
+              <h4 className="title mt-3 mb-3 text-left  fw-bold fs-6">
+                {title}
+              </h4>
               <div className="d-flex align-items-center">
                 <div className="rating">
                   {/* <!-- Insert star rating here --> */}
                 </div>
-                <span className="text-muted mx-1 mb-2 btn btn-warning">
+                <span className="text-muted   mb-2 btn btn-warning">
                   154 orders
                 </span>
-                <span className="text-dark mx-4 mb-2 btn btn-info">
+
+                <span className="text-dark  ms-1 mb-2 btn btn-info">
                   In stock:{stock}
                 </span>
               </div>
               <div className="price mb-3 mt-3">
-                <span className="h4 mb-3 fw-medium">
+                <span className="h4 mb-3 fs-5 ">
                   <MdOutlineLocalOffer />
                   Price:&#8377;{price}
                 </span>
-                <span className=" h4 text-muted  mx-4">
+                <span className=" h4 text-muted fs-5 mx-2">
                   Discount:{discount}%
                 </span>
                 {/* <span className="text-muted">Assured:{tags}</span> */}
@@ -108,16 +125,11 @@ const Detail1 = () => {
                 </tbody>
               </table>
 
-              <div className="d-flex mb-4 my-4 ">
-                <div className="">
-                <Suspense fallback={<div>Loading...</div>}>
-        <CheckoutButton />
-      </Suspense>
+              <div className="d-flex  ">
+                <div className=" me-4 ms-2">
+                  <CheckoutButton />
                 </div>
-                <button
-                  className="btn btn-info btn-md mx-5 mb-4"
-                  onClick={handleAddToCart}
-                >
+                <button className="btn btn-info   " onClick={handleAddToCart}>
                   Add to Cart
                 </button>
               </div>
@@ -129,4 +141,4 @@ const Detail1 = () => {
   );
 };
 
-export default  React.memo(Detail1);
+export default React.memo(Detail1);

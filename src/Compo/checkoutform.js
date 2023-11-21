@@ -69,7 +69,7 @@ console.log(userId, "I AM A USER DATA FETCH FROM USERINFO SLICE AND I AM FROM CH
 
   return (
     <button
-    className="btn btn-danger my-5 d-flex justify-content-center align-items-center mx-auto"
+    className="btn btn-danger"
      
       onClick={handleCheckout}
       disabled={loading}
