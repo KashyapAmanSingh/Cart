@@ -55,9 +55,8 @@ const MainPage = () => {
                   </div>
                 ) : (
                   <div
-                  className="mt-5 pt-0 border border-3 border-info"
-                  style={{ height: "100vh",width: "100%"}}
-                >
+                  className="mt-5 pt-0 border border-3 border-info mb-5"
+                 >
                    <FeaturedProduct />
                    </div>
                 )}
