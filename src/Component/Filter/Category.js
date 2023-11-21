@@ -46,7 +46,7 @@ const Category = () => {
               value={category}
               checked={selectedCategory === category}
               onChange={handleRadioChange}
-              className="form-check-input border border-1 border-dark "
+              className="form-check-input border border-1 border-dark   "
               style={{
                 width: "20px",
                 height: "20px",
