@@ -51,10 +51,10 @@ const Detail1 = () => {
     <div className="container  mt-5">
       <div className="row  ">
         {/* Parent Column (col-sm-8) */}
-        <div className="col-lg-6  col-sm-6 mt-3  mb-0    ">
+        <div className="col-lg-6 col-sm-6 mt-3  mb-0    ">
           {/* col-lg-5 col-md-6 */}
 
-          <div className="row">
+          <div className="row ">
             {/* Child Column (col-sm-7) */}
             <div className=" col-md-12  mx-auto mt-5 border border-1 border-dark "
                style={{
@@ -116,9 +116,9 @@ const Detail1 = () => {
   overflowY:"auto"
         }}>
           {/* <!-- Product Details --> */}
-          <h4 className="title  mt-5 mb-3 text-justify  small fs-5 ">
+          <h5 className="title  mt-5 mb-3 text-justify  ">
             {title} 
-          </h4>
+          </h5>
           <div className="d-flex align-items-center">
             <div className="rating">
               {/* <!-- Insert star rating here --> */}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect,  useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchData } from "@/utils/FetchCode";
 import useSWR from "swr";
@@ -9,9 +9,9 @@ const fetcher = async (url) => {
   return data;
 };
 const SubmitReview = () => {
-  const totalStar = useSelector((state) => state.Reviews.ratings);
-  const ProductId = useSelector((state) => state.Reviews.ProductOrderId);
-  const comment = useSelector((state) => state.Reviews.comment);
+  const totalStar = useSelector((state) => state.Reviews?.ratings);
+  const ProductId = useSelector((state) => state.Reviews?.ProductOrderId);
+  const comment = useSelector((state) => state.Reviews?.comment);
 
   const [userID, setUserID] = useState(null);
 

@@ -5,7 +5,6 @@ import SubmitReview from "./SubmitReview";
 
 const Comment = () => {
   const dispatch = useDispatch();
-
   const handleCommentChange = (e) => {
     dispatch(addComment(e.target.value));
   };
