@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React  from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactStars from "react-rating-stars-component";
 import { AiTwotoneStar } from "react-icons/ai";

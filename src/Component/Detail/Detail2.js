@@ -3,6 +3,9 @@ import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Loader1 } from "../Progress";
+import SubmitReview from "../ReviewsRatings/SubmitReview";
+import Comment from "../ReviewsRatings/Comment";
+import Image from "next/image";
 
 function DynamicTabs() {
   const router = useRouter();
@@ -128,16 +131,19 @@ function DynamicTabs() {
                 onClick={() => goToCardDetailsPage(item._id)}
               >
                 <div className="card mb-4">
-                  <img
+                  <Image
                     src={item.images[0]}
+                    height={100}
+                    width={100}
+                    layout="responsive"
                     className="card-img-top"
                     alt={item.title}
                   />
                   <div className="card-body">
-                    <h5 className="h6 m-0 card-title text-align-center">
+                    <h6 className="  m-0 card-title text-center">
                       {item.title}
-                    </h5>
-                    <p className="card-text">Price: ₹{item.price}</p>
+                    </h6>
+                    <p className="card-text text-start ms-2 fw-bold my-1">Price: ₹{item.price}</p>
                     <button
                       className="btn btn-info"
                       onClick={() => handleAddToCart(item)}
