@@ -5,8 +5,7 @@ import Loader from "../Progress";
 import dynamic from "next/dynamic";
 import { addItem } from "@/redux/Slice";
 import Image from "next/image";
-import DetailImage from "./DetailImage";
-import ReactImageMagnify from "react-image-magnify";
+
 const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
 
 const Detail1 = () => {
@@ -57,28 +56,13 @@ const Detail1 = () => {
 
           <div className="row">
             {/* Child Column (col-sm-7) */}
-            <div
-              className=" col-md-12  mx-auto mt-5 border border-1 border-dark "
-            
-            >
-              <ReactImageMagnify
-              isActivatedOnTouch="true"
-              fadeDurationInMs="200"
-       
-                {...{
-                  smallImage: {
-                    alt: title.slice(0, 20),
-                    isFluidWidth: true,
-                    src: images[0],
-                   },
-                  largeImage: {
-                    src: images[0],
-                    width: 1200,
-                    height: 2000,
-              
-
-                  },
-                }}
+            <div className=" col-md-12  mx-auto mt-5 border border-1 border-dark ">
+              <Image
+                layout="fill"
+                objectFit="cover"
+                src={images[0]}
+                // className="mx-auto"
+                alt={title.slice(0, 20)}
               />
             </div>
           </div>
