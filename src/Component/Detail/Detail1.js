@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { addItem } from "@/redux/Slice";
 import Image from "next/image";
 import DetailImage from "./DetailImage";
-
+import ReactImageMagnify from "react-image-magnify";
 const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
 
 const Detail1 = () => {
@@ -58,19 +58,27 @@ const Detail1 = () => {
           <div className="row">
             {/* Child Column (col-sm-7) */}
             <div
-              className=" col-md-10  mx-auto mt-5 border border-1 border-dark "
-              style={{
-                height: "25rem",
-                width: "24rem",
-                position: "relative",
-              }}
+              className=" col-md-12  mx-auto mt-5 border border-1 border-dark "
+            
             >
-              <Image
-                layout="fill"
-                objectFit="cover"
-                src={images[0]}
-                // className="mx-auto"
-                alt={title.slice(0, 20)}
+              <ReactImageMagnify
+              isActivatedOnTouch="true"
+              fadeDurationInMs="200"
+       
+                {...{
+                  smallImage: {
+                    alt: title.slice(0, 20),
+                    isFluidWidth: true,
+                    src: images[0],
+                   },
+                  largeImage: {
+                    src: images[0],
+                    width: 1200,
+                    height: 2000,
+              
+
+                  },
+                }}
               />
             </div>
           </div>
@@ -116,7 +124,9 @@ const Detail1 = () => {
 
         <div className="col-lg-6   col-sm-6   mt-3 mx-auto">
           {/* <!-- Product Details --> */}
-          <h4 className="title  mt-5 mb-3 text-justify  fw-bold fs-6 ">{title}</h4>
+          <h4 className="title  mt-5 mb-3 text-justify  fw-bold fs-6 ">
+            {title}
+          </h4>
           <div className="d-flex align-items-center">
             <div className="rating">
               {/* <!-- Insert star rating here --> */}
