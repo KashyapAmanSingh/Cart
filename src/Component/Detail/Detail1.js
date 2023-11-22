@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { addItem } from "@/redux/Slice";
 import Image from "next/image";
 import DetailImage from "./DetailImage";
-import ReactImageMagnify from "react-image-magnify";
+import ReactImageMagnify from 'blacklab/react-image-magnify';
 const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
 
 const Detail1 = () => {
@@ -61,7 +61,7 @@ const Detail1 = () => {
               className=" col-md-12  mx-auto mt-5 border border-1 border-dark "
             
             >
-              <ReactImageMagnify
+      <ReactImageMagnify
               isActivatedOnTouch="true"
               fadeDurationInMs="200"
        
@@ -78,10 +78,7 @@ const Detail1 = () => {
               
 
                   },
-                  lensStyle: {
-                    background: 'hsla(0, 0%, 100%, .3)',
-                    border: '1px solid #ccc'
-                  }
+                 
                 }}
               />
             </div>
