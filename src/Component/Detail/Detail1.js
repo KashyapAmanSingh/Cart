@@ -5,12 +5,7 @@ import Loader from "../Progress";
 import dynamic from "next/dynamic";
 import { addItem } from "@/redux/Slice";
 import Image from "next/image";
-<<<<<<< HEAD
   const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
-=======
-
-const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
->>>>>>> FinalStage0.4
 
 const Detail1 = () => {
   const dispatch = useDispatch();
@@ -67,24 +62,6 @@ const Detail1 = () => {
                 position: "relative",
               }}
             >
-<<<<<<< HEAD
-             
-             <div
-                className="vice_image1 mx-auto my-1 border-2 border-secondary border"
-                style={{
-                  height: "7rem",
-                  width: "7rem",
-                  position: "relative",
-                }}
-              >
-                <Image
-                  layout="fill"
-                  objectFit="cover"
-                  src={images[1]}
-                  alt={title}
-                />
-              </div>
-=======
               <Image
                 layout="fill"
                 objectFit="cover"
@@ -92,7 +69,6 @@ const Detail1 = () => {
                 // className="mx-auto"
                 alt={title.slice(0, 20)}
               />
->>>>>>> FinalStage0.4
             </div>
           </div>
           <div className="row mx-auto">
