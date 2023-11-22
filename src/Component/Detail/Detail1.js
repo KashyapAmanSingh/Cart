@@ -5,9 +5,7 @@ import Loader from "../Progress";
 import dynamic from "next/dynamic";
 import { addItem } from "@/redux/Slice";
 import Image from "next/image";
-import DetailImage from "./DetailImage";
-import ReactImageMagnify from "react-image-magnify";
-const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
+  const CheckoutButton = dynamic(() => import("@/Compo/checkoutform"));
 
 const Detail1 = () => {
   const dispatch = useDispatch();
@@ -61,29 +59,22 @@ const Detail1 = () => {
               className=" col-md-12  mx-auto mt-5 border border-1 border-dark "
             
             >
-              <ReactImageMagnify
-              isActivatedOnTouch="true"
-              fadeDurationInMs="200"
-       
-                {...{
-                  smallImage: {
-                    alt: title.slice(0, 20),
-                    isFluidWidth: true,
-                    src: images[0],
-                   },
-                  largeImage: {
-                    src: images[0],
-                    width: 1200,
-                    height: 2000,
-              
-
-                  },
-                  lensStyle: {
-                    background: 'hsla(0, 0%, 100%, .3)',
-                    border: '1px solid #ccc'
-                  }
+             
+             <div
+                className="vice_image1 mx-auto my-1 border-2 border-secondary border"
+                style={{
+                  height: "7rem",
+                  width: "7rem",
+                  position: "relative",
                 }}
-              />
+              >
+                <Image
+                  layout="fill"
+                  objectFit="cover"
+                  src={images[1]}
+                  alt={title}
+                />
+              </div>
             </div>
           </div>
           <div className="row mx-auto">
