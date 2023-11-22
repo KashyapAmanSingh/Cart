@@ -78,6 +78,10 @@ const Detail1 = () => {
               
 
                   },
+                  lensStyle: {
+                    background: 'hsla(0, 0%, 100%, .3)',
+                    border: '1px solid #ccc'
+                  }
                 }}
               />
             </div>
