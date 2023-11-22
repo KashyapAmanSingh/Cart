@@ -56,7 +56,13 @@ const Detail1 = () => {
 
           <div className="row">
             {/* Child Column (col-sm-7) */}
-            <div className=" col-md-12  mx-auto mt-5 border border-1 border-dark ">
+            <div className=" col-md-12  mx-auto mt-5 border border-1 border-dark "
+               style={{
+                height: "24rem",
+                width: "23rem",
+                position: "relative",
+              }}
+            >
               <Image
                 layout="fill"
                 objectFit="cover"
@@ -72,14 +78,14 @@ const Detail1 = () => {
               <div
                 className="vice_image1 mx-auto my-1 border-2 border-secondary border"
                 style={{
-                  height: "7rem",
-                  width: "7rem",
+                  height: "6rem",
+                  width: "6rem",
                   position: "relative",
                 }}
               >
                 <Image
                   layout="fill"
-                  objectFit="cover"
+                  objectFit="contain"
                   src={images[1]}
                   alt={title}
                 />
@@ -90,8 +96,8 @@ const Detail1 = () => {
               <div
                 className="vice_image1 mx-auto my-1 border-2 border-secondary border"
                 style={{
-                  height: "7rem",
-                  width: "7rem",
+                  height: "6rem",
+                  width: "6rem",
                   position: "relative",
                 }}
               >
@@ -106,10 +112,12 @@ const Detail1 = () => {
           </div>
         </div>
 
-        <div className="col-lg-6   col-sm-6   mt-3 mx-auto">
+        <div className="col-lg-6  col-sm-6   mt-3 mx-auto" style={{
+  overflowY:"auto"
+        }}>
           {/* <!-- Product Details --> */}
-          <h4 className="title  mt-5 mb-3 text-justify  fw-bold fs-6 ">
-            {title}
+          <h4 className="title  mt-5 mb-3 text-justify  small fs-5 ">
+            {title} 
           </h4>
           <div className="d-flex align-items-center">
             <div className="rating">
