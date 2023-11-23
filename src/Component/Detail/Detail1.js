@@ -18,7 +18,7 @@ const Detail1 = () => {
         className="d-flex align-items-center justify-content-center"
         style={{ height: "100vh" }}
       >
-        <Loader />;
+        <Loader /> 
       </div>
     );
   }

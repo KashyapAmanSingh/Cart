@@ -51,23 +51,22 @@ export async function POST(request) {
 }
 
 export async function GET(req) {
- 
   const parsedUrl = parse(req.url, true);
   const { id } = parsedUrl.query;
- 
- 
-try {
-  const objectId =new mongoose.Types.ObjectId(id);
 
-  // const reviews = await Review.find();
-   const reviews = await Review.find(objectId).populate("userId");
+  try {
+    const objectId = new mongoose.Types.ObjectId(id);
+    const isValidObjectId = mongoose.Types.ObjectId.isValid(objectId);
 
- 
+    if (isValidObjectId) {
+      // const reviews = await Review.find();
+      const reviews = await Review.find(objectId).populate("userId");
 
-    return NextResponse.json(
-      { success: true, reviews: reviews },
-      { status: 200 } // OK
-    );
+      return NextResponse.json(
+        { success: true, reviews: reviews },
+        { status: 200 } // OK
+      );
+    }
   } catch (error) {
     console.error("Error handling GET request:", error);
     return NextResponse.json(
@@ -76,4 +75,3 @@ try {
     );
   }
 }
- 

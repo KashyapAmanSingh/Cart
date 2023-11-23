@@ -6,37 +6,22 @@ import { Loader1 } from "../Progress";
 import SubmitReview from "../ReviewsRatings/SubmitReview";
 import Comment from "../ReviewsRatings/Comment";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const ReviewShow = dynamic(() => import("../ReviewsRatings/ReviewShow"), {
+  loading: () => <p>Loading...</p>,
+});
 
 function DynamicTabs() {
   const router = useRouter();
   const cartItems = useSelector((state) => state.Product.items);
   const Id = useSelector((state) => state.Reviews.ProductOrderId);
-  const [reviews, setReviews] = useState([]);
- 
-  if(reviews.length > 0) {
-console.log(reviews,"- ---- --- ---- --💖💖💖💖 ---- ---- --- ----detailedProduct :-- ------ ---- ---" );
-  }
+
   const filteredItems = useMemo(
     () => cartItems.filter((item) => item._id === Id),
     [cartItems, Id]
   );
 
   console.log("This is the first id of detailed Dynamic Id ??", Id);
-
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/reviews?id=${Id}`);       //652a5df585f9baa9a21b9933
-        const data = await response.json();
-        setReviews(data.reviews); // Assuming the reviews are in the 'reviews' property
-      } catch (error) {
-        console.error('Error fetching reviews:', error);
-      }
-    };
-
-    fetchReviews();
-  }, [Id]);
 
   const filteredSimilar = useMemo(
     () =>
@@ -62,7 +47,6 @@ console.log(reviews,"- ---- --- ---- --💖💖💖💖 ---- ---- --- ----detail
   }
 
   const {
-    _id,
     title,
     model,
     subcategory,
@@ -76,7 +60,7 @@ console.log(reviews,"- ---- --- ---- --💖💖💖💖 ---- ---- --- ----detail
   };
 
   return (
-    <div className="container-fluid mb-5 mt-5">
+    <div className="container  mb-5 mt-5">
       <div className="row gx-4">
         <div className="col-lg-8 mb-4">
           <div className="border rounded-2 px-3 py-2 bg-white">
@@ -163,7 +147,9 @@ console.log(reviews,"- ---- --- ---- --💖💖💖💖 ---- ---- --- ----detail
                     <h6 className="  m-0 card-title text-center">
                       {item.title}
                     </h6>
-                    <p className="card-text text-start ms-2 fw-bold my-1">Price: ₹{item.price}</p>
+                    <p className="card-text text-start ms-2 fw-bold my-1">
+                      Price: ₹{item.price}
+                    </p>
                     <button
                       className="btn btn-info"
                       onClick={() => handleAddToCart(item)}
@@ -176,9 +162,13 @@ console.log(reviews,"- ---- --- ---- --💖💖💖💖 ---- ---- --- ----detail
             ))}
           </div>
         </div>
+        <div className="Review_Container ">
+          <h6 className=" text-center fs-3 fw-medium my-2">Ratings & Reviews</h6>
+          <ReviewShow />
+        </div>
       </div>
     </div>
   );
 }
 
-export default  React.memo(DynamicTabs);
+export default React.memo(DynamicTabs);

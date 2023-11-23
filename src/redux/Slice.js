@@ -1,21 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
  
-// let storedCartItems;
-// let storedWishListItems; 
-
-// if (typeof localStorage !== 'undefined') {
-//   storedCartItems = localStorage.getItem("cartItems");
-//   storedWishListItems = localStorage.getItem("WishList");
-// }
-
-// const initialState = {
-//   items: storedCartItems ? JSON.parse(storedCartItems) : [],
-//   count: 0,
-//   session: null,
-//   sessionAll: [],
-//   wishlist: storedWishListItems ? JSON.parse(storedWishListItems):[],
-// };
+ 
 
 let storedCartItems;
  
