@@ -12,7 +12,6 @@ const SubmitReview = () => {
   const totalStar = useSelector((state) => state.Reviews?.ratings);
   const ProductId = useSelector((state) => state.Reviews?.ProductOrderId);
   const comment = useSelector((state) => state.Reviews?.comment);
-
   const [userID, setUserID] = useState(null);
 
   const { data: authData, error: authError } = useSWR("/api/kindeSession", fetcher);
@@ -39,14 +38,17 @@ useEffect(() => {
       productId: ProductId || "",
     };
  
- 
+    console.log(dataToSend,  ProductId,"================================This is The Product ID of the Product=--------------------------------", ProductId);
+
     try {
       const response = await fetchData("/api/reviews", "POST", dataToSend);
       console.log("Review submitted successfully", response);
+      alert('Review submitted successfully')
     } catch (error) {
       console.error("Error submitting review", error);
     }
   };
+  console.log("================================This is The Product ID of the Product=--------------------------------", ProductId);
 
   return (
     <div className="text-center mb-5">

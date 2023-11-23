@@ -11,8 +11,7 @@ import { useDispatch } from "react-redux";
 import { DetailedProduct } from "@/redux/ProductSlice";
 import Loader from "@/Component/Progress";
 import useSWR from "swr";
-import { fetchData } from "@/utils/FetchCode";
-
+ 
 const fetcher = async (url) => {
   const response = await fetch(url);
   const data = await response.json();

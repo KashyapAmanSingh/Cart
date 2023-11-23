@@ -7,8 +7,7 @@ import { connectToDatabase } from "../../../../db/Connection";
 
 export async function POST(request) {
   try {
-    console.log("Incoming POST request:", request);
-
+ 
     const {
       rating,
       comment,
@@ -17,8 +16,7 @@ export async function POST(request) {
    
     } = await request.json();
 
-    console.log("Received data:", rating, comment, productId, userId);
-
+   
     if (!rating || !comment || !productId || !userId) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -27,18 +25,19 @@ export async function POST(request) {
     }
 
     await ConnectionMongoosedbs();
+    console.log("Received data:----------- ------------------------ -----💖💖💖💖💖💖💖",   productId, userId);
 
     const newReview = await Review.create({
       rating: rating,
       comment: comment,
-      userId: userId,
-      productId: productId,
+      userId:  new mongoose.Types.ObjectId(userId),
+      reviewedProductId:  new mongoose.Types.ObjectId(productId),
     });
-
-    console.log("Review created successfully:", newReview);
+    
+    console.log("Review created successfully:💖",     userId,"-------------------------💖💖", newReview,new mongoose.Types.ObjectId(productId));
 
     return NextResponse.json(
-      { success: true, message: "Review created successfully" },
+      { success: true,newReview:newReview, message: "Review created successfully" },
       { status: 201 } // Created
     );
   } catch (error) {
