@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
- import ConnectionMongoosedbs from "../../../../db/ConnectionMongoosedbs";
+import ConnectionMongoosedbs from "../../../../db/ConnectionMongoosedbs";
 import Review from "../../../../models/Review";
 import parse from "url-parse";
 import mongoose from "mongoose";
@@ -7,16 +7,8 @@ import { connectToDatabase } from "../../../../db/Connection";
 
 export async function POST(request) {
   try {
- 
-    const {
-      rating,
-      comment,
-      productId,
-      userId,
-   
-    } = await request.json();
+    const { rating, comment, productId, userId } = await request.json();
 
-   
     if (!rating || !comment || !productId || !userId) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -25,19 +17,33 @@ export async function POST(request) {
     }
 
     await ConnectionMongoosedbs();
-    console.log("Received data:----------- ------------------------ -----💖💖💖💖💖💖💖",   productId, userId);
+    console.log(
+      "Received data:----------- ------------------------ -----💖💖💖💖💖💖💖",
+      productId,
+      userId
+    );
 
     const newReview = await Review.create({
       rating: rating,
       comment: comment,
-      userId:  new mongoose.Types.ObjectId(userId),
-      reviewedProductId:  new mongoose.Types.ObjectId(productId),
+      userId: new mongoose.Types.ObjectId(userId),
+      reviewedProductId: new mongoose.Types.ObjectId(productId),
     });
-    
-    console.log("Review created successfully:💖",     userId,"-------------------------💖💖", newReview,new mongoose.Types.ObjectId(productId));
+
+    console.log(
+      "Review created successfully:💖",
+      userId,
+      "-------------------------💖💖",
+      newReview,
+      new mongoose.Types.ObjectId(productId)
+    );
 
     return NextResponse.json(
-      { success: true,newReview:newReview, message: "Review created successfully" },
+      {
+        success: true,
+        newReview: newReview,
+        message: "Review created successfully",
+      },
       { status: 201 } // Created
     );
   } catch (error) {
@@ -58,13 +64,17 @@ export async function GET(req) {
     const isValidObjectId = mongoose.Types.ObjectId.isValid(objectId);
 
     if (isValidObjectId) {
-      // const reviews = await Review.find();
-      const reviews = await Review.find(objectId).populate("userId");
+      const reviews = await Review.find({
+        reviewedProductId: objectId,
+      }).populate("userId");
+      console.log(reviews);
 
       return NextResponse.json(
         { success: true, reviews: reviews },
-        { status: 200 } // OK
+        { status: 200 }
       );
+    } else {
+      console.log("Invalid ObjectId");
     }
   } catch (error) {
     console.error("Error handling GET request:", error);

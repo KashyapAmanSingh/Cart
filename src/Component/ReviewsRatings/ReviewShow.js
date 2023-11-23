@@ -13,9 +13,10 @@ const ReviewShow = () => {
     const fetchReviews = async () => {
       try {
         const response = await fetchData(
-          `http://localhost:3000/api/reviews?id=65196f6174e983f8cb16ff26`
+          `http://localhost:3000/api/reviews?id=652fc79d79526b18bd362583`
         );
         const data = response.data;
+        console.log(data,"Reviews------- ---😂😂😂😂😂😂😂😂😂",   reviews);
 
         setReviews(data.reviews); // Assuming the reviews are in the 'reviews' property
       } catch (error) {
@@ -29,13 +30,15 @@ const ReviewShow = () => {
   if (!reviews) {
     return null; // or some loading state
   }
-
-  const { comment, rating, userId } = reviews[0];
+console.log("Reviews-------------------------------------------- 😂",   reviews);
+   // Assuming reviews is an array of review objects
+const renderedReviews = reviews.map((review) => {
+  const { comment, rating, userId } = review;
   const profilePicture = userId ? userId.profilePicture : null;
 
   return (
-    <div className="row">
-      <div className="col-2  my-auto  mx-auto">
+    <div className="row" key={review._id}>
+      <div className="col-2 my-auto mx-auto">
         {/* Display user image */}
         {profilePicture ? (
           <Image
@@ -43,21 +46,25 @@ const ReviewShow = () => {
             height={40}
             width={40}
             alt="User Image"
-            className=" rounded-circle "
+            className="rounded-circle"
           />
         ) : (
           <CgProfile size={30} />
         )}
       </div>
       <div className="col-10 d-flex justify-content-start align-items-center border border-4 border-black">
-        <p className=" fw-bold fs-4  my-auto">
-          <FcRating className=" mx-1 pb-1" size={25} />
+        <p className="fw-bold fs-4 my-auto">
+          <FcRating className="mx-1 pb-1" size={25} />
           {rating}
         </p>
-        <p className=" ms-5 my-auto">{comment}</p>
+        <p className="ms-5 my-auto">{comment}</p>
       </div>
     </div>
   );
+});
+
+return <div>{renderedReviews}</div>;
+
 };
 
 export default ReviewShow;
