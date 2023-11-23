@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+import User from './User';
+import orderedProductDetail from './orderedProduct';
 const reviewSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   comment: { type: String, required: true },
@@ -7,7 +8,7 @@ const reviewSchema = new mongoose.Schema({
  
  
  // // orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true },
- reviewedProductId: { type: mongoose.Schema.Types.ObjectId, ref: 'orderedProductDetail' },  //, required: true
+ reviewedProductId: { type: mongoose.Schema.Types.ObjectId, ref: 'orderedProductDetail' },  
 });
  
  

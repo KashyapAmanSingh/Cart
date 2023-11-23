@@ -9,7 +9,7 @@ export async function connectToDatabase(collectionName) {
     await client.connect();
     const database = client.db('Crud_dbs');
     const collection = database.collection(collectionName);  
-    return { client, db: database, collection }; // Make sure to return the client and db
+    return { client, db: database, collection };  
   } catch (error) {
     console.error('Error connecting to the database:', error);
     throw error;

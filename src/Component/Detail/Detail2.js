@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Loader1 } from "../Progress";
@@ -11,13 +11,32 @@ function DynamicTabs() {
   const router = useRouter();
   const cartItems = useSelector((state) => state.Product.items);
   const Id = useSelector((state) => state.Reviews.ProductOrderId);
-
+  const [reviews, setReviews] = useState([]);
+ 
+  if(reviews.length > 0) {
+console.log(reviews,"- ---- --- ---- --💖💖💖💖 ---- ---- --- ----detailedProduct :-- ------ ---- ---" );
+  }
   const filteredItems = useMemo(
     () => cartItems.filter((item) => item._id === Id),
     [cartItems, Id]
   );
 
   console.log("This is the first id of detailed Dynamic Id ??", Id);
+
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/reviews?id=${Id}`);       //652a5df585f9baa9a21b9933
+        const data = await response.json();
+        setReviews(data.reviews); // Assuming the reviews are in the 'reviews' property
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      }
+    };
+
+    fetchReviews();
+  }, [Id]);
 
   const filteredSimilar = useMemo(
     () =>
@@ -43,6 +62,7 @@ function DynamicTabs() {
   }
 
   const {
+    _id,
     title,
     model,
     subcategory,

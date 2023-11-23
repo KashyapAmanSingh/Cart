@@ -17,7 +17,7 @@ const SubmitReview = () => {
 
   const { data: authData, error: authError } = useSWR("/api/kindeSession", fetcher);
    const { data: userData, error: userError } = useSWR(`/api/user?id=${authData.user.id}`, fetcher);
-  
+   
 if (userError) {
   console.error("Error fetching user data:", userError);
 }
