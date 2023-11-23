@@ -10,7 +10,7 @@ const SortOffCanvas = () => {
   return (
     <div>
       <button
-        class="btn btn-dark p-0 "
+        className="btn btn-dark p-0 "
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasBottom"
@@ -20,24 +20,24 @@ const SortOffCanvas = () => {
       </button>
 
       <div
-        class="offcanvas offcanvas-bottom"
+        className="offcanvas offcanvas-bottom"
         tabindex="-1"
         id="offcanvasBottom"
         aria-labelledby="offcanvasBottomLabel"
       >
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="offcanvasBottomLabel">
           <Sorting />
 
           </h5>
           <button
             type="button"
-            class="btn-close text-reset"
+            className="btn-close text-reset"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           ></button>
         </div>
-        <div class="offcanvas-body small">...</div>
+        <div className="offcanvas-body small">...</div>
       </div>
     </div>
   );

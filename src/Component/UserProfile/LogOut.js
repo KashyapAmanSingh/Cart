@@ -1,20 +1,24 @@
+"use client";
+
 import React from "react";
- 
-import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import {
+  RegisterLink,
+  LoginLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
-const LogOut = () => {
-  const { getUser, isAuthenticated } = getKindeServerSession();
+function LogOut() {
+  const { isAuthenticated, isLoading } = useKindeBrowserClient();
 
-  return (
+  if (isLoading) return <div>Loading...</div>;
+
+  return isAuthenticated ? (
+    <LogoutLink>Sign  out</LogoutLink>
+  ) : (
     <div>
-      {isAuthenticated() ? (
-        <LogoutLink>Log out</LogoutLink>
-      ) : (
-        <LoginLink>Sign In</LoginLink>
-      )}
+      <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink>
     </div>
   );
-};
-
+}
 export default LogOut;
