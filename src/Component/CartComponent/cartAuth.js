@@ -45,11 +45,13 @@ const CartAuth = () => {
   }, []);
 
   return (
-    <div>
+    <div  >
       {loading ? (
      <Loader1/> 
       ) : authStatus ? (
+ 
         <Cart />
+ 
       ) : ( 
        <SecureCartLogin/>             //<Link></Link>
        )}

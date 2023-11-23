@@ -4,42 +4,12 @@ import React, { useEffect, useState } from "react";
 import CheckoutButton from "@/Compo/checkoutform";
 import { removeItem, setQuantity } from "@/redux/Slice";
 
-import { useDispatch  } from "react-redux";
-import Loader from "../Progress";
-import { addUser } from "@/redux/UserInfoSlice";
-
-const Cart = () => {
+import { useDispatch } from "react-redux";
  
+const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
-  // const [loading, setLoading] = useState(true);
 
-  //  const [user, setUser] = useState();
-  // const [authStatus, setAuthStatus] = useState(null);
-  const dispatch = useDispatch()
-
-
-  // useEffect(() => {
-  //   const getKindeSession = async () => {
-  //     try {
-  //       const res = await fetch("/api/kindeSession");
-  //       const data = await res.json();
-  //       setUser(data.user);
-  //       console.log(data.user.id,"this is best place here to use as we have all users info so it it and use them bro ");
-  //       dispatch(addUser(data.user.id))
-  //       setAuthStatus(data.authenticated);
-  //     } catch (error) {
-  //       console.error('Error fetching user information:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   getKindeSession();
-  // }, []);
-
-
-
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
@@ -68,61 +38,60 @@ const Cart = () => {
   };
 
   return (
-    <>
-      <div className="mt-0">
-        <div className="container">
-          <div className="row">
-            {cartItems &&
-              cartItems.map((product, i) => (
-                <div className="col-md-3 mt-3" key={i}>
-                  <div className="card" style={{ width: "18rem" }}>
+    <div className="mt-5">
+      <div className="container ">
+        <div className="row ">
+          {cartItems &&
+            cartItems.map((product, i) => (
+              <>
+                <div
+                  className="col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-3  col-sm-2"
+                  key={i}
+                >
+                                    <hr className="mt-3 "/>
+
+                  <div className="card mx-auto " style={{ width: "18rem" }}>
                     <img src={product.image} alt={product.title} />
                     <div className="card-body">
                       <h5>{product.title.slice(0, 30)}</h5>
                       <h5>{product.price}</h5>
+                      <div className="d-flex  ">
+                        <button
+                          className="btn btn-danger me-3"
+                          onClick={() => handleremove(product.id)} // Pass the index
+                        >
+                          Remove
+                        </button>
 
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => handleremove(product.id)} // Pass the index
-                      >
-                        Remove
-                      </button>
+                        <h6 className="my-auto mx-auto btn btn-primary me-2">
+                          Quantity
+                        </h6>
 
-                      <label htmlFor="quantityInput">Quantity:</label>
-
-                      <select
-                        className="form-control"
-                        id="quantityInput"
-                        onChange={(e) => handleUnitChange(e.target.value, i)}
-                      >
-                        <option value="1"> 1</option>
-                        <option value="2"> 2</option>
-                        <option value="3"> 3</option>
-                        <option value="4"> 4</option>
-                        <option value="5"> 5</option>
-                      </select>
+                        <select
+                          className="form-control  mx-auto border border-1 border-dark"
+                          id="quantityInput"
+                          onChange={(e) => handleUnitChange(e.target.value, i)}
+                        >
+                          <option value="1"> 1</option>
+                          <option value="2"> 2</option>
+                          <option value="3"> 3</option>
+                          <option value="4"> 4</option>
+                          <option value="5"> 5</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
+                  <hr />
                 </div>
-              ))}
-          </div>
+              </>
+            ))}
         </div>
-
-{/* 
-        {loading ? (
-  <Loader/> 
-) : authStatus ? ( */}
-  <CheckoutButton />
-{/* ) : ( 
-  <p>Please log in to view your cart. </p>
-)} */}
-
- 
-
-
-    
       </div>
-    </>
+
+      <div className="d-flex justify-content-center my-3">
+        <CheckoutButton />
+      </div>
+    </div>
   );
 };
 
