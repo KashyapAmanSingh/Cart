@@ -16,11 +16,7 @@ export default function Home() {
         <MainPage />
         
       </Suspense>
-      {/* <LoginLink>Sign in</LoginLink>
-      <RegisterLink>Sign up</RegisterLink>
-      <Suspense fallback={<div>Loading LogOut...</div>}>
-        <LogOut />
-      </Suspense> */}
+ 
     </h1>
   );
 }

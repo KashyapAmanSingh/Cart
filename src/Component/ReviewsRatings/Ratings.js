@@ -23,7 +23,7 @@ const StarRating = () => {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center mb-5">
+    <div className="d-flex align-items-center justify-content-center mb-1">
 
       <ReactStars
         count={5}

@@ -16,7 +16,6 @@ const ReviewShow = () => {
           `http://localhost:3000/api/reviews?id=652fc79d79526b18bd362583`
         );
         const data = response.data;
-        console.log(data,"Reviews------- ---😂😂😂😂😂😂😂😂😂",   reviews);
 
         setReviews(data.reviews); // Assuming the reviews are in the 'reviews' property
       } catch (error) {
@@ -30,41 +29,43 @@ const ReviewShow = () => {
   if (!reviews) {
     return null; // or some loading state
   }
-console.log("Reviews-------------------------------------------- 😂",   reviews);
-   // Assuming reviews is an array of review objects
-const renderedReviews = reviews.map((review) => {
-  const { comment, rating, userId } = review;
-  const profilePicture = userId ? userId.profilePicture : null;
+  const renderedReviews = reviews.map((review, i) => {
+    const { comment, rating, userId } = review;
+    const profilePicture = userId ? userId.profilePicture : null;
 
-  return (
-    <div className="row" key={review._id}>
-      <div className="col-2 my-auto mx-auto">
-        {/* Display user image */}
-        {profilePicture ? (
-          <Image
-            src={profilePicture}
-            height={40}
-            width={40}
-            alt="User Image"
-            className="rounded-circle"
-          />
-        ) : (
-          <CgProfile size={30} />
-        )}
+    return (
+      <div className="container" key={i}>
+        <div className="row" key={review._id}>
+          <div className="col-1 my-auto mx-auto">
+            {/* Display user image */}
+            {profilePicture ? (
+              <Image
+                src={profilePicture}
+                height={40}
+                width={40}
+                alt="User Image"
+                className="rounded-circle"
+              />
+            ) : (
+              <CgProfile size={30} />
+            )}
+          </div>
+          <div className="col-1 d-flex my-1 justify-content-start align-items-center border border-1 border-black">
+            <p className="fw-bold fs-4 my-auto">
+              <FcRating className="mx-1 pb-1" size={25} />
+              {rating}
+            </p>
+          </div>
+
+          <div className="col-10 d-flex my-1 justify-content-start align-items-center border border-1 border-black">
+            <p className="ms-5 my-auto px-5">{comment}</p>
+          </div>
+        </div>
       </div>
-      <div className="col-10 d-flex justify-content-start align-items-center border border-4 border-black">
-        <p className="fw-bold fs-4 my-auto">
-          <FcRating className="mx-1 pb-1" size={25} />
-          {rating}
-        </p>
-        <p className="ms-5 my-auto">{comment}</p>
-      </div>
-    </div>
-  );
-});
+    );
+  });
 
-return <div>{renderedReviews}</div>;
-
+  return <div>{renderedReviews}</div>;
 };
 
 export default ReviewShow;

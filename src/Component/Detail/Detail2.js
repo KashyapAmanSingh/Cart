@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { Loader1 } from "../Progress";
+import Loader, { Loader1 } from "../Progress";
 import SubmitReview from "../ReviewsRatings/SubmitReview";
 import Comment from "../ReviewsRatings/Comment";
 import Image from "next/image";
@@ -128,7 +128,9 @@ function DynamicTabs() {
         <div className="col-lg-4 mb-4 border-5 border-info border">
           <h1>Similar Others Products</h1>
           <div className="row">
-            {filteredSimilar.slice(0, 2).map((item) => (
+            {
+            filteredSimilar.length >= 1 ? ( 
+            filteredSimilar.slice(0, 2).map((item) => (
               <div
                 key={item._id}
                 className="col-md-6"
@@ -159,13 +161,12 @@ function DynamicTabs() {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+            ):(<div  className="d-flex justify-content-center my-5"><Loader/></div>)
+            }
           </div>
         </div>
-        <div className="Review_Container ">
-          <h6 className=" text-center fs-3 fw-medium my-2">Ratings & Reviews</h6>
-          <ReviewShow />
-        </div>
+      
       </div>
     </div>
   );

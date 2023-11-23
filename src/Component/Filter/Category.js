@@ -84,9 +84,9 @@ const Category = () => {
       <div>
         {/* <MyErrorBoundary> */}
 
-        <Suspense fallback={<div>Loading Filter ...</div>}>
+        {/* <Suspense fallback={<div>Loading Filter ...</div>}>
           <Filter />
-        </Suspense>
+        </Suspense> */}
         {/* <MyErrorBoundary/> */}
       </div>
     </>

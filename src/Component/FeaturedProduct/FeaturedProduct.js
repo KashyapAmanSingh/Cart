@@ -38,15 +38,14 @@ const FeaturedProduct = () => {
             <div
               key={index}
               className={`w-100 carousel-item ${index === 0 ? "active" : ""}`}
-              style={{ height: "24rem", position: "relative" }}
+              style={{ height: "27rem", position: "relative" }}
             >
               <Image src={images[2]} alt={title} layout="fill" />
               <div className="carousel-caption">
                 <h6 className="d-none d-sm-none d-md-block  text-white fw-bold">
                   {title}
                 </h6>
-                {/* You can add additional content or remove the following line */}
-              </div>
+               </div>
             </div>
           ))}
         </div>

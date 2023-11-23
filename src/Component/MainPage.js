@@ -52,7 +52,7 @@ const MainPage = () => {
                   </div>
                 ) : (
                   <div
-                  className="mt-5 pt-0 border border-3 border-info mb-5"
+                  className="mt-5 pt-0  mb-3"
                  >
                    <FeaturedProduct />
                    </div>
@@ -60,12 +60,14 @@ const MainPage = () => {
               </div>
 
               <div className="row mx-0">
+              <hr/>
+                <h1 className="text-center"> Our Products </h1>
                 {data &&
                   data.map((product) => (
-                    <div className="col-lg-4 col-xl-3 mx-auto col-sm-6  col-12 mt-5" key={product._id}>
+                    <div className="col-lg-4 col-xl-3 mx-auto col-sm-6  col-12 mt-3" key={product._id}>
                       <div className="card mx-auto border border-1 border-dark " style={{ width: "16rem",height:"22rem" }}>
                        
-                        <div className="cart_image ">
+                        <div className="cart_image  mt-1 ">
                         <WishList wishProductDetail={product} />
 
                           <HandleCartImage
@@ -93,6 +95,7 @@ const MainPage = () => {
                           </div>
                         </div>
                       </div>
+                      <hr/>
                     </div>
                   ))}
               </div>

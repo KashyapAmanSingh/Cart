@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { DetailedProduct } from "@/redux/ProductSlice";
 import Loader from "@/Component/Progress";
 import useSWR from "swr";
+import ReviewShow from "@/Component/ReviewsRatings/ReviewShow";
  
 const fetcher = async (url) => {
   const response = await fetch(url);
@@ -19,10 +20,7 @@ const fetcher = async (url) => {
 };
 
 const Page = ({ params }) => {
-  console.log(
-    "THIS IS THE PAGE OF PARAMS AND IDS OF THE CARDS DETAILS AND THE STATUS OF THE CARDS",
-    params.slug
-  );
+  
   const dispatch = useDispatch();
   const { data, error } = useSWR(
     `/api/fetchDetailProduct?id=${params.slug}`,
@@ -63,6 +61,10 @@ const Page = ({ params }) => {
           <Comment />
         </>
       )}
+        <div className="Review_Container mb-5">
+          <h6 className=" text-center fs-3 fw-medium my-2">Ratings & Reviews</h6>
+          <ReviewShow />
+        </div>
     </>
   );
 };
