@@ -4,12 +4,9 @@ import dynamic from "next/dynamic";
 import { FcBusinessman } from "react-icons/fc";
 import LogOut from "./UserProfile/LogOut";
 import {
-  FcAlphabeticalSortingAz,
-  FcBookmark,
-  FcFilledFilter,
-} from "react-icons/fc";
-import { FaFilter } from "react-icons/fa";
-import { FaSort } from "react-icons/fa";
+   FcBookmark,
+ } from "react-icons/fc";
+ 
 
 import OffCanvaSideBar from "@/app/SideBarCanvas/OffCanvaSideBar";
 import SortOffCanvas from "@/app/SideBarCanvas/SortOffCanvas";
@@ -72,7 +69,21 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <ul className="navbar-nav ml-auto mb-2 mb-lg-0 px-4">
+
+          <div className="d-none mx-1 me-4 d-sm-none d-md-inline d-lg-inline d-xl-inline d-xxl-inline  ">
+            <Sorting />
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <ul className="navbar-nav ml-auto mb-2 mb-lg-0 px-1">
             <li className="nav-item">
               <Link
                 href="/cart"
@@ -80,7 +91,7 @@ const Navbar = () => {
                 aria-current="page"
               >
                 <CartCount />
-                <span className="ms-3 d-none d-inline d-sm-inline  d-md-inline  d-lg-none">
+                <span className="ms-1 d-none d-inline d-sm-inline  d-md-inline  d-lg-none">
                   {" "}
                   Cart Items
                 </span>
@@ -101,13 +112,11 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+
           <div className="btn btn-link bg-light  ">
             <LogOut />
           </div>
         </div>
-      </div>
-      <div className="d-none mx-5  d-sm-none d-md-none d-lg-inline d-xl-inline d-xxl-inline  ">
-        <Sorting />
       </div>
       <Searching />
     </nav>

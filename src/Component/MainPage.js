@@ -4,13 +4,13 @@
 import React, { useEffect, Suspense } from "react";
 import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
-import   Loader1   from "./Progress";
+import Loader1 from "./Progress";
 import Functions, {
   HandleAddToCartBtn,
   HandleCartImage,
 } from "@/utils/Functions";
 import Not_found_Product from "./not_found_Product/not_found_Product";
- 
+
 const WishList = dynamic(() => import("./WishList/WishList"));
 const Category = dynamic(() => import("./Filter/Category"), {
   suspense: true,
@@ -30,7 +30,7 @@ const MainPage = () => {
 
   let data = sortedData;
 
-  console.log("setResponse(response.data);---------------------👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿", data );
+   
   return (
     <>
       <div className="container-fluid">
@@ -40,7 +40,7 @@ const MainPage = () => {
               <Category />
             </Suspense>
           </div>
-        
+
           <div className="col-sm-12 col-md-9 col-lg-10  p-0 ">
             <div className="row">
               <div className="someClass">
@@ -53,56 +53,65 @@ const MainPage = () => {
                     <Loader1 />
                   </div>
                 ) : (
-                  <div
-                  className="mb-2"
-                 >
-                   <FeaturedProduct />
-                   </div>
+                  <div className="mb-2">
+                    <FeaturedProduct />
+                  </div>
                 )}
               </div>
 
               <div className="row mx-0">
-              <hr/>
-              {data && data.length >= 1 && (
-  <h1 className="text-center mt-0">Our Products</h1>
-)}
-                {data && data.length >=1 ?(
-              
+                <hr />
+                {data && data.length >= 1 && (
+                  <h1 className="text-center mt-0">Our Products</h1>
+                )}
+                {data && data.length >= 1 ? (
                   data.map((product) => (
-                    <div className="col-lg-4 col-xl-3 mx-auto col-sm-6  col-12 mt-3" key={product._id}>
-                      <div className="card mx-auto border border-1 border-dark " style={{ width: "16rem",height:"22rem" }}>
-                       
+                    <div
+                      className="col-lg-4 col-xl-3 mx-auto col-sm-6  col-12 mt-3"
+                      key={product._id}
+                    >
+                      <div
+                        className="card mx-auto border border-1 border-dark "
+                        style={{ width: "16rem", height: "22rem" }}
+                      >
                         <div className="cart_image  mt-1 ">
-                        <WishList wishProductDetail={product} />
+                          <WishList wishProductDetail={product} />
 
                           <HandleCartImage
                             src={product.images[0]}
                             alt={product.title}
                             id={product._id}
-                           />
-                          
+                          />
                         </div>
-                        
+
                         <div className="card-body  ">
                           <h6 className="card-title ">
                             {product.title.slice(0, 90)}
                           </h6>
-           
-                          <h6 className="card-title text-start m-0">Price: ₹{product.price}</h6>
+
+                          <h6 className="card-title text-start m-0">
+                            Price: ₹{product.price}
+                          </h6>
                           <h6 className="card-title  m-0">
                             Rankings: {product.ratings}
                           </h6>
                           <h5 className="card-title mb-0">
-                            Discount: -{product.discount}<span className="  mb-0 text-danger fw-bold">%</span>
+                            Discount: -{product.discount}
+                            <span className="  mb-0 text-danger fw-bold">
+                              %
+                            </span>
                           </h5>
-                             <div className="addCartBtn  ">
-                          <HandleAddToCartBtn product={product} />
+                          <div className="addCartBtn  ">
+                            <HandleAddToCartBtn product={product} />
                           </div>
                         </div>
                       </div>
-                      <hr/>
+                      <hr />
                     </div>
-                  ))):<Not_found_Product/>}
+                  ))
+                ) : (
+                  <Not_found_Product />
+                )}
               </div>
             </div>
           </div>
