@@ -25,13 +25,13 @@ const UserProfile = () => {
   const entries = Object.entries(fieldNamesMapping);
 
   return (
-    <div className="container ">
-      <div className="row mx-5">
+    <div className="container mt-5">
+      <div className="row  mx-5">
         <div className="col-sm-3 mb-4">
           <div className="card card-style1 my-2 mt-5 border-0">
-            <div className="card-body d-flex justify-content-center p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+            <div className="card-body  d-flex justify-content-center p-1-9 p-sm-2-3 p-md-6 p-lg-7">
               <Image
-                className="rounded-circle img-fluid h-100 w-100 my-5"
+                className="rounded-circle img-fluid h-100 w-100 mt-5 mb-2"
                 src={profilePicture}
                 alt="User Profile"
                 width={900}

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "@/redux/UserInfoSlice";
 import SecureProfile from "./secureProfile";
 import SecurityAuth from "@/utils/SecurityAuth";
+import { fetchData } from "@/utils/FetchCode";
 
 const UserDetailAfterSignIn = () => {
   const [hasData, setHasData] = useState(false);
@@ -17,17 +18,10 @@ const UserDetailAfterSignIn = () => {
   
  
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProfileData = async () => {
        try {
-     
-        console.log(
-          "UserDetailAfterSignIn Component 🍯🍯🍯🍯🍯🍯🍯🍯🍯🍯",
-          user?.id
-        );
-
-        const userResponse = await axios.get(`/api/user?id=${user?.id}`);
+        const userResponse = await fetchData(`/api/user?id=${user?.id}`);
         const userData = userResponse.data;
- 
         setData(userData.user);
         setHasData(true);
         dispatch(addUser(userData.user[0]));
@@ -35,7 +29,7 @@ const UserDetailAfterSignIn = () => {
         console.error("Error fetching user information:", error);
       }
     };
-    fetchData();
+    fetchProfileData();
   }, [user?.id,dispatch]);
 
   if (isLoading) return <Loader1 />;
@@ -48,8 +42,8 @@ const UserDetailAfterSignIn = () => {
               <SecureProfile />
             </div>
           ) : hasData && data.length !== 0 ? (
-            <UserProfile />
-          ) : (
+             <UserProfile />
+           ) : (
             <div>
               <UserForm />
             </div>

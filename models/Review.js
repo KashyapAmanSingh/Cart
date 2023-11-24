@@ -6,9 +6,7 @@ const reviewSchema = new mongoose.Schema({
   comment: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User'  },
  
- 
- // // orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true },
- reviewedProductId: { type: mongoose.Schema.Types.ObjectId, ref: 'orderedProductDetail' },  
+  reviewedProductId: { type: mongoose.Schema.Types.ObjectId, ref: 'orderedProductDetail' },  
 });
  
  
