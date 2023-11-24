@@ -10,7 +10,7 @@ import {
 } from "react-icons/fc";
 import { FaFilter } from "react-icons/fa";
 import { FaSort } from "react-icons/fa";
- 
+
 import OffCanvaSideBar from "@/app/SideBarCanvas/OffCanvaSideBar";
 import SortOffCanvas from "@/app/SideBarCanvas/SortOffCanvas";
 const Searching = dynamic(() => import("./Filter/Searching"));
@@ -27,7 +27,7 @@ const Navbar = () => {
           <OffCanvaSideBar />
         </div>
 
-        <div className="border p-1 d-flex border-1 border-secondary    d-sm-inline  d-md-inline  d-lg-none d-xl-none d-xxl-none  ">
+        <div className="border p-1 d-flex border-1 border-secondary    d-inline d-sm-inline  d-md-inline  d-lg-none d-xl-none d-xxl-none  ">
           <SortOffCanvas />
         </div>
         <div className="CartNavbr d-sm-inline d-md-inline d-lg-none d-xl-none d-xxl-none">
@@ -61,8 +61,12 @@ const Navbar = () => {
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
-                <span className="ms-1">
+                <span className="ms-4">
                   <FcBusinessman size={35} />
+
+                  <span className="ms-3   d-inline d-sm-inline  d-md-inline  d-lg-none">
+                    Your UserProfile
+                  </span>
                 </span>
               </Link>
             </li>
@@ -75,8 +79,11 @@ const Navbar = () => {
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
-                <span className="ms-1">Cart</span>
                 <CartCount />
+                <span className="ms-3 d-none d-inline d-sm-inline  d-md-inline  d-lg-none">
+                  {" "}
+                  Cart Items
+                </span>
               </Link>
             </li>
             <li className="nav-item">
@@ -87,6 +94,9 @@ const Navbar = () => {
               >
                 <span className="ms-1">
                   <FcBookmark size={35} />
+                  <span className="ms-3  d-none d-inline d-sm-inline  d-md-inline  d-lg-none">
+                    Your WishList
+                  </span>
                 </span>
               </Link>
             </li>

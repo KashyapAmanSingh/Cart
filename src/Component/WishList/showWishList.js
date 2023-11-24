@@ -36,12 +36,12 @@ const ShowWishList = () => {
 
   return (
     <div>
-      <h2>Wish List</h2>
+      <h2 className="fs-1 text-center pt-3 mt-5 mb-3 ">Your Wish_List</h2>
       <div className="container">
-        <div className="row  mt-5">
+        <div className="row ">
           {wishListItems.map((product) => (
-            <div className="col-md-3 mt-5" key={product._id}>
-              <div className="card" style={{ width: "18rem" }}>
+            <div className="col-md-6  col-lg-4 col-xl-3 mt-2" key={product._id}>
+              <div className="card mx-auto" style={{ width: "18rem" }}>
                 {/* <WishList wishProductDetail={product} /> */}
                 <HandleCartImage
                   src={product.firstImage}

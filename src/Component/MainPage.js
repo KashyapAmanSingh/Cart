@@ -33,7 +33,7 @@ const MainPage = () => {
     <>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3 col-lg-2 mt-5 d-none d-md-inline d-lg-inline d-xl-inline d-xxl-inline categ">
+          <div className="col-md-3 col-lg-2 d-none d-md-inline d-lg-inline d-xl-inline d-xxl-inline categ">
             <Suspense fallback={<div>Loading Category...</div>}>
               <Category />
             </Suspense>
@@ -52,7 +52,7 @@ const MainPage = () => {
                   </div>
                 ) : (
                   <div
-                  className="mt-5 pt-0  mb-3"
+                  className="mb-2"
                  >
                    <FeaturedProduct />
                    </div>
@@ -61,7 +61,7 @@ const MainPage = () => {
 
               <div className="row mx-0">
               <hr/>
-                <h1 className="text-center"> Our Products </h1>
+                <h1 className="text-center mt-0"> Our Products </h1>
                 {data &&
                   data.map((product) => (
                     <div className="col-lg-4 col-xl-3 mx-auto col-sm-6  col-12 mt-3" key={product._id}>

@@ -32,3 +32,15 @@ max-height: 90vh !important;
   display: none;
  
 }
+
+ 
+.NavbarTop {
+  margin-bottom: 6.8vh !important;
+  border: 3px solid red !important;
+}
+
+@media (max-width: 756px) {
+  .NavbarTop {
+    margin-bottom: 6rem !important;
+  }
+}
