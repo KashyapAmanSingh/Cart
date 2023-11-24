@@ -9,8 +9,9 @@ import Functions, {
   HandleAddToCartBtn,
   HandleCartImage,
 } from "@/utils/Functions";
-import WishList from "./WishList/WishList";
+import Not_found_Product from "./not_found_Product/not_found_Product";
  
+const WishList = dynamic(() => import("./WishList/WishList"));
 const Category = dynamic(() => import("./Filter/Category"), {
   suspense: true,
 });
@@ -29,6 +30,7 @@ const MainPage = () => {
 
   let data = sortedData;
 
+  console.log("setResponse(response.data);---------------------👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿", data );
   return (
     <>
       <div className="container-fluid">
@@ -61,8 +63,11 @@ const MainPage = () => {
 
               <div className="row mx-0">
               <hr/>
-                <h1 className="text-center mt-0"> Our Products </h1>
-                {data &&
+              {data && data.length >= 1 && (
+  <h1 className="text-center mt-0">Our Products</h1>
+)}
+                {data && data.length >=1 ?(
+              
                   data.map((product) => (
                     <div className="col-lg-4 col-xl-3 mx-auto col-sm-6  col-12 mt-3" key={product._id}>
                       <div className="card mx-auto border border-1 border-dark " style={{ width: "16rem",height:"22rem" }}>
@@ -97,7 +102,7 @@ const MainPage = () => {
                       </div>
                       <hr/>
                     </div>
-                  ))}
+                  ))):<Not_found_Product/>}
               </div>
             </div>
           </div>

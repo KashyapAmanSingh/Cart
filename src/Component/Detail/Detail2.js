@@ -3,14 +3,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import Loader, { Loader1 } from "../Progress";
-import SubmitReview from "../ReviewsRatings/SubmitReview";
-import Comment from "../ReviewsRatings/Comment";
+ 
 import Image from "next/image";
-import dynamic from "next/dynamic";
-const ReviewShow = dynamic(() => import("../ReviewsRatings/ReviewShow"), {
-  loading: () => <p>Loading...</p>,
-});
-
+  
 function DynamicTabs() {
   const router = useRouter();
   const cartItems = useSelector((state) => state.Product.items);
@@ -41,7 +36,7 @@ function DynamicTabs() {
         className="d-flex align-items-center justify-content-center"
         style={{ height: "100vh" }}
       >
-        <Loader1 />;
+        <Loader1 /> 
       </div>
     );
   }
@@ -125,7 +120,7 @@ function DynamicTabs() {
             </div>
           </div>
         </div>
-        <div className="col-lg-4 mb-4 border-5 border-info border">
+        <div className="col-lg-4 mb-4 rounded-1 border border-1 border-muted">
           <h1>Similar Others Products</h1>
           <div className="row">
             {
@@ -136,18 +131,18 @@ function DynamicTabs() {
                 className="col-md-6"
                 onClick={() => goToCardDetailsPage(item._id)}
               >
-                <div className="card mb-4">
+                <div className="card mb-4 border border-1 border-black"  >
                   <Image
                     src={item.images[0]}
-                    height={100}
-                    width={100}
+                    height={80}
+                    width={80}
                     layout="responsive"
                     className="card-img-top"
                     alt={item.title}
                   />
                   <div className="card-body">
                     <h6 className="  m-0 card-title text-center">
-                      {item.title}
+                      {item.title.slice(0,30)}
                     </h6>
                     <p className="card-text text-start ms-2 fw-bold my-1">
                       Price: ₹{item.price}

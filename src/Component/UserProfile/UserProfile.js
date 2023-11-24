@@ -33,7 +33,7 @@ const UserProfile = () => {
               <Image
                 className="rounded-circle img-fluid h-100 w-100 mt-5 mb-2"
                 src={profilePicture}
-                alt="User Profile"
+                alt="No Profile Picture available"
                 width={900}
                 height={900}
               />

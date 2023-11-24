@@ -33,7 +33,7 @@ const SuccessPage = () => {
         setLoading(false);
       } catch (error) {
         console.error(
-          "Error retrieving data: -------------------------------------------------->",
+          "Error retrieving data: ",
           error
         );
       }
@@ -67,10 +67,7 @@ const SuccessPage = () => {
 
     const imageUrls = JSON.parse(images);
     const { successInvoice } = state.invoiceUrls;
-    console.log(
-      "Invoice information successInvoice.hosted_invoice_url ~~~~~ ~~~",
-      successInvoice.Invoice_url
-    );
+   
 
 
     return (

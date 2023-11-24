@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { addItem } from "@/redux/Slice";
-import { homeItem } from "@/redux/ProductSlice";
-
+ 
 const HomePage = () => {
   const [data, setDatas] = useState([]);
   const dispatch = useDispatch();

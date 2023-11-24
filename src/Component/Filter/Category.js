@@ -12,8 +12,7 @@ const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    // dispatch(filteredItem(filterData));
-    dispatch(filteredCategoryQuery(selectedCategory));
+     dispatch(filteredCategoryQuery(selectedCategory));
   }, [selectedCategory, dispatch]);
 
   const categories = [

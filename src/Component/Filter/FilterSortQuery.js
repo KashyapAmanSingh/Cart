@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+ import { useSelector } from "react-redux";
 
 const FilterSortQuery = () => {
   const {
@@ -9,11 +8,7 @@ const FilterSortQuery = () => {
     filteredSearchedQuery,
     filteredAssured,
   } = useSelector((state) => state.FilterSortSlice);
-  // const sortQuery = useSelector((state) => state.FilterSortSlice.sortQuery);
-  // const filteredPriceQuery = useSelector((state) => state.FilterSortSlice.filteredPriceQuery);
-  // const filteredCategoryQuery = useSelector((state) => state.FilterSortSlice.filteredCategoryQuery);
-  // const filteredSearchedQuery = useSelector((state) => state.FilterSortSlice.filteredSearchedQuery);
-
+ 
   const queryParams = [];
 
   if (filteredCategoryQuery) {
