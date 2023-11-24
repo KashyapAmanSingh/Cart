@@ -39,8 +39,26 @@ max-height: 90vh !important;
   border: 3px solid red !important;
 }
 
-@media (max-width: 756px) {
+
+
+.FeatureProductCarousal {
+  height: 28rem !important;
+  position: relative !important;
+}
+@media (max-width: 768px) {
   .NavbarTop {
     margin-bottom: 6rem !important;
+  }
+  .FeatureProductCarousal {
+    height: 15rem !important;
+    position: relative !important;
+  }
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+  .FeatureProductCarousal {
+    margin-top: 2.1rem !important;
+    height: 19rem !important;
+    position: relative !important;
   }
 }

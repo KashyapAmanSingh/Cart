@@ -4,7 +4,7 @@
 import React, { useEffect, Suspense } from "react";
 import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
-import Loader, { Loader1 } from "./Progress";
+import   Loader1   from "./Progress";
 import Functions, {
   HandleAddToCartBtn,
   HandleCartImage,
@@ -43,12 +43,12 @@ const MainPage = () => {
             <div className="row">
               <div className="someClass">
                 {loading ? (
-                  // If loading is true, show a loader component
+                  // If loading is true, show a loader1 component
                   <div
                     className="d-flex align-items-center justify-content-center"
                     style={{ height: "100vh" }}
                   >
-                    <Loader />
+                    <Loader1 />
                   </div>
                 ) : (
                   <div

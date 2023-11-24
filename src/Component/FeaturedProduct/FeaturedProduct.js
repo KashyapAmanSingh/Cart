@@ -33,13 +33,12 @@ const FeaturedProduct = () => {
           ))}
         </div>
 
-        <div className="carousel-inner">
+        <div className="carousel-inner" >
           {is_featuredItems.map(({ title, images }, index) => (
             <div
               key={index}
-              className={`w-100 carousel-item ${index === 0 ? "active" : ""}`}
-              style={{ height: "27rem", position: "relative" }}
-            >
+              className={`carousel-item FeatureProductCarousal ${index === 0 ? "active" : ""}`}
+             >
               <Image src={images[2]} alt={title} layout="fill" />
               <div className="carousel-caption">
                 <h6 className="d-none d-sm-none d-md-block  text-white fw-bold">
