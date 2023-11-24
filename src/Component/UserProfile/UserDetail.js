@@ -7,53 +7,43 @@ import { Loader1 } from "../Progress";
 import { useDispatch } from "react-redux";
 import { addUser } from "@/redux/UserInfoSlice";
 import SecureProfile from "./secureProfile";
+import SecurityAuth from "@/utils/SecurityAuth";
 
 const UserDetailAfterSignIn = () => {
   const [hasData, setHasData] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
-
-  const [userKindeId, setUserKindeId] = useState(null);
-
-  const [authStatus, setAuthStatus] = useState(null);
-
+  const { isAuthenticated, isLoading, user } = SecurityAuth();
+  
+ 
   useEffect(() => {
-    const getKindeSession = async () => {
-      try {
-        const res = await fetch("/api/kindeSession");
-        const data = await res.json();
-        setAuthStatus(data.authenticated);
-        setUserKindeId(data.user);
+    const fetchData = async () => {
+       try {
+     
+        console.log(
+          "UserDetailAfterSignIn Component 🍯🍯🍯🍯🍯🍯🍯🍯🍯🍯",
+          user?.id
+        );
 
-        if (data.user?.id) {
-          const userResponse = await axios.get(`/api/user?id=${data.user.id}`);
-          const userData = userResponse.data;
-
-          setData(userData.user);
-
-          setHasData(true);
-          dispatch(addUser(userData.user[0]));
-
-       
-        }
+        const userResponse = await axios.get(`/api/user?id=${user?.id}`);
+        const userData = userResponse.data;
+ 
+        setData(userData.user);
+        setHasData(true);
+        dispatch(addUser(userData.user[0]));
       } catch (error) {
         console.error("Error fetching user information:", error);
-      } finally {
-        setLoading(false);
       }
     };
+    fetchData();
+  }, [user?.id,dispatch]);
 
-    getKindeSession();
-  }, []);
-
- 
-  if (loading) return <Loader1 />;
+  if (isLoading) return <Loader1 />;
   return (
     <>
       {
         <>
-          {!authStatus ? (
+          {!isAuthenticated ? (
             <div>
               <SecureProfile />
             </div>

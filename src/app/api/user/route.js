@@ -43,12 +43,7 @@ export async function POST(req) {
 
 export async function GET(req) {
   const parsedUrl = parse(req.url, true);
-
-  console.log(
-    parsedUrl.query.id,
-    "User ID:0-432423424234242352352362363245235353----------------------------------------------------------- -----------"
-  );
-
+console.log(parsedUrl.query.id,"🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝")
   await ConnectionMongoosedbs();
 
   try {

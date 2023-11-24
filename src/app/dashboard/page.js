@@ -1,27 +1,21 @@
-
-"use react";
- import React from 'react';
- import UserDetailAfterSignIn from '@/Component/UserProfile/UserDetail';
- import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-
+"use client"
+import React from 'react';
+import UserDetailAfterSignIn from '@/Component/UserProfile/UserDetail';
+import SecurityAuth from '@/utils/SecurityAuth';
+  
 const Page = () => {
-    const checkAuthentication = async () => {
-     const { getUser, isAuthenticated } = getKindeServerSession();
-     const user = await getUser();
+  const { isAuthenticated, isLoading, user } = SecurityAuth();
+  // console.log(isAuthenticated, user, "000000000000----------------------------------------------------------------------------------------------------------------")
 
-    if (await isAuthenticated()) {
-      return (
-        <div>
-        <UserDetailAfterSignIn /> 
-    
-        </div>
-      );
-    } else {
-      return <p>Please sign in or register!Redirect to sign page bro  </p>;
-    }
-  };
+if (isLoading) return <div>Loading...</div>;
 
-   return checkAuthentication();
+  return isAuthenticated ? (
+    <UserDetailAfterSignIn />
+    // <p>Please sign in or register! Redirect to the sign page, bro.</p>
+
+  ) : (
+    <p>Please sign in or register! Redirect to the sign page, bro.</p>
+  );
 };
 
 export default Page;
