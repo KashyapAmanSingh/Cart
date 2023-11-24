@@ -26,7 +26,7 @@ const CategoryPrice = () => {
 
   return (
     <div>
-      <h5 className="ms-3">Price:</h5>
+      <h5 className="ms-3    mt-4 pb-1">Price:</h5>
 
       {Price.map((category) => (
         <div
@@ -40,7 +40,7 @@ const CategoryPrice = () => {
             value={category}
             checked={selectedCategoryPrice === category}
             onChange={handleRadioChange}
-            className="form-check-input border border-1 border-dark"
+            className="form-check-input border border-3 border-dark"
             style={{
               width: "20px",
               height: "20px",

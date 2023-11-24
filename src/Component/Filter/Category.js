@@ -32,7 +32,7 @@ const Category = () => {
   return (
     <>
       <div>
-        <h4 className="mt-4 ms-3">Category:</h4>
+        <h4 className="mt-5 ms-3">Category:</h4>
         {categories.map((category) => (
           <div
             key={category}
@@ -45,7 +45,7 @@ const Category = () => {
               value={category}
               checked={selectedCategory === category}
               onChange={handleRadioChange}
-              className="form-check-input border border-1 border-dark   "
+              className="form-check-input border border-3 border-dark   "
               style={{
                 width: "20px",
                 height: "20px",
@@ -66,12 +66,12 @@ const Category = () => {
       </div>
       {/* <MyErrorBoundary> */}
 
-      <Suspense fallback={<div>Loading CategoryPrice ...</div>}>
+      <Suspense fallback={<div>Loading Category Price ...</div>}>
         <CategoryPrice />
       </Suspense>
       {/* <MyErrorBoundary/> */}
 
-      <div className="  my-2 d-flex justify-content-start">
+      <div className="  my-2 d-flex justify-content-start     ">
         {/* <MyErrorBoundary> */}
 
         <Suspense fallback={<div>Loading CategoryAssure...</div>}>

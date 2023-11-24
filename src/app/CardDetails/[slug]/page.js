@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
-
+import React from "react";
 import Detail1 from "@/Component/Detail/Detail1";
 import DynamicTabs from "@/Component/Detail/Detail2";
 import StarRating from "@/Component/ReviewsRatings/Ratings";
