@@ -67,14 +67,9 @@ export async function GET(req) {
         sortField = "discount"; // Replace with the actual field in your MongoDB document
         sortOrder = -1; // Assuming you want to sort discounts in descending order
         break;
-
-      //   case "timestamp":                           // currently this timestamp is not working as in our product creation is very minimal difference. so use use if else .reverse() , in future we may remove reverse()
-      //     sortField = "timestamp";
-      //     sortOrder = -1  ;
-      //     break;
+ 
       default:
-        // Default sorting logic, if sortBy doesn't match any case
-        sortField = null; // No specific sorting
+         sortField = null; // No specific sorting
         sortOrder = 1; // No specific order
         break;
     }
@@ -89,8 +84,7 @@ export async function GET(req) {
           .toArray()
       ).reverse();
 
-      //    const products = await collection.find({}).toArray();
-      return NextResponse.json({ products }, { status: 200 });
+       return NextResponse.json({ products }, { status: 200 });
     } else {
       const queryWithSorting = sortField ? { [sortField]: sortOrder } : {};
       const products = await mongoose.connection

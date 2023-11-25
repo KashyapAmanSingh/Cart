@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 export async function GET(req) {
   let client, db;
 
-  const url = new URL(req.url, "http://localhost:3000");
+  const url = new URL(req.url, process.env.DEVELOPMENT_URL);
   const searchID = url.searchParams.get("id");
 
   const isValidObjectId = mongoose.Types.ObjectId.isValid(searchID);

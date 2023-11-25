@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import User from "../../../../models/User";
 import parse from "url-parse";
-
+ 
 export async function POST(req) {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const user = await getUser();
@@ -43,8 +43,7 @@ export async function POST(req) {
 
 export async function GET(req) {
   const parsedUrl = parse(req.url, true);
-console.log(parsedUrl.query.id,"🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝")
-  await ConnectionMongoosedbs();
+   await ConnectionMongoosedbs();
 
   try {
     const foundUser = await User.find({ id: parsedUrl.query.id });

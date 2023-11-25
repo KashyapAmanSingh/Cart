@@ -79,6 +79,7 @@ function UserForm() {
       return;
     }
     try {
+      console.log(`Uploading 🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠${formData}`);
       // Use the fetchData function to make a POST request
       const response = await fetchData("/api/user", "POST", formData);
       console.log("Review submitted successfully", response);
@@ -93,10 +94,10 @@ function UserForm() {
   // JSX structure for the component
   return (
     <>
-      <div className="container mt-4">
+      <div className="container mt-5 pt-4">
         <form onSubmit={handleSubmit}>
           {fieldNames.map((fieldName) => (
-            <div key={fieldName} className="row mb-3">
+            <div key={fieldName} className="row mb-1 ">
               <label className="col-sm-6 col-form-label fw-bolder">
                 {fieldName === "mobileNumber"
                   ? "Mobile Number"
@@ -105,13 +106,14 @@ function UserForm() {
                     )}:`}
                 {/* fieldName.slice(1) append rest all character start from index 1st  */}
               </label>
-              <div className="col-sm-6">
+              <div className="col-sm-6 ">
                 <input
                   type="text"
                   name={fieldName}
                   value={formData[fieldName]}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control border border-2 border-black"
+                  placeholder={`Please Enter Your ${fieldName}`}
                   required
                 />
               </div>

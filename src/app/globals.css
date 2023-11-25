@@ -1,8 +1,8 @@
 
 .categ {
-  border: 1px solid rgb(32, 30, 30) !important;
+  border: 0.5px solid rgba(117, 107, 107, 0.305) !important;
 min-height: 40rem !important;
-max-height: 90vh !important;
+max-height: 93vh !important;
 }
 
 .icon-hover:hover {

@@ -20,7 +20,7 @@ const CategoryAssure = () => {
         value={selectedAssured === "Assured" ? "" : "Assured"}
         checked={selectedAssured === "Assured"}
         onChange={handleRadioChange}
-        className="form-check-input mt-3 mb-3 border border-1 border-dark"
+        className="form-check-input mt-3 mb-3 border border-3 border-dark"
         style={{ width: "20px", height: "20px" }}
       />
   

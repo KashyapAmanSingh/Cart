@@ -42,8 +42,8 @@ const MainPage = () => {
           </div>
 
           <div className="col-sm-12 col-md-9 col-lg-10  p-0 ">
-            <div className="row">
-              <div className="someClass">
+            <div className="row  border border-1 border-muted mx-0">
+              <div className="someClass p-0  ">
                 {loading ? (
                   // If loading is true, show a loader1 component
                   <div
@@ -53,17 +53,18 @@ const MainPage = () => {
                     <Loader1 />
                   </div>
                 ) : (
-                  <div className="mb-2">
+                  <div className="mb-3 ">
                     <FeaturedProduct />
                   </div>
                 )}
               </div>
 
               <div className="row mx-0">
-                <hr />
+     
                 {data && data.length >= 1 && (
                   <h1 className="text-center mt-0">Our Products</h1>
                 )}
+                       
                 {data && data.length >= 1 ? (
                   data.map((product) => (
                     <div
@@ -86,10 +87,10 @@ const MainPage = () => {
 
                         <div className="card-body  ">
                           <h6 className="card-title ">
-                            {product.title.slice(0, 90)}
+                            {product.title.slice(0, 80)}
                           </h6>
 
-                          <h6 className="card-title text-start m-0">
+                          <h6 className="card-title text-start">
                             Price: ₹{product.price}
                           </h6>
                           <h6 className="card-title  m-0">

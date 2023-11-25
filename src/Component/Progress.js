@@ -4,7 +4,8 @@ import { RotatingLines, ThreeCircles } from "react-loader-spinner";
 
 const Loader = () => {
   return (
-    <div>
+    <div className="d-flex justify-content-center align-items-center vh-100">
+
       <RotatingLines
         strokeColor="green"
         strokeWidth="5"
@@ -18,7 +19,8 @@ const Loader = () => {
 
 export const Loader1 = () => {
   return (
-    <div>
+    <div className="d-flex justify-content-center align-items-center vh-100">
+
       <ThreeCircles
         height="100"
         width="100"
