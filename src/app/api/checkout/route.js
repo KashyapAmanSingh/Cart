@@ -1,25 +1,22 @@
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
+import { SUCCESSUrl , CANCELUrl} from "@/Component/Urls";
 
 export async function POST(request) {
-  const isDevelopment = process.env.NODE_ENV === 'development';
-
-   const successUrl = isDevelopment
-      ? `http://localhost:3000/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`
-      : `https://cart-six-delta.vercel.app/StripeSuccess?session_id={CHECKOUT_SESSION_ID}`;
-  
-  const cancelUrl = isDevelopment
-   ? `http://localhost:3000/StripeFail`
-   : `https://cart-six-delta.vercel.app/`;
-  
-  
-  
-  
+ 
+   const successUrl= SUCCESSUrl
+   const cancelUrl =  CANCELUrl;
+ 
   
   try {
     const { cart: cartItems, userDbsId } = await request.json();
     const itemIds = cartItems.map((item) => item._id);
     const itemquantity = cartItems.map((item) => item.quantity);
+    console.log('cartItems:- -- -🐝🐝🐝🐝🐝🐝🐝🐝🐝 ==========================', cartItems);
+console.log('userDbsId:- -- -🐝🐝🐝🐝🐝🐝🐝🐝🐝 ==========================', userDbsId);
+
+console.log('itemIds:- -- -🐝🐝🐝🐝🐝🐝🐝🐝🐝 ==========================', itemIds);
+console.log('itemquantity:- -- -🐝🐝🐝🐝🐝🐝🐝🐝🐝 ==========================', itemquantity);
     if (cartItems.length === 0)
       if (
         cartItems.length === 0 ||
@@ -94,8 +91,7 @@ export async function POST(request) {
     };
 
     const stripe = new Stripe(
-      "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic",
-      {
+      process.env.STRIPE_SECRET_KEY, {
         apiVersion: "2022-11-15",
       }
     );

@@ -3,8 +3,7 @@ import ConnectionMongoosedbs from "../../../../db/ConnectionMongoosedbs";
 import Review from "../../../../models/Review";
 import parse from "url-parse";
 import mongoose from "mongoose";
-import { connectToDatabase } from "../../../../db/Connection";
-
+ 
 export async function POST(request) {
   try {
     const { rating, comment, productId, userId } = await request.json();
@@ -17,11 +16,7 @@ export async function POST(request) {
     }
 
     await ConnectionMongoosedbs();
-    console.log(
-      "Received data:----------- ------------------------ -----💖💖💖💖💖💖💖",
-      productId,
-      userId
-    );
+    
 
     const newReview = await Review.create({
       rating: rating,
@@ -30,14 +25,7 @@ export async function POST(request) {
       reviewedProductId: new mongoose.Types.ObjectId(productId),
     });
 
-    console.log(
-      "Review created successfully:💖",
-      userId,
-      "-------------------------💖💖",
-      newReview,
-      new mongoose.Types.ObjectId(productId)
-    );
-
+ 
     return NextResponse.json(
       {
         success: true,

@@ -43,8 +43,7 @@ export async function POST(req) {
 
 export async function GET(req) {
   const parsedUrl = parse(req.url, true);
-console.log(parsedUrl.query.id,"🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝🐝")
-  await ConnectionMongoosedbs();
+   await ConnectionMongoosedbs();
 
   try {
     const foundUser = await User.find({ id: parsedUrl.query.id });

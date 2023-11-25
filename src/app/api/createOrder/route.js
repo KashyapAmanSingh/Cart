@@ -11,7 +11,7 @@ import UserAddress from "../../../../models/UserAddress";
 
 
 const stripe = new Stripe(
-  "sk_test_51Nr0qpSGcFt4Msz1nwiCDptTvHH171EgKDiBkfMv0wJz1hJYR8lO0a3Um69sdUo6M0kFGmhlyPF4mxp5ZmT1eFqw002qgRL5Ic"
+  process.env.STRIPE_SECRET_KEY
   // { apiVersion: "2023-08-16" }
 );
 
@@ -91,8 +91,7 @@ export async function POST(request) {
  
     const productTitleQuantityId = createdProductTitleQuantity._id;
  
-    console.log(productTitleQuantityId ,"!!!!!t newOrderTestt newOrderTest!!!!!!!!!!!!!!!!!! newOrderTestt newOrderTestt n ")
-
+ 
     const orderPaymentInfoInstance = await orderPaymentInfo.create({
       transactionId,
       sessionId,
@@ -115,8 +114,7 @@ export async function POST(request) {
       orderPaymentInfo: orderPaymentInfoInstance._id,
     });
 
- console.log(newOrderTest,"!!!!!t newOrderTestt newOrderTest!!!!!!!!!!!!!!!!!! newOrderTestt newOrderTestt n ")
-    if (newOrderTest) {
+     if (newOrderTest) {
       await User.findByIdAndUpdate(client_reference_id, {
         $push: { orders: newOrderTest._id },
       });
