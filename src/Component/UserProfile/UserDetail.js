@@ -12,44 +12,46 @@ import { fetchData } from "@/utils/FetchCode";
 
 const UserDetailAfterSignIn = () => {
   const [hasData, setHasData] = useState(false);
+  const [loader, setLoader] = useState(true);
+
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
   const { isAuthenticated, isLoading, user } = SecurityAuth();
-  
- 
+
   useEffect(() => {
     const fetchProfileData = async () => {
-       try {
+      try {
         const userResponse = await fetchData(`/api/user?id=${user?.id}`);
-        const userData = userResponse.data;
+        const userData = await userResponse.data;
         setData(userData.user);
         setHasData(true);
         dispatch(addUser(userData.user[0]));
+        setLoader(false);
       } catch (error) {
         console.error("Error fetching user information:", error);
       }
     };
     fetchProfileData();
-  }, [user?.id,dispatch]);
+  }, [user?.id, dispatch]);
 
-  if (isLoading) return <Loader1 />;
+  if (loader) return <Loader1 />;
   return (
     <>
-      {
+      {!isAuthenticated ? (
+        <div>
+          <SecureProfile />
+        </div>
+      ) : (
         <>
-          {!isAuthenticated ? (
-            <div>
-              <SecureProfile />
-            </div>
-          ) : hasData && data.length !== 0 ? (
-             <UserProfile />
-           ) : (
+          {hasData && data.length !== 0 ? (
+            <UserProfile />
+          ) : (
             <div>
               <UserForm />
             </div>
           )}
         </>
-      }
+      )}
     </>
   );
 };

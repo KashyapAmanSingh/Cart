@@ -82,7 +82,7 @@ const SuccessPage = () => {
             </h4>
            
 
-            <div className=" my-4 text-info fw-semibold">
+            <div className=" my-3 text-info fw-semibold">
               <Link
                 href={successInvoice.Invoice_url ?? "/"}
                 className="my-auto d-flex  justify-content-center"
@@ -95,12 +95,12 @@ const SuccessPage = () => {
               </Link>
             </div>
           </div>
-            <div className="col-sm-4 d-flex justify-content-center align-items-center border border-info m-0">
+            <div className="col-sm-4 mb-3 col-lg-3  d-flex justify-content-center align-items-top  m-0">
               <Image
                 priority
                 src={shoppingboy}
-                height={700}
-                width={680}
+                height={600}
+                width={580}
                 alt="Shopping Boy"
               />
             </div>
@@ -112,14 +112,16 @@ const SuccessPage = () => {
               ) : (
                 <div className="row">
                   {data.map((item, i) => (
-                    <div className="col-sm-4 mb-4" key={i}>
+                    <div className="col-10 mx-auto col-sm-6 col-lg-4 mb-4" key={i}>
                       <div className="card">
-                        <div className="card-img-top d-flex justify-content-center align-items-center">
+                        <div className="card-img-top border border-muted d-flex justify-content-center align-items-center">
                           <Image
                             src={imageUrls[i]}
                             alt="ordered Product image"
                             height={200}
+                            objectFit="contain"
                             width={200}
+                            className="p-3"
                           />
                         </div>
                         <div className="card-body">
