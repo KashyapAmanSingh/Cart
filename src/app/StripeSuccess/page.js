@@ -76,7 +76,7 @@ const SuccessPage = () => {
         <div className="container-fluid">
           <div className="row">
           <div>
-            <h4 className=" text-center mt-4  fs-1 fw-bold">
+            <h4 className=" text-center mt-5  fs-1 fw-bold">
               Thank you,<span className="text-info fst-italic ">{name}! </span>  for your purchase! Your order has been
               successfully processed. We hope you enjoy your new items!
             </h4>

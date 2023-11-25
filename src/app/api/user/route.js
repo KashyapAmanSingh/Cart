@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import User from "../../../../models/User";
 import parse from "url-parse";
-
+ 
 export async function POST(req) {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const user = await getUser();
