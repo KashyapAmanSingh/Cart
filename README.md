@@ -92,7 +92,48 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 ![Product_Section](https://github.com/KashyapAmanSingh/Cart/assets/119684617/d9e58686-eef7-449d-bd6d-5e4650aef7a2)
 
 
+ # Application Code Structure
 
+```
+├───public
+│   └───images
+└───src
+    ├───app
+    │   ├───api
+    │   │   ├───auth
+    │   │   │   └───[kindeAuth]
+    │   │   ├───checkout
+    │   │   ├───createOrder
+    │   │   ├───fetchDetailProduct
+    │   │   ├───fetchProduct
+    │   │   ├───kindeSession
+    │   │   ├───retrieveSession
+    │   │   ├───reviews
+    │   │   ├───user
+    │   │   └───webhooks
+    │   ├───CardDetails
+    │   │   └───[slug]
+    │   ├───cart
+    │   ├───dashboard
+    │   ├───SideBarCanvas
+    │   ├───Sorting
+    │   ├───StripeFail
+    │   ├───StripeSuccess
+    │   ├───UsersProfiles
+    │   └───WishList
+    ├───Compo
+    ├───Component
+    │   ├───CartComponent
+    │   ├───Detail
+    │   ├───FeaturedProduct
+    │   ├───Filter
+    │   ├───not_found_Product
+    │   ├───ReviewsRatings
+    │   ├───UserProfile
+    │   └───WishList
+    ├───redux
+    └───utils
+```
 
 
 
