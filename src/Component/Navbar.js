@@ -58,7 +58,7 @@ const Navbar = () => {
                 className="nav-link active text-white fw-bolder d-flex align-items-center"
                 aria-current="page"
               >
-                <span className="ms-4">
+                <span className="ms-2">
                   <FcBusinessman size={35} />
 
                   <span className="ms-3   d-inline d-sm-inline  d-md-inline  d-lg-none">
@@ -74,14 +74,7 @@ const Navbar = () => {
             <Sorting />
           </div>
 
-
-
-
-
-
-
-
-
+ 
 
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0 px-1">
             <li className="nav-item">
@@ -91,7 +84,7 @@ const Navbar = () => {
                 aria-current="page"
               >
                 <CartCount />
-                <span className="ms-1 d-none d-inline d-sm-inline  d-md-inline  d-lg-none">
+                <span className="ms-3  d-inline d-sm-inline  d-md-inline  d-lg-none">
                   {" "}
                   Cart Items
                 </span>
@@ -105,7 +98,7 @@ const Navbar = () => {
               >
                 <span className="ms-1">
                   <FcBookmark size={35} />
-                  <span className="ms-3  d-none d-inline d-sm-inline  d-md-inline  d-lg-none">
+                  <span className="ms-3  d-inline d-sm-inline  d-md-inline  d-lg-none">
                     Your WishList
                   </span>
                 </span>
