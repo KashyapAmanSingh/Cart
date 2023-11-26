@@ -33,6 +33,7 @@ export async function POST(req) {
         country,
       },
     });
+    console.log(    mobileNumber,'--------------------------🦄🦄🦄🦄🦄🦄🦄🦄🦄-----------------------------',       profilePicture);
 
     return NextResponse.json({ message: "User Created" }, { status: 201 });
   } catch (error) {

@@ -82,7 +82,7 @@ function UserForm() {
       console.log(`Uploading 🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠${formData}`);
       // Use the fetchData function to make a POST request
       const response = await fetchData("/api/user", "POST", formData);
-      console.log("Review submitted successfully", response);
+      console.log("Review submitted successfully", response,formData);
     } catch (error) {
       console.error("Error submitting review", error);
     }
@@ -96,6 +96,7 @@ function UserForm() {
     <>
       <div className="container mt-5 pt-4">
         <form onSubmit={handleSubmit}>
+ 
           {fieldNames.map((fieldName) => (
             <div key={fieldName} className="row mb-1 ">
               <label className="col-sm-6 col-form-label fw-bolder">
@@ -119,6 +120,7 @@ function UserForm() {
               </div>
             </div>
           ))}
+          
           <div className=" d-flex justify-content-start">
             <Suspense fallback={<div>Loading ImageUpload ...</div>}>
               {/* Render the ImageUpload component with suspense */}
@@ -130,7 +132,7 @@ function UserForm() {
           </div>
 
           <div className=" d-flex justify-content-center  mb-5">
-            <button type="submit" className="btn btn-warning">
+            <button type="submit" className="btn btn-dark">
               Submit
             </button>
           </div>

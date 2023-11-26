@@ -16,7 +16,7 @@ max-height: 93vh !important;
 }
 
 #file-upload-btn {
-  border: 3px solid red;
+  border: 3px solid rgb(0, 0, 0)(15, 14, 14);
   height: 8rem;
   width: 8rem;
   margin: 1rem;

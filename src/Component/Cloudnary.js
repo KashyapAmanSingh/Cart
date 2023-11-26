@@ -4,9 +4,11 @@ import axios from "axios"; // Import axios
 import cloudinary from "cloudinary-core";
 import { FcUpload } from "react-icons/fc";
 import Loader from "./Progress";
+import Image from "next/image";
 
-const cloudinaryCore = new cloudinary.Cloudinary({ cloud_name: "dm2wuzfzc" });
-
+const cloudinaryCore = new cloudinary.Cloudinary({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+});
 function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState("");
@@ -21,15 +23,12 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
     if (selectedFiles) {
       const formData = new FormData();
       formData.append("file", selectedFiles);
+      formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET);
 
-      formData.append("upload_preset", "bofedne7");
-
+ 
       try {
-        const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dm2wuzfzc/image/upload",
-          formData
-        );
-
+        const response = await axios.post(process.env.NEXT_PUBLIC_CLOUDINARY_URL, formData);
+ 
         if (response.status === 200) {
           const { secure_url } = response.data;
           const optimizedImageUrl = cloudinaryCore.url(secure_url, {
@@ -38,6 +37,7 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
             quality: "auto",
             fetch_format: "auto",
           });
+ 
 
           setOptimisedImageUrl(optimizedImageUrl);
           setIsLoading(false);
@@ -56,40 +56,52 @@ function ImageUpload({ setOptimisedImageUrl, OptimisedImageUrl }) {
   };
 
   return (
-    <div>
-      <div className="ImageUploadBox">
-        <label
-          htmlFor="image_input"
-          id="file-upload-btn"
-          className=" d-flex justify-content-center align-items-center "
-        >
-          {isLoading ? (
-            <div className="text-center">
-              <Loader />
-            </div>
-          ) : (
-            <>
-              <FcUpload size={24} /> Upload Images
-            </>
-          )}
-        </label>
-      </div>
-      <input
-        type="file"
-        name="image"
-        id="image_input"
-        accept=".jpg, .jpeg, .png"
-        multiple
-        onChange={handleFileSelect}
-      />
+    <div className="ImageUploadBox">
+      {OptimisedImageUrl === "" ? (
+        <div>
+          <label
+            htmlFor="image_input"
+            id="file-upload-btn"
+            className="bg-dark text-light  rounded-2 "
+          >
+            {isLoading ? (
+              <div className="text-center">
+                <Loader />
+              </div>
+            ) : (
+              <>
+                <FcUpload size={55} /> Upload Images
+              </>
+            )}
+          </label>
 
-      <button
-        type="button"
-        className="btn btn-info mx-3 mb-1"
-        onClick={handleImageUpload}
-      >
-        Upload Image
-      </button>
+          <input
+            type="file"
+            name="image"
+            id="image_input"
+            accept=".jpg, .jpeg, .png"
+            single
+            onChange={handleFileSelect}
+          />
+          <button
+            type="button"
+            className="btn btn-info mx-3 mb-1"
+            onClick={handleImageUpload}
+          >
+            Upload Image
+          </button>
+        </div>
+      ) : (
+        <div className="border border-2 border-dark">
+          <Image
+            src={OptimisedImageUrl}
+            width={170}
+            height={170}
+            quality={100}
+            alt="profile uploads"
+          />
+        </div>
+      )}
     </div>
   );
 }
